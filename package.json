@@ -9,7 +9,18 @@
     }
   ],
   "scripts": {
-    "ng": "ng"
+    "ng": "ng",
+    "build:mediastream": "npm run lint:mediastream && npm run test:mediastream && ng build --prod mediastream",
+    "lint": "ng lint --format stylish",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:mediastream": "npm run lint -- mediastream",
+    "lint:mediastream:fix": "npm run lint:mediastream -- --fix",
+    "package:mediastream": "npm run build:mediastream && cd ./dist/mediastream && npm pack",
+    "publish:mediastream": "cd ./dist/mediastream && npm publish",
+    "test": "ng test --browsers ChromeHeadless --watch false",
+    "test:watch": "npm run test -- --watch true",
+    "test:mediastream": "npm run test -- mediastream",
+    "test:mediastream:watch": "npm run test:mediastream -- --watch true"
   },
   "dependencies": {
     "@angular/common": "~11.2.7",

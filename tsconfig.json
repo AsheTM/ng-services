@@ -14,7 +14,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "paths": {},
+    "paths": {
+      "mediastream": [
+        "dist/mediastream/mediastream",
+        "dist/mediastream"
+      ]
+    },
     "target": "es2015",
     "module": "es2020",
     "lib": [

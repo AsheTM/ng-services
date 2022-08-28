@@ -1,0 +1,40 @@
+{
+  "name": "@ashetm/ng-mediastream",
+  "version": "0.0.1",
+  "contributors": [
+    {
+      "email": "contact@ashetm.com",
+      "name": "DAWOUD Haitham",
+      "url": "http://ashetm.com"
+    }
+  ],
+  "author": {
+    "email": "contact@ashetm.com",
+    "name": "DAWOUD Haitham",
+    "url": "http://ashetm.com"
+  },
+  "keywords": [
+    "angular",
+    "mediastream",
+    "js",
+    "api",
+    "media",
+    "stream",
+    "ng",
+    "ng-service",
+    "ng-services",
+    "ng-mediastream",
+    "service"
+  ],
+  "private": false,
+  "repository": {
+    "url": "https://github.com/AsheTM/ng-services/tree/main/packages/ng-mediastream"
+  },
+  "peerDependencies": {
+    "@angular/common": "^11.2.14",
+    "@angular/core": "^11.2.14"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

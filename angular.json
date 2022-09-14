@@ -245,6 +245,126 @@
           }
         }
       }
+    },
+    "sample-google-auth": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/sample-google-auth",
+      "sourceRoot": "projects/sample-google-auth/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sample-google-auth",
+            "index": "projects/sample-google-auth/src/index.html",
+            "main": "projects/sample-google-auth/src/main.ts",
+            "polyfills": "projects/sample-google-auth/src/polyfills.ts",
+            "tsConfig": "projects/sample-google-auth/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/sample-google-auth/src/favicon.ico",
+              "projects/sample-google-auth/src/assets"
+            ],
+            "styles": [
+              "projects/sample-google-auth/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sample-google-auth/src/environments/environment.ts",
+                  "with": "projects/sample-google-auth/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sample-google-auth:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sample-google-auth:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sample-google-auth:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sample-google-auth/src/test.ts",
+            "polyfills": "projects/sample-google-auth/src/polyfills.ts",
+            "tsConfig": "projects/sample-google-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/sample-google-auth/karma.conf.js",
+            "assets": [
+              "projects/sample-google-auth/src/favicon.ico",
+              "projects/sample-google-auth/src/assets"
+            ],
+            "styles": [
+              "projects/sample-google-auth/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sample-google-auth/tsconfig.app.json",
+              "projects/sample-google-auth/tsconfig.spec.json",
+              "projects/sample-google-auth/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sample-google-auth/e2e/protractor.conf.js",
+            "devServerTarget": "sample-google-auth:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sample-google-auth:serve:production"
+            }
+          }
+        }
+      }
     }
   }
 }

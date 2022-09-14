@@ -2,7 +2,8 @@
 
 This mono repository contains multiple library/package, check README.md of each one of them: 
 
-* [README @ashetm/ng-mediastream](https://github.com/AsheTM/ng-services/blob/main/packages/ng-mediastream/README.md)
+* [README @ashetm/ng-broadcast-channel](https://github.com/AsheTM/ng-services/blob/main/projects/broadcast-channel/README.md)
+* [README @ashetm/ng-mediastream](https://github.com/AsheTM/ng-services/blob/main/projects/mediastream/README.md)
 
 <!-- ### LOOKING FOR MAINTAINER. PLEASE PING [@voronianski](https://twitter.com/voronianski)! -->
 

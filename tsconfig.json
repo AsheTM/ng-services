@@ -15,6 +15,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
+      "broadcast-channel": [
+        "dist/broadcast-channel/broadcast-channel",
+        "dist/broadcast-channel"
+      ],
       "mediastream": [
         "dist/mediastream/mediastream",
         "dist/mediastream"

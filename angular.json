@@ -45,6 +45,46 @@
           }
         }
       }
+    },
+    "broadcast-channel": {
+      "projectType": "library",
+      "root": "projects/broadcast-channel",
+      "sourceRoot": "projects/broadcast-channel/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/broadcast-channel/tsconfig.lib.json",
+            "project": "projects/broadcast-channel/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/broadcast-channel/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/broadcast-channel/src/test.ts",
+            "tsConfig": "projects/broadcast-channel/tsconfig.spec.json",
+            "karmaConfig": "projects/broadcast-channel/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/broadcast-channel/tsconfig.lib.json",
+              "projects/broadcast-channel/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "mediastream"

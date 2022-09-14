@@ -1,0 +1,27 @@
+
+<div class="card">
+  <ng-container *ngTemplateOutlet="(newContext$ | async) ? OtherContext : NoOtherContext"></ng-container>
+</div>
+
+<ng-template #OtherContext>
+  <div class="card-title">
+    Data received: <kbd>{{ (data$ | async) || 'Nothing' }}</kbd>
+  </div>
+
+  <div class="card-input">
+    Action 1: <input type="text"
+      (keyup)="onKeyupEventHandler($event)" />
+  </div>
+
+  <div class="card-button">
+    <button (click)="onClickEventHandler()">Action 2</button>
+  </div>
+
+  <div class="card-hint">Write something or click on the button, then check the other tab</div>
+</ng-template>
+
+<ng-template #NoOtherContext>
+  <a target="_blank"
+    [href]="origin">Open another tab</a>
+</ng-template>
+

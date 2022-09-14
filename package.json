@@ -12,6 +12,7 @@
     "ng": "ng",
     "build:mediastream": "npm run lint:mediastream & npm run test:mediastream & ng build --prod mediastream",
     "build:broadcast-channel": "npm run lint:broadcast-channel & npm run test:broadcast-channel & ng build --prod broadcast-channel",
+    "build:sample-broadcast-channel": "npm run build:broadcast-channel && ng build --prod sample-broadcast-channel",
     "lint": "ng lint --format stylish",
     "lint:fix": "npm run lint -- --fix",
     "lint:broadcast-channel": "npm run lint -- broadcast-channel",
@@ -22,12 +23,15 @@
     "publish:broadcast-channel": "cd ./dist/broadcast-channel && npm publish --access=public",
     "package:mediastream": "npm run build:mediastream && cd ./dist/mediastream && npm pack",
     "publish:mediastream": "cd ./dist/mediastream && npm publish --access=public",
+    "start": "ng serve -o",
+    "start:sample-broadcast-channel": "npm start -- sample-broadcast-channel --port 4233",
     "test": "ng test --browsers ChromeHeadless --watch false",
     "test:watch": "npm run test -- --watch true",
     "test:broadcast-channel": "npm run test -- broadcast-channel",
     "test:broadcast-channel:watch": "npm run test:broadcast-channel -- --watch true",
     "test:mediastream": "npm run test -- mediastream",
-    "test:mediastream:watch": "npm run test:mediastream -- --watch true"
+    "test:mediastream:watch": "npm run test:mediastream -- --watch true",
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/common": "~11.2.7",

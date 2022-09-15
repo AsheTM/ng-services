@@ -85,6 +85,126 @@
           }
         }
       }
+    },
+    "sample-broadcast-channel": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/sample-broadcast-channel",
+      "sourceRoot": "projects/sample-broadcast-channel/src",
+      "prefix": "sample-broadcast-channel",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sample-broadcast-channel",
+            "index": "projects/sample-broadcast-channel/src/index.html",
+            "main": "projects/sample-broadcast-channel/src/main.ts",
+            "polyfills": "projects/sample-broadcast-channel/src/polyfills.ts",
+            "tsConfig": "projects/sample-broadcast-channel/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/sample-broadcast-channel/src/favicon.ico",
+              "projects/sample-broadcast-channel/src/assets"
+            ],
+            "styles": [
+              "projects/sample-broadcast-channel/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sample-broadcast-channel/src/environments/environment.ts",
+                  "with": "projects/sample-broadcast-channel/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sample-broadcast-channel:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sample-broadcast-channel:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sample-broadcast-channel:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sample-broadcast-channel/src/test.ts",
+            "polyfills": "projects/sample-broadcast-channel/src/polyfills.ts",
+            "tsConfig": "projects/sample-broadcast-channel/tsconfig.spec.json",
+            "karmaConfig": "projects/sample-broadcast-channel/karma.conf.js",
+            "assets": [
+              "projects/sample-broadcast-channel/src/favicon.ico",
+              "projects/sample-broadcast-channel/src/assets"
+            ],
+            "styles": [
+              "projects/sample-broadcast-channel/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sample-broadcast-channel/tsconfig.app.json",
+              "projects/sample-broadcast-channel/tsconfig.spec.json",
+              "projects/sample-broadcast-channel/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sample-broadcast-channel/e2e/protractor.conf.js",
+            "devServerTarget": "sample-broadcast-channel:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sample-broadcast-channel:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "mediastream"

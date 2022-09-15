@@ -4,6 +4,7 @@
 
 *It works with Angular 11 and above*
 
+[![npm version](https://badge.fury.io/js/@ashetm%2Fng-broadcast-channel.svg)](https://badge.fury.io/js/@ashetm%2Fng-broadcast-channel)
 <!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
 <!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
 <!-- [![github tag](https://img.shields.io/github/tag/likeastore/ngDialog.svg)](https://github.com/likeastore/ngDialog/tags) -->

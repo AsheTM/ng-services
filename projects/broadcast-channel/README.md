@@ -60,7 +60,7 @@ export class AppModule { }
 
 And for methods, there is the following: 
 
-* ``create<T>(name: string)`` returns ``BroadcastChannelRef<T>`` a reference of BroadcastChannel with that name provided in the first argument, if exists otherwise returns null.
+* ``create<T>(name: string)`` returns ``BroadcastChannelRef<T>`` a reference of BroadcastChannel with that name provided in the first argument, if exists otherwise returns create a new one.
 
 * ``get<T>(name: string)`` returns ``BroadcastChannelRef<T> | null`` a reference of BroadcastChannel with that name provided in the first argument, otherwise null.
 

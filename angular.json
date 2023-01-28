@@ -205,6 +205,46 @@
           }
         }
       }
+    },
+    "google-auth": {
+      "projectType": "library",
+      "root": "projects/google-auth",
+      "sourceRoot": "projects/google-auth/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/google-auth/tsconfig.lib.json",
+            "project": "projects/google-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/google-auth/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/google-auth/src/test.ts",
+            "tsConfig": "projects/google-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/google-auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/google-auth/tsconfig.lib.json",
+              "projects/google-auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

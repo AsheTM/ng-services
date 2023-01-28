@@ -19,6 +19,10 @@
         "dist/broadcast-channel/broadcast-channel",
         "dist/broadcast-channel"
       ],
+      "google-auth": [
+        "dist/google-auth/google-auth",
+        "dist/google-auth"
+      ],
       "mediastream": [
         "dist/mediastream/mediastream",
         "dist/mediastream"

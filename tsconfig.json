@@ -15,6 +15,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
+      "@ashetm/ng-utility": [
+        "dist/ashetm/ng-utility/ashetm-ng-utility",
+        "dist/ashetm/ng-utility"
+      ],
       "broadcast-channel": [
         "dist/broadcast-channel/broadcast-channel",
         "dist/broadcast-channel"

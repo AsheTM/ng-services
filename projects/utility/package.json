@@ -1,0 +1,11 @@
+{
+  "name": "@ashetm/ng-utility",
+  "version": "1*.0.0",
+  "peerDependencies": {
+    "@angular/common": "^1*.0.0",
+    "@angular/core": "^1*.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

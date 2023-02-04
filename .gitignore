@@ -45,5 +45,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Angular
+/.angular
+
 # Others
 *.git-credentials

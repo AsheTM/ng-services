@@ -1,24 +1,66 @@
-# Openai
+# @ashetm/ng-openai
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+``@ashetm/ng-openai`` is a wrapped library of ``openai`` for Angular.
 
-## Code scaffolding
+<!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
+<!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
+<!-- [![github tag](https://img.shields.io/github/tag/likeastore/ngDialog.svg)](https://github.com/likeastore/ngDialog/tags) -->
+<!-- [![Download Count](https://img.shields.io/npm/dm/ng-dialog.svg)](http://www.npmjs.com/package/ng-dialog) -->
+<!-- [![Code Climate](https://codeclimate.com/github/likeastore/ngDialog/badges/gpa.svg)](https://codeclimate.com/github/likeastore/ngDialog) -->
 
-Run `ng generate component component-name --project openai` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project openai`.
-> Note: Don't forget to add `--project openai` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
+<!-- ### [Demo](http://likeastore.github.io/ngDialog) -->
 
-Run `ng build openai` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Install
 
-## Publishing
+You can install it with npm:
 
-After building your library with `ng build openai`, go to the dist folder `cd dist/openai` and run `npm publish`.
+```bash
+npm install @ashetm/ng-openai
+```
 
-## Running unit tests
+## Import
 
-Run `ng test openai` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You only need to import ``OpenaiModule``.
 
-## Further help
+```ts
+...
+import { OpenaiModule, TOpenaiConfiguration } from '@ashetm/ng-openai';
+...
+@NgModule({
+  ...
+  imports: [
+    ...
+    OpenaiModule.forRoot(configuration as TOpenaiConfiguration), 
+    ...
+  ]
+  ...
+})
+export class AppModule { }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## API
+
+``@ashetm/ng-mediastream`` exposes the following: 
+
+### Modules
+
+* ``OpenaiModule``, that needs to import in order to use the library
+
+### Services
+
+#### OpenaiService
+
+``OpenaiService`` is a service concern all about ``openapi``.
+
+And for methods, they are the same methods for openai open source library.
+
+### Tokens
+
+#### OPENAI_TOKEN_CONFIGURATION
+
+``OPENAI_TOKEN_CONFIGURATION`` is a token that provide configuration provided in ``OpenaiModule.forRoot`` static method.
+
+## Issue
+
+LOOKING FOR MAINTAINER OR IF THERE IS AN ISSUE OR ANY IDEA TO ADD. PLEASE CREATE ISSUE IN GITHUB REPOSITORY.

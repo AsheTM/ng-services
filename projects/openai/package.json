@@ -1,6 +1,35 @@
 {
   "name": "@ashetm/ng-openai",
   "version": "15.0.0",
+  "contributors": [
+    {
+      "email": "contact@ashetm.com",
+      "name": "DAWOUD Haitham",
+      "url": "http://ashetm.com"
+    }
+  ],
+  "author": {
+    "email": "contact@ashetm.com",
+    "name": "DAWOUD Haitham",
+    "url": "http://ashetm.com"
+  },
+  "keywords": [
+    "angular",
+    "mediastream",
+    "js",
+    "api",
+    "media",
+    "stream",
+    "ng",
+    "ng-service",
+    "ng-services",
+    "ng-mediastream",
+    "service"
+  ],
+  "private": false,
+  "repository": {
+    "url": "https://github.com/AsheTM/ng-services/tree/main/projects/openai"
+  },
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0",

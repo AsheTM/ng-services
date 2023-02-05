@@ -205,6 +205,46 @@
           }
         }
       }
+    },
+    "openai": {
+      "projectType": "library",
+      "root": "projects/openai",
+      "sourceRoot": "projects/openai/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/openai/tsconfig.lib.json",
+            "project": "projects/openai/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/openai/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/openai/src/test.ts",
+            "tsConfig": "projects/openai/tsconfig.spec.json",
+            "karmaConfig": "projects/openai/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/openai/tsconfig.lib.json",
+              "projects/openai/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   }
 }

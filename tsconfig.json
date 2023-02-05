@@ -22,6 +22,10 @@
       "mediastream": [
         "dist/mediastream/mediastream",
         "dist/mediastream"
+      ],
+      "openai": [
+        "dist/openai/openai",
+        "dist/openai"
       ]
     },
     "target": "es2020",

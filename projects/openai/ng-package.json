@@ -3,5 +3,6 @@
   "dest": "../../dist/openai",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [".npmrc"]
 }

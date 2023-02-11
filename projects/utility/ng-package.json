@@ -3,5 +3,6 @@
   "dest": "../../dist/utility",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["./.npmrc"]
 }

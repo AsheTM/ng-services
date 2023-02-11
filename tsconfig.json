@@ -15,17 +15,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "@ashetm/ng-utility": [
-        "dist/ashetm/ng-utility/ashetm-ng-utility",
-        "dist/ashetm/ng-utility"
-      ],
-      "broadcast-channel": [
+      "@ashetm/ng-broadcast-channel": [
         "dist/broadcast-channel/broadcast-channel",
         "dist/broadcast-channel"
       ],
-      "mediastream": [
+      "@ashetm/ng-mediastream": [
         "dist/mediastream/mediastream",
         "dist/mediastream"
+      ],
+      "@ashetm/ng-utility": [
+        "dist/utility/utility",
+        "dist/utility"
       ]
     },
     "target": "es2020",

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BroadcastChannelRef, BroadcastChannelService } from 'broadcast-channel';
+import { BroadcastChannelRef, BroadcastChannelService } from '@ashetm/ng-broadcast-channel';
 
 
 @Injectable()

@@ -2,6 +2,7 @@
  * Public API Surface of ng-utility
  */
 
-export * from './lib/ng-utility.service';
-export * from './lib/ng-utility.component';
 export * from './lib/utility.module';
+export * from './lib/utility-pipes.module';
+
+export * from './lib/pipes';

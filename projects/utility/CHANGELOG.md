@@ -1,4 +1,11 @@
 
+# 14.0.1
+
+- [x] Write README.md
+- [x] Make second argument of ArrayFilter optional
+- [x] Refactor code
+- [x] Fix issue of ArrayFilter that could not filter properly
+
 # 14.0.0
 
 - [x] Create array-filter pipe

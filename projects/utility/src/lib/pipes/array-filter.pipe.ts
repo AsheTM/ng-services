@@ -7,11 +7,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArrayFilter<T extends string | number | boolean> implements PipeTransform {
 
-  transform(value: T[], filterBy: string | number | boolean): (string | number | boolean)[] {
+  transform(value: T[], filterBy?: string | number | boolean): (string | number | boolean)[] {
     return value.filter((val: T) => {
       const stringVal: string = String(val);
 
-      return !filterBy || stringVal.includes(String(filterBy));
+      return filterBy === undefined || stringVal.includes(String(filterBy));
     });
   }
 

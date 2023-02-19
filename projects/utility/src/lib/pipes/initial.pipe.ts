@@ -11,7 +11,7 @@ export class Initial implements PipeTransform {
     return value.split(' ').map((word: string) => {
       return word[0].toUpperCase();
     }).filter((_: string, index: number) => index < max)
-    .join('');
+      .join('');
   }
 
 }

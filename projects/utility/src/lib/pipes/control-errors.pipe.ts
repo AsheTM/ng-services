@@ -14,9 +14,9 @@ export class ControlErrors implements PipeTransform {
 
     for (const key in errorsControl) {
       switch(true) {
-        // case key === 'required':
-        //   messages = [...messages, 'Ce champ est obligatoire'];
-        //   break;
+        case key === 'required':
+          messages = [...messages, 'This field is required'];
+          break;
         case typeof errorsControl[key] === 'string':
         default:
           messages = [...messages, errorsControl[key]];

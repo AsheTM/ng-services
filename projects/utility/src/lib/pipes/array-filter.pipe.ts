@@ -11,7 +11,7 @@ export class ArrayFilter<T extends string | number | boolean> implements PipeTra
     return value.filter((val: T) => {
       const stringVal: string = String(val);
 
-      return filterBy ?? stringVal.includes(String(filterBy));
+      return filterBy === undefined || stringVal.includes(String(filterBy));
     });
   }
 

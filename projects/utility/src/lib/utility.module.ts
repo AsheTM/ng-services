@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { NgUtilityPipesModule } from './utility-pipes.module';
+import { UtilityPipesModule } from './utility-pipes.module';
 
 
 @NgModule({
-  exports: [NgUtilityPipesModule]
+  exports: [UtilityPipesModule]
 })
-export class NgUtilityModule { }
+export class UtilityModule { }

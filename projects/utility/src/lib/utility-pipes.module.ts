@@ -46,4 +46,4 @@ import {
     ObjectValues
   ],
 })
-export class NgUtilityPipesModule { }
+export class UtilityPipesModule { }

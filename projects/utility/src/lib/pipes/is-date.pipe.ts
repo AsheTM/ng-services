@@ -5,9 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'isDate',
   standalone: true
 })
-export class IsDate implements PipeTransform {
+export class IsDate<T extends Date | number | string> implements PipeTransform {
 
-  transform(value: any): boolean {
+  transform(value: T, ...args: any): boolean;
+  transform(value: T): boolean {
+    return this.isDate(value);
+  }
+
+  protected isDate(value: T): boolean {
     return value && !isNaN(new Date(value).getTime());
   }
 

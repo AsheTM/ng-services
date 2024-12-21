@@ -7,8 +7,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArrayFrom implements PipeTransform {
 
-  transform(length: number, fill?: number): number[] {
-    return Array.from({ length }, (_, i: number) => fill || i);
+  transform(length: number): number[];
+  transform<T>(length: number, fill: T): T[];
+  transform<T>(length: number, fill?: T): (number | T)[] {
+    return Array.from({ length }, (_, i: number) => fill ?? i);
   }
 
 }

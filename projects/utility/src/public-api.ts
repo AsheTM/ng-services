@@ -6,6 +6,15 @@ export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
 export {
+  containsItem,
+  filterFromArray,
+  firstFromArray,
+  lastFromArray,
+  mapFromArray,
+  nthFromArray,
+  pluckFromArray
+} from './lib/operators';
+export {
   ArrayFill,
   ArrayFilter,
   ArrayFrom,

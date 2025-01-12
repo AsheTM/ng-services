@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-mediastream",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -15,24 +15,27 @@
   },
   "keywords": [
     "angular",
-    "mediastream",
-    "js",
     "api",
+    "camera",
+    "js",
     "media",
-    "stream",
+    "mediastream",
+    "micro",
+    "microphone",
     "ng",
     "ng-service",
     "ng-services",
     "ng-mediastream",
-    "service"
+    "service",
+    "stream"
   ],
   "private": false,
   "repository": {
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/mediastream"
   },
   "peerDependencies": {
-    "@angular/common": "^11.2.14",
-    "@angular/core": "^11.2.14"
+    "@angular/common": ">=11.0.0 <16.0.0",
+    "@angular/core": ">=11.0.0 <16.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

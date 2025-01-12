@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first, mapTo, tap } from 'rxjs/operators';
 
-import { BroadcastChannelRef, BroadcastChannelService } from 'broadcast-channel';
+import { BroadcastChannelRef, BroadcastChannelService } from '@ashetm/ng-broadcast-channel';
 
 
 @Injectable()

@@ -1,3 +1,7 @@
+# 1.3.0
+
+* Modify REAMDE.md
+
 # 1.2.0
 
 * Create sample broadcast channel application

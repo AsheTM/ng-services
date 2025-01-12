@@ -3,7 +3,16 @@
 
 ``@ashetm/ng-broadcast-channel`` is a library that simplify manipulation of ``BroadcastChannel`` API.
 
-*It works with Angular 11 and above*
+## Compatibility Table
+
+| Angular Version    | @ashetm/ng-broadcast-channel Version     | Zone     | Support |
+|--------------------|------------------------------------------|----------|---------|
+| Angular 16.x and + | @ashetm/ng-broadcast-channel 16.x and +  | Zonefull | ✅      |
+| Angular 15.x       | @ashetm/ng-broadcast-channel 15.x        | Zonefull | ❌      |
+| Angular 14.x       | @ashetm/ng-broadcast-channel 14.x        | Zonefull | ❌      |
+| Angular 13.x       | @ashetm/ng-broadcast-channel 13.x        | Zonefull | ❌      |
+| Angular 12.x       | @ashetm/ng-broadcast-channel 12.x        | Zonefull | ❌      |
+| Angular 11.x       | @ashetm/ng-broadcast-channel 11.x        | Zonefull | ❌      |
 
 ### Demo
 

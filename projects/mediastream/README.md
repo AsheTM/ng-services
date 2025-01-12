@@ -11,8 +11,15 @@
 <!-- [![Download Count](https://img.shields.io/npm/dm/ng-dialog.svg)](http://www.npmjs.com/package/ng-dialog) -->
 <!-- [![Code Climate](https://codeclimate.com/github/likeastore/ngDialog/badges/gpa.svg)](https://codeclimate.com/github/likeastore/ngDialog) -->
 
-
 <!-- ### [Demo](http://likeastore.github.io/ngDialog) -->
+
+## Compatibility Table
+
+| Angular Version                | @ashetm/ng-mediastream Version | Support |
+|--------------------------------|--------------------------------|---------|
+| Angular 16 and +               | Planned for later              | ✅      |
+| Angular >= 11.0.0 and < 16.0.0 | @ashetm/ng-mediastream 1.0.1   | ❌      |
+| Angular ~ 11.2.14              | @ashetm/ng-mediastream 1.0.0   | ❌      |
 
 ## Install
 

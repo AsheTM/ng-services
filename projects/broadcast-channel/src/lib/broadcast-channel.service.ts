@@ -1,12 +1,9 @@
 import { Injectable, NgZone, OnDestroy } from '@angular/core';
 
-import { BroadcastChannelModule } from './broadcast-channel.module';
 import { BroadcastChannelRef } from './broadcast-channel.ref';
 
 
-@Injectable({
-  providedIn: BroadcastChannelModule
-})
+@Injectable()
 export class BroadcastChannelService implements OnDestroy {
 
   private readonly _broadcastChannels: Record<string, BroadcastChannelRef<any>>

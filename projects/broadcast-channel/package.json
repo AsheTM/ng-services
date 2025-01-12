@@ -32,8 +32,9 @@
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/broadcast-channel"
   },
   "peerDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0",
+    "zone.js": "~0.13.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

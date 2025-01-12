@@ -35,17 +35,17 @@ npm install @ashetm/ng-broadcast-channel
 
 ## Import
 
-You only need to import ``BroadcastChannelModule``.
+You only need to import ``provideBroadcastChannel``.
 
 ```ts
 ...
-import { BroadcastChannelModule } from '@ashetm/ng-broadcast-channel';
+import { provideBroadcastChannel } from '@ashetm/ng-broadcast-channel';
 ...
 @NgModule({
   ...
-  imports: [
+  provide: [
     ...
-    BroadcastChannelModule, 
+    provideBroadcastChannel(), 
     ...
   ]
   ...
@@ -57,9 +57,9 @@ export class AppModule { }
 
 ``@ashetm/ng-broadcast-channel`` exposes the following: 
 
-### Modules
+### Providers
 
-* ``BroadcastChannelModule``, that needs to import in order to use the library
+* ``provideBroadcastChannel``, that needs to import in order to use the library
 
 ### Services
 

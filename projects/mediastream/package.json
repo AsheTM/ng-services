@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-mediastream",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -34,10 +34,10 @@
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/mediastream"
   },
   "peerDependencies": {
-    "@angular/common": ">=11.0.0 <16.0.0",
-    "@angular/core": ">=11.0.0 <16.0.0"
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.3.0"
   }
 }

@@ -8,12 +8,9 @@ import {
   MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
 } from './mediastream.token';
-import { MediastreamModule } from './mediastream.module';
 
 
-@Injectable({
-  providedIn: MediastreamModule
-})
+@Injectable()
 export class MediastreamService extends AMediastream {
 
   constructor(private readonly _injector: Injector) {

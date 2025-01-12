@@ -1,0 +1,47 @@
+{
+  "name": "@ashetm/ng-utility",
+  "version": "16.0.0",
+  "contributors": [
+    {
+      "email": "contact@ashetm.com",
+      "name": "DAWOUD Haitham",
+      "url": "http://ashetm.com"
+    }
+  ],
+  "author": {
+    "email": "contact@ashetm.com",
+    "name": "DAWOUD Haitham",
+    "url": "http://ashetm.com"
+  },
+  "keywords": [
+    "angular",
+    "utility",
+    "js",
+    "pipe",
+    "pipes",
+    "ng",
+    "ng-pipe",
+    "ng-service",
+    "ng-services",
+    "ng-utility",
+    "observable",
+    "operators",
+    "service",
+    "rxjs",
+    "rxjs/operators"
+  ],
+  "private": false,
+  "repository": {
+    "url": "https://github.com/AsheTM/ng-services/tree/release/%40ashetm/ng-utility/projects/utility"
+  },
+  "peerDependencies": {
+    "@angular/cdk": ">=16.0.0",
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0",
+    "@angular/forms": ">=16.0.0",
+    "rxjs": ">=6.6.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

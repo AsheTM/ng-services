@@ -5,6 +5,7 @@ This mono repository contains multiple library/package, check README.md of each 
 * [README @ashetm/ng-broadcast-channel](https://github.com/AsheTM/ng-services/blob/main/projects/broadcast-channel/README.md)
 * [README @ashetm/ng-mediastream](https://github.com/AsheTM/ng-services/blob/main/projects/mediastream/README.md)
 * [README @ashetm/ng-openai](https://github.com/AsheTM/ng-services/blob/release/%40ashetm/openai/projects/main/README.md)
+* [README @ashetm/ng-utility](https://github.com/AsheTM/ng-services/blob/main/projects/utility/README.md)
 * [README @ashetm/sample-broadcast-channel](https://github.com/AsheTM/ng-services/blob/main/projects/sample-broadcast-channel)
 
 <!-- ### LOOKING FOR MAINTAINER. PLEASE PING [@voronianski](https://twitter.com/voronianski)! -->

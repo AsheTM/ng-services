@@ -1,9 +1,46 @@
 {
   "name": "@ashetm/ng-network",
   "version": "0.0.1",
+  "contributors": [
+    {
+      "email": "contact@ashetm.com",
+      "name": "DAWOUD Haitham",
+      "url": "http://ashetm.com"
+    }
+  ],
+  "author": {
+    "email": "contact@ashetm.com",
+    "name": "DAWOUD Haitham",
+    "url": "http://ashetm.com"
+  },
+  "keywords": [
+    "angular",
+    "directive",
+    "internet",
+    "js",
+    "network",
+    "ng",
+    "ng-directive",
+    "ng-service",
+    "ng-services",
+    "ng-network",
+    "observable",
+    "observables",
+    "offline",
+    "online",
+    "operators",
+    "rxjs",
+    "rxjs/operators",
+    "ts"
+  ],
+  "private": false,
+  "repository": {
+    "url": "https://github.com/AsheTM/ng-services/tree/develop/projects/network"
+  },
   "peerDependencies": {
-    "@angular/common": "^16.2.0",
-    "@angular/core": "^16.2.0"
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0",
+    "rxjs": ">=6.6.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

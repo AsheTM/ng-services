@@ -26,6 +26,10 @@
       "@ashetm/ng-utility": [
         "dist/utility/utility",
         "dist/utility"
+      ],
+      "@ashetm/ng-network": [
+        "dist/network/@ashetm/",
+        "dist/network"
       ]
     },
     "target": "ES2022",

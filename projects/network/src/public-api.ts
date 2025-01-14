@@ -2,6 +2,7 @@
  * Public API Surface of network
  */
 
-export * from './lib/network.service';
-export * from './lib/network.component';
-export * from './lib/network.module';
+export * from './lib/network.directive';
+export * from './lib/network.operators';
+export * from './lib/network.rxjs';
+export * from './lib/network.type';

@@ -1,15 +1,15 @@
 import { InjectFlags } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { MediastreamCameraMicrophoneService } from './mediastream-camera-microphone.service';
 
+import { MediastreamCameraMicrophoneService } from './mediastream-camera-microphone.service';
 import { MediastreamCameraService } from './mediastream-camera.service';
 import { MediastreamMicrophoneService } from './mediastream-microphone.service';
-import { MediastreamModule } from './mediastream.module';
 import { MediastreamService } from './mediastream.service';
 import {
   MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
 } from './mediastream.token';
+import { provideMediaStream } from './mediastream.provider';
 
 fdescribe('MediastreamService', () => {
   const deviceMocks: MediaDeviceInfo[] = [
@@ -43,7 +43,7 @@ fdescribe('MediastreamService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MediastreamModule]
+      providers: [provideMediaStream()]
     });
     service = TestBed.inject(MediastreamService);
   });

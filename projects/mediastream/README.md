@@ -3,7 +3,6 @@
 
 ``@ashetm/ng-mediastream`` is a library that simplify manipulation of API ``MediaStream``.
 
-*It works with Angular 11 and above*
 
 <!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
 <!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
@@ -11,8 +10,15 @@
 <!-- [![Download Count](https://img.shields.io/npm/dm/ng-dialog.svg)](http://www.npmjs.com/package/ng-dialog) -->
 <!-- [![Code Climate](https://codeclimate.com/github/likeastore/ngDialog/badges/gpa.svg)](https://codeclimate.com/github/likeastore/ngDialog) -->
 
-
 <!-- ### [Demo](http://likeastore.github.io/ngDialog) -->
+
+## Compatibility Table
+
+| Angular Version                | @ashetm/ng-mediastream Version | Support |
+|--------------------------------|--------------------------------|---------|
+| Angular 16 and +               | @ashetm/ng-mediastream 2.0.0   | ✅      |
+| Angular >= 11.0.0 and < 16.0.0 | @ashetm/ng-mediastream 1.0.1   | ❌      |
+| Angular ~ 11.2.14              | @ashetm/ng-mediastream 1.0.0   | ❌      |
 
 ## Install
 
@@ -24,17 +30,17 @@ npm install @ashetm/ng-mediastream
 
 ## Import
 
-You only need to import ``MediastreamModule``.
+You only need to import ``provideMediaStream``.
 
 ```ts
 ...
-import { MediastreamModule } from '@ashetm/ng-mediastream';
+import { provideMediaStream } from '@ashetm/ng-mediastream';
 ...
 @NgModule({
   ...
-  imports: [
+  providers: [
     ...
-    MediastreamModule, 
+    provideMediaStream(), 
     ...
   ]
   ...
@@ -46,9 +52,9 @@ export class AppModule { }
 
 ``@ashetm/ng-mediastream`` exposes the following: 
 
-### Modules
+### Providers
 
-* ``MediastreamModule``, that needs to import in order to use the library
+* ``provideMediaStream``, that needs to import in order to use the library
 
 ### Services
 

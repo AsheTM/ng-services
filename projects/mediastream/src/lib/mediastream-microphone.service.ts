@@ -26,7 +26,7 @@ export class MediastreamMicrophoneService extends AMediastreamMicrophoneService 
 
   constructor(
     @Inject(MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS)
-      private readonly __mediastreamMicrophoneConstraints: any
+      private readonly __mediastreamMicrophoneConstraints: boolean | MediaTrackConstraints
   ) {
     super(__mediastreamMicrophoneConstraints);
   }

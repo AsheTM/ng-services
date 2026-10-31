@@ -14,7 +14,7 @@ export class MediastreamCameraService extends AMediastreamCameraService {
       this._toggleMediaStreamSubject.asObservable(),
       this._userMedia$
     ]).pipe(map(([toggleCamera, media]: [boolean, MediaStream]) => {
-      media.getAudioTracks()
+      media.getVideoTracks()
         .map((track: MediaStreamTrack) => {
           track.enabled = toggleCamera;
 
@@ -26,7 +26,7 @@ export class MediastreamCameraService extends AMediastreamCameraService {
 
   constructor(
     @Inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS)
-      private readonly __mediastreamCameraConstraints: any
+      private readonly __mediastreamCameraConstraints: boolean | MediaTrackConstraints
   ) {
     super(__mediastreamCameraConstraints);
   }

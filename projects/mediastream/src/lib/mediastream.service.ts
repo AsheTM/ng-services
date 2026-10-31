@@ -22,7 +22,7 @@ export class MediastreamService extends AMediastream {
   }
 
   async getDevices(): Promise<MediaDeviceInfo[]> {
-    return await this.MEDIA_DEVICES.enumerateDevices();
+    return this.MEDIA_DEVICES ? await this.MEDIA_DEVICES.enumerateDevices() : [];
   }
 
   async getMicrophoneDevices(): Promise<MediaDeviceInfo[]> {
@@ -54,10 +54,14 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: false,
       video: cameraConstraints
-    }).then(() => injector.get(MediastreamCameraService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamCameraService);
+    });
   }
 
   async requestCameraAndMicrophone(constraints?: Partial<
@@ -89,10 +93,14 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: microphoneConstraints,
       video: cameraConstraints
-    }).then(() => injector.get(MediastreamCameraMicrophoneService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamCameraMicrophoneService);
+    });
   }
 
   async requestMicrophone(
@@ -112,10 +120,14 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: microphoneConstraints,
       video: false
-    }).then(() => injector.get(MediastreamMicrophoneService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamMicrophoneService);
+    });
   }
 
 }

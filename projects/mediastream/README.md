@@ -16,7 +16,7 @@
 
 | Angular Version                | @ashetm/ng-mediastream Version | Support |
 |--------------------------------|--------------------------------|---------|
-| Angular 16 and +               | @ashetm/ng-mediastream 2.0.0   | ✅      |
+| Angular 16.x – 19.x            | @ashetm/ng-mediastream 2.x     | ✅      |
 | Angular >= 11.0.0 and < 16.0.0 | @ashetm/ng-mediastream 1.0.1   | ❌      |
 | Angular ~ 11.2.14              | @ashetm/ng-mediastream 1.0.0   | ❌      |
 
@@ -70,21 +70,23 @@ And for methods, there is the following:
 
 * ``getMicrophoneDevices()`` returns ``Promise<MediaDeviceInfo[]>`` with microphone device list of type ``MediaDeviceInfo[]``.
 
-* ``hasCameraDevices()`` returns ``Promise<boolean>`` ``boolean`` value if has at least 1 camera devise.
+* ``hasCameraDevices()`` returns ``Promise<boolean>`` ``boolean`` value if has at least 1 camera device.
 
-* ``hasMicrophoneDevices()`` returns ``Promise<boolean>`` ``boolean`` value if has at least 1 microphone devise.
+* ``hasMicrophoneDevices()`` returns ``Promise<boolean>`` ``boolean`` value if has at least 1 microphone device.
 
 * ``requestCamera(constraints?: MediaTrackConstraints)`` returns ``Promise<MediastreamCameraService>`` that contain instance of ``MediastreamCameraService`` (See below), it has 1 optional argument: 
 
 1. ``constraints`` of type ``MediaTrackConstraints`` a configuration for camera.
 
-* ``requestCameraAndMicrophone(constraints?: Partial<Record<'audio' | 'video', MediaTrackConstraints>>)`` returns ``Promise<MediastreamCameraService>`` that contain instance of ``MediastreamCameraService`` (See below), it has 1 optional argument: 
+* ``requestCameraAndMicrophone(constraints?: Partial<Record<'audio' | 'video', MediaTrackConstraints>>)`` returns ``Promise<MediastreamCameraMicrophoneService>`` that contain instance of ``MediastreamCameraMicrophoneService`` (See below), it has 1 optional argument: 
 
-1. ``constraints`` of type ``Partial<Record<'audio' | 'video', MediaTrackConstraints>>`` a configuration for bot camera and microphone.
+1. ``constraints`` of type ``Partial<Record<'audio' | 'video', MediaTrackConstraints>>`` a configuration for both camera and microphone.
 
 * ``requestMicrophone(constraints?: MediaTrackConstraints)`` returns ``Promise<MediastreamMicrophoneService>`` that contain instance of ``MediastreamMicrophoneService`` (See below), it has 1 optional argument: 
 
 1. ``constraints`` of type ``MediaTrackConstraints`` a configuration for microphone.
+
+The ``request…()`` methods ask the user for permission, then stop the stream used for it: the camera/microphone only turns on when you subscribe to ``mediastream$``.
 
 #### MediastreamCameraService
 
@@ -157,6 +159,24 @@ For methods, there is the following:
 * ``toggleMicrophone()`` returns ``void``, it disables/enables the current microphone device.
 
 * ``updateMicrophoneDevice(device: MediaDeviceInfo & Record<'kind', 'audioinput'>)`` returns ``void``, it updates the current microphone device with the first argument ``device: MediaDeviceInfo & Record<'kind', 'audioinput'>``.
+
+## Media stream lifecycle
+
+* ``mediastream$`` opens the camera/microphone on the first subscription, and **shares one stream** between all subscribers: a late subscriber gets the current stream.
+* When the **last subscriber unsubscribes**, the tracks are stopped and the camera/microphone turns off. The next subscription opens a new stream.
+* Changing device with ``updateCameraDevice()`` / ``updateMicrophoneDevice()`` stops the previous stream.
+
+```html
+<video autoplay [srcObject]="cameraService.mediastream$ | async"></video>
+```
+
+## Server-side rendering
+
+The library is safe to use with server-side rendering, and when media devices aren't available (e.g. a page not served over HTTPS):
+
+* ``getDevices()`` (and the related ``get…Devices()`` / ``has…Devices()``) return ``[]`` / ``false``.
+* ``requestCamera()``, ``requestMicrophone()`` and ``requestCameraAndMicrophone()`` reject with a ``NotSupportedError``.
+* On the server, ``mediastream$`` emits nothing.
 
 ## Issue
 

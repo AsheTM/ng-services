@@ -5,9 +5,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NetworkDirective } from './network.directive';
 
 @Component({
-  standalone: true,
-  imports: [AsyncPipe, NetworkDirective],
-  template: `
+    imports: [AsyncPipe, NetworkDirective],
+    template: `
     <ng-template ashetmNetwork let-network>
       <span id="template">{{ (network | async) ? 'online' : 'offline' }}</span>
     </ng-template>

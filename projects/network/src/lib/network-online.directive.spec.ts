@@ -4,9 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NetworkOnlineDirective } from './network-online.directive';
 
 @Component({
-  standalone: true,
-  imports: [NetworkOnlineDirective],
-  template: `
+    imports: [NetworkOnlineDirective],
+    template: `
     <div *ashetmNetworkOnline>
       <span id="template">Online</span>
     </div>

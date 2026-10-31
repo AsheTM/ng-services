@@ -70,6 +70,37 @@ Or with the structural shorthand:
 * _network_: This observable emits the current state first, then `true` when the device goes online and `false` when it goes offline.
 * _lastTimeConnected$_: This observable emits, every 100 ms while the device is offline, the time elapsed in milliseconds since the connection was lost. It emits `undefined` while the device is online.
 
+#### NetworkOnlineDirective
+
+* _Selector_: `[ashetmNetworkOnline]`
+
+This Angular **standalone** **structural** directive renders its content only while the device is online, and removes it when the device goes offline.
+
+#### NetworkOfflineDirective
+
+* _Selector_: `[ashetmNetworkOffline]`
+
+This Angular **standalone** **structural** directive renders its content only while the device is offline, and removes it when the device goes back online.
+
+**Usage Example:**
+
+Import the standalone ``NetworkOnlineDirective`` and/or ``NetworkOfflineDirective`` in your component (or NgModule) `imports`:
+
+```ts
+@Component({
+  standalone: true,
+  imports: [NetworkOfflineDirective, NetworkOnlineDirective],
+  // ...
+})
+```
+
+```html
+<div *ashetmNetworkOnline>You are online</div>
+<div *ashetmNetworkOffline>You are offline</div>
+```
+
+Both directives follow the current state from the start (see [`fromNetworkEvents()`](#fromnetworkevents)), and stop listening to network events when they are destroyed.
+
 ### Custom RXJS Observables
 
 #### `fromOfflineEvent()`

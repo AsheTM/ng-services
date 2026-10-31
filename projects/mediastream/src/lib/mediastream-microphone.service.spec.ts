@@ -1,23 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MediastreamMicrophoneService } from './mediastream-microphone.service';
-import { MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK } from './mediastream-service.class.mock';
+import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from './mediastream.token';
 
 describe('MediastreamMicrophoneService', () => {
-  let mediastreamConstraints: boolean | MediaTrackConstraints;
   let service: MediastreamMicrophoneService;
 
   beforeEach(() => {
     const MEDIASTREAM_CONSTRAINTS_MOCK_VALUE: boolean = true;
     TestBed.configureTestingModule({
       providers: [
+        MediastreamMicrophoneService,
         {
-          provide: MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK,
+          provide: MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS,
           useValue: MEDIASTREAM_CONSTRAINTS_MOCK_VALUE
         }
       ]
     });
-    mediastreamConstraints = TestBed.inject(MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK);
     service = TestBed.inject(MediastreamMicrophoneService);
   });
 

@@ -71,3 +71,36 @@ describe('MediastreamMicrophoneService release', () => {
     expect(mediastreams[0].getAudioTracks()[0].readyState).toBe('ended');
   });
 });
+
+describe('MediastreamMicrophoneService sharing', () => {
+  let service: MediastreamMicrophoneService;
+  let getUserMedia: jasmine.Spy;
+
+  beforeEach(() => {
+    getUserMedia = spyOn(navigator.mediaDevices, 'getUserMedia').and.callFake(() => Promise.resolve(createMicrophoneStreamMock()));
+    TestBed.configureTestingModule({
+      providers: [
+        MediastreamMicrophoneService,
+        { provide: MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS, useValue: true }
+      ]
+    });
+    service = TestBed.inject(MediastreamMicrophoneService);
+  });
+
+  it('should share one stream between subscribers', async () => {
+    // GIVEN
+    const first: MediaStream[] = [];
+    const second: MediaStream[] = [];
+
+    // WHEN
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => first.push(mediastream));
+    subscription.add(service.mediastream$.subscribe((mediastream: MediaStream) => second.push(mediastream)));
+    await flushPromises();
+
+    // THEN
+    expect(getUserMedia).toHaveBeenCalledTimes(1);
+    expect(second[0]).toBe(first[0]);
+
+    subscription.unsubscribe();
+  });
+});

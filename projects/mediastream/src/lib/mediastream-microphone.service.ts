@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
 import { AMediastreamMicrophoneService } from './mediastream-microphone-service.class';
@@ -23,11 +23,8 @@ export class MediastreamMicrophoneService extends AMediastreamMicrophoneService 
       return media;
     }));
 
-  constructor(
-    @Inject(MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS)
-      private readonly __mediastreamMicrophoneConstraints: boolean | MediaTrackConstraints
-  ) {
-    super(__mediastreamMicrophoneConstraints);
+  constructor() {
+    super(inject(MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS));
   }
 
 }

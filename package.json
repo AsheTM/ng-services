@@ -11,7 +11,7 @@
   "scripts": {
     "ng": "ng",
     "build:broadcast-channel": "npm run lint:broadcast-channel & npm run test:broadcast-channel & ng build broadcast-channel --configuration=production",
-    "build:mediastream": "npm run lint:mediastream & npm run test:mediastream & ng build mediastream --configuration=production",
+    "build:mediastream": "npm run lint:mediastream && npm run test:mediastream && ng build mediastream --configuration=production",
     "build:network": "npm run lint:network && npm run test:network && ng build network --configuration=production",
     "build:sample-broadcast-channel": "npm run build:broadcast-channel && ng build sample-broadcast-channel --configuration=production",
     "build:utility": "npm run lint:utility & npm run test:utility & ng build utility --configuration=production",

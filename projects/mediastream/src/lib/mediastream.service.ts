@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, inject } from '@angular/core';
 
 import { MediastreamCameraMicrophoneService } from './mediastream-camera-microphone.service';
 import { MediastreamCameraService } from './mediastream-camera.service';
@@ -13,9 +13,7 @@ import {
 @Injectable()
 export class MediastreamService extends AMediastream {
 
-  constructor(private readonly _injector: Injector) {
-    super();
-  }
+  private readonly _injector: Injector = inject(Injector);
 
   async getCameraDevices(): Promise<MediaDeviceInfo[]> {
     return (await this.getDevices()).filter((device: MediaDeviceInfo) => device.kind === 'videoinput');

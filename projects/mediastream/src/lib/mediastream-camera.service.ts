@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
 import { AMediastreamCameraService } from './mediastream-camera-service.class';
@@ -23,11 +23,8 @@ export class MediastreamCameraService extends AMediastreamCameraService {
       return media;
     }));
 
-  constructor(
-    @Inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS)
-      private readonly __mediastreamCameraConstraints: boolean | MediaTrackConstraints
-  ) {
-    super(__mediastreamCameraConstraints);
+  constructor() {
+    super(inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS));
   }
 
 }

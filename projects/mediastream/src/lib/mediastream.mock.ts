@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from "@angular/core";
+import { Injectable, InjectionToken, inject } from "@angular/core";
 import { Observable, of } from "rxjs";
 
 import { AMediastreamService } from "./mediastream-service.class";
@@ -12,11 +12,8 @@ export class MediaStreamServiceMock extends AMediastreamService {
 
   mediastream$: Observable<MediaStream> = of(new MediaStream());
 
-  constructor(
-    @Inject(MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK)
-      private readonly __mediaConstraints: boolean | MediaTrackConstraints
-  ) {
-    super(__mediaConstraints);
+  constructor() {
+    super(inject(MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK));
   }
 
 }

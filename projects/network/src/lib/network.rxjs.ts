@@ -1,5 +1,4 @@
-import { EMPTY, Observable, defer, fromEvent, merge, of, timer } from "rxjs";
-import { distinctUntilChanged, map, startWith, switchMap } from "rxjs/operators";
+import { EMPTY, Observable, defer, distinctUntilChanged, fromEvent, map, merge, of, startWith, switchMap, timer } from "rxjs";
 
 import { isBrowser, isOnline } from "./network.platform";
 import { NetworkStatus } from "./network.type";

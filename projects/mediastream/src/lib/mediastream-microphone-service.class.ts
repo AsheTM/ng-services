@@ -1,5 +1,5 @@
 import { combineLatest, Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { shareReplay, switchMap } from "rxjs/operators";
 
 import { IMediastreamMicrophoneService } from "./mediastream-microphone-service.interface";
 import { AMediastreamService } from "./mediastream-service.class";
@@ -16,7 +16,8 @@ export abstract class AMediastreamMicrophoneService
       this._getUserMedia({
         audio: this._buildMediaConstraints(device),
         video: false
-      })));
+      })),
+    shareReplay({ bufferSize: 1, refCount: true }));
 
   disableMicrophone(): void {
     this._toggleMediaStreamSubject.next(false);

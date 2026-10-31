@@ -135,3 +135,71 @@ describe('MediastreamCameraService release', () => {
     subscription.unsubscribe();
   });
 });
+
+describe('MediastreamCameraService sharing', () => {
+  let service: MediastreamCameraService;
+  let getUserMedia: jasmine.Spy;
+
+  beforeEach(() => {
+    getUserMedia = spyOn(navigator.mediaDevices, 'getUserMedia').and.callFake(() => Promise.resolve(createCameraStreamMock()));
+    TestBed.configureTestingModule({
+      providers: [
+        MediastreamCameraService,
+        { provide: MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS, useValue: true }
+      ]
+    });
+    service = TestBed.inject(MediastreamCameraService);
+  });
+
+  it('should share one stream between subscribers', async () => {
+    // GIVEN
+    const first: MediaStream[] = [];
+    const second: MediaStream[] = [];
+
+    // WHEN
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => first.push(mediastream));
+    subscription.add(service.mediastream$.subscribe((mediastream: MediaStream) => second.push(mediastream)));
+    await flushPromises();
+
+    // THEN
+    expect(getUserMedia).toHaveBeenCalledTimes(1);
+    expect(second[0]).toBe(first[0]);
+
+    subscription.unsubscribe();
+  });
+
+  it('should give the current stream to a late subscriber', async () => {
+    // GIVEN
+    const first: MediaStream[] = [];
+    const late: MediaStream[] = [];
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => first.push(mediastream));
+    await flushPromises();
+
+    // WHEN
+    subscription.add(service.mediastream$.subscribe((mediastream: MediaStream) => late.push(mediastream)));
+
+    // THEN
+    expect(getUserMedia).toHaveBeenCalledTimes(1);
+    expect(late[0]).toBe(first[0]);
+
+    subscription.unsubscribe();
+  });
+
+  it('should open a new stream after every subscriber unsubscribed', async () => {
+    // GIVEN
+    const mediastreams: MediaStream[] = [];
+    service.mediastream$.subscribe((mediastream: MediaStream) => mediastreams.push(mediastream)).unsubscribe();
+    await flushPromises();
+
+    // WHEN
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => mediastreams.push(mediastream));
+    await flushPromises();
+
+    // THEN
+    expect(getUserMedia).toHaveBeenCalledTimes(2);
+    expect(mediastreams.length).toBe(1);
+    expect(mediastreams[0].getVideoTracks()[0].readyState).toBe('live');
+
+    subscription.unsubscribe();
+  });
+});

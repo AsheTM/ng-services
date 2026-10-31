@@ -1,5 +1,5 @@
 import { combineLatest, Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { shareReplay, switchMap } from "rxjs/operators";
 
 import { IMediastreamCameraService } from "./mediastream-camera-service.interface";
 import { AMediastreamService } from "./mediastream-service.class";
@@ -16,7 +16,8 @@ export abstract class AMediastreamCameraService
       this._getUserMedia({
         audio: false,
         video: this._buildMediaConstraints(device)
-      })));
+      })),
+    shareReplay({ bufferSize: 1, refCount: true }));
 
   disableCamera(): void {
     this._toggleMediaStreamSubject.next(false);

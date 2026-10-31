@@ -4,7 +4,7 @@ import { AMediastreamService } from './mediastream-service.class';
 import {
   MediaStreamServiceMock,
   MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK
-} from './mediastream-service.class.mock';
+} from './mediastream.mock';
 
 describe('AMediastreamService', () => {
   let mediastreamConstraints: boolean | MediaTrackConstraints;

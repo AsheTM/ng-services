@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import { combineLatest, map, Observable } from 'rxjs';
 
 import { IMediastreamCameraService } from './mediastream-camera-service.interface';
 import { MediastreamCameraService } from './mediastream-camera.service';
@@ -12,10 +11,13 @@ import { MediastreamMicrophoneService } from './mediastream-microphone.service';
 export class MediastreamCameraMicrophoneService
   implements IMediastreamCameraService, IMediastreamMicrophoneService {
 
-  readonly currentCameraMediaDevice$: Observable<MediaDeviceInfo>
+  private readonly _mediastreamCameraService: MediastreamCameraService = inject(MediastreamCameraService);
+  private readonly _mediastreamMicrophoneService: MediastreamMicrophoneService = inject(MediastreamMicrophoneService);
+
+  readonly currentCameraMediaDevice$: Observable<MediaDeviceInfo | null>
     = this._mediastreamCameraService.currentMediaDevice$;
 
-  readonly currentMicrophoneMediaDevice$: Observable<MediaDeviceInfo>
+  readonly currentMicrophoneMediaDevice$: Observable<MediaDeviceInfo | null>
     = this._mediastreamMicrophoneService.currentMediaDevice$;
 
   readonly mediastream$: Observable<MediaStream>
@@ -40,11 +42,6 @@ export class MediastreamCameraMicrophoneService
   get mediastreamMicrophoneConstraints(): boolean | MediaTrackConstraints {
     return this._mediastreamMicrophoneService.mediastreamConstraints;
   }
-
-  constructor(
-    private readonly _mediastreamCameraService: MediastreamCameraService,
-    private readonly _mediastreamMicrophoneService: MediastreamMicrophoneService
-  ) { }
 
   disableCamera(): void {
     this._mediastreamCameraService.disableCamera();

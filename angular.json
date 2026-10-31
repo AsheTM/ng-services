@@ -31,6 +31,16 @@
             "tsConfig": "projects/mediastream/tsconfig.spec.json",
             "karmaConfig": "projects/mediastream/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/mediastream/**/*.ts",
+              "projects/mediastream/**/*.html"
+            ],
+            "eslintConfig": "projects/mediastream/eslint.config.js"
+          }
         }
       }
     },

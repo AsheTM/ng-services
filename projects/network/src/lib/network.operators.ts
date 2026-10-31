@@ -1,5 +1,5 @@
-import { MonoTypeOperatorFunction, Observable, timer } from "rxjs";
-import { delayWhen, retryWhen } from "rxjs/operators";
+import { MonoTypeOperatorFunction, Observable, throwError } from "rxjs";
+import { concatMap, delay, first, retryWhen } from "rxjs/operators";
 
 import { fromNetworkEvents } from "./network.rxjs";
 
@@ -8,8 +8,13 @@ import { fromNetworkEvents } from "./network.rxjs";
  */
 export function retryUntilOnline<T>(durationStep: number = 1000, timeIncreasing: boolean = false): MonoTypeOperatorFunction<T> {
   return (source$: Observable<T>): Observable<T> => source$.pipe(
-    retryWhen((_: Observable<unknown>) => fromNetworkEvents().pipe(
-      delayWhen((isOnline: boolean, index: number) => isOnline ? source$ : timer((timeIncreasing ? index : 1) * durationStep))
+    retryWhen((errors$: Observable<unknown>) => errors$.pipe(
+      concatMap((error: unknown, index: number) => navigator.onLine
+        ? throwError(error)
+        : fromNetworkEvents().pipe(
+          first((isOnline: boolean) => isOnline),
+          delay((timeIncreasing ? index + 1 : 1) * durationStep)
+        ))
     ))
   );
 }

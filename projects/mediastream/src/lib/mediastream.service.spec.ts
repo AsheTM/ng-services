@@ -10,6 +10,7 @@ import {
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
 } from './mediastream.token';
 import { provideMediaStream } from './mediastream.provider';
+import { createCameraStreamMock, createMicrophoneStreamMock } from './mediastream.mock';
 
 describe('MediastreamService', () => {
   const deviceMocks: MediaDeviceInfo[] = [
@@ -199,5 +200,44 @@ describe('MediastreamService', () => {
     expect(hasMicrophoneDevices).toBeTrue();
     expect(hasMicrophoneDevices).toEqual(hasMicrophoneDeviceMocks);
     expect(window.navigator.mediaDevices.enumerateDevices).toHaveBeenCalledWith();
+  });
+
+  it('should stop the permission stream of requestCamera', async () => {
+    // GIVEN
+    const mediastream: MediaStream = createCameraStreamMock();
+    spyOn(window.navigator.mediaDevices, 'getUserMedia').and.resolveTo(mediastream);
+
+    // WHEN
+    await service.requestCamera();
+
+    // THEN
+    expect(mediastream.getVideoTracks()[0].readyState).toBe('ended');
+  });
+
+  it('should stop the permission stream of requestMicrophone', async () => {
+    // GIVEN
+    const mediastream: MediaStream = createMicrophoneStreamMock();
+    spyOn(window.navigator.mediaDevices, 'getUserMedia').and.resolveTo(mediastream);
+
+    // WHEN
+    await service.requestMicrophone();
+
+    // THEN
+    expect(mediastream.getAudioTracks()[0].readyState).toBe('ended');
+  });
+
+  it('should stop the permission stream of requestCameraAndMicrophone', async () => {
+    // GIVEN
+    const mediastream: MediaStream = new MediaStream([
+      ...createCameraStreamMock().getVideoTracks(),
+      ...createMicrophoneStreamMock().getAudioTracks()
+    ]);
+    spyOn(window.navigator.mediaDevices, 'getUserMedia').and.resolveTo(mediastream);
+
+    // WHEN
+    await service.requestCameraAndMicrophone();
+
+    // THEN
+    expect(mediastream.getTracks().every((track: MediaStreamTrack) => track.readyState === 'ended')).toBeTrue();
   });
 });

@@ -57,7 +57,11 @@ export class MediastreamService extends AMediastream {
     return await this.MEDIA_DEVICES.getUserMedia({
       audio: false,
       video: cameraConstraints
-    }).then(() => injector.get(MediastreamCameraService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamCameraService);
+    });
   }
 
   async requestCameraAndMicrophone(constraints?: Partial<
@@ -92,7 +96,11 @@ export class MediastreamService extends AMediastream {
     return await this.MEDIA_DEVICES.getUserMedia({
       audio: microphoneConstraints,
       video: cameraConstraints
-    }).then(() => injector.get(MediastreamCameraMicrophoneService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamCameraMicrophoneService);
+    });
   }
 
   async requestMicrophone(
@@ -115,7 +123,11 @@ export class MediastreamService extends AMediastream {
     return await this.MEDIA_DEVICES.getUserMedia({
       audio: microphoneConstraints,
       video: false
-    }).then(() => injector.get(MediastreamMicrophoneService));
+    }).then((mediastream: MediaStream) => {
+      this._stopMediastream(mediastream);
+
+      return injector.get(MediastreamMicrophoneService);
+    });
   }
 
 }

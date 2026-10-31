@@ -1,4 +1,4 @@
-import { combineLatest, from, Observable } from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
 import { IMediastreamCameraService } from "./mediastream-camera-service.interface";
@@ -13,10 +13,10 @@ export abstract class AMediastreamCameraService
     = combineLatest([
       this._currentMediaDeviceSubject$
     ]).pipe(switchMap(([device]: [MediaDeviceInfo]) =>
-      from(this.MEDIA_DEVICES.getUserMedia({
+      this._getUserMedia({
         audio: false,
         video: this._buildMediaConstraints(device)
-      }))));
+      })));
 
   disableCamera(): void {
     this._toggleMediaStreamSubject.next(false);

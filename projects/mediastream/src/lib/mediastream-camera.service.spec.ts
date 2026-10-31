@@ -1,15 +1,10 @@
 import { TestBed } from '@angular/core/testing';
+import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { MediastreamCameraService } from './mediastream-camera.service';
+import { createCameraStreamMock, flushPromises } from './mediastream.mock';
 import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from './mediastream.token';
-
-function createCameraStream(): MediaStream {
-  const canvas: HTMLCanvasElement = document.createElement('canvas');
-  canvas.getContext('2d');
-
-  return canvas.captureStream();
-}
 
 describe('MediastreamCameraService', () => {
   let service: MediastreamCameraService;
@@ -45,7 +40,7 @@ describe('MediastreamCameraService toggle', () => {
   let cameraStream: MediaStream;
 
   beforeEach(() => {
-    cameraStream = createCameraStream();
+    cameraStream = createCameraStreamMock();
     spyOn(navigator.mediaDevices, 'getUserMedia').and.resolveTo(cameraStream);
     TestBed.configureTestingModule({
       providers: [
@@ -91,5 +86,52 @@ describe('MediastreamCameraService toggle', () => {
 
     // THEN
     expect(mediastream.getVideoTracks()[0].enabled).toBeFalse();
+  });
+});
+
+describe('MediastreamCameraService release', () => {
+  let service: MediastreamCameraService;
+
+  beforeEach(() => {
+    spyOn(navigator.mediaDevices, 'getUserMedia').and.callFake(() => Promise.resolve(createCameraStreamMock()));
+    TestBed.configureTestingModule({
+      providers: [
+        MediastreamCameraService,
+        { provide: MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS, useValue: true }
+      ]
+    });
+    service = TestBed.inject(MediastreamCameraService);
+  });
+
+  it('should stop the tracks when unsubscribed', async () => {
+    // GIVEN
+    const mediastreams: MediaStream[] = [];
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => mediastreams.push(mediastream));
+    await flushPromises();
+
+    // WHEN
+    subscription.unsubscribe();
+
+    // THEN
+    expect(mediastreams.length).toBe(1);
+    expect(mediastreams[0].getVideoTracks()[0].readyState).toBe('ended');
+  });
+
+  it('should stop the previous tracks when the device changes', async () => {
+    // GIVEN
+    const mediastreams: MediaStream[] = [];
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => mediastreams.push(mediastream));
+    await flushPromises();
+
+    // WHEN
+    service.updateCameraDevice({ deviceId: 'deviceId', kind: 'videoinput' } as MediaDeviceInfo & Record<'kind', 'videoinput'>);
+    await flushPromises();
+
+    // THEN
+    expect(mediastreams.length).toBe(2);
+    expect(mediastreams[0].getVideoTracks()[0].readyState).toBe('ended');
+    expect(mediastreams[1].getVideoTracks()[0].readyState).toBe('live');
+
+    subscription.unsubscribe();
   });
 });

@@ -20,3 +20,18 @@ export class MediaStreamServiceMock extends AMediastreamService {
   }
 
 }
+
+export function createCameraStreamMock(): MediaStream {
+  const canvas: HTMLCanvasElement = document.createElement('canvas');
+  canvas.getContext('2d');
+
+  return canvas.captureStream();
+}
+
+export function createMicrophoneStreamMock(): MediaStream {
+  return new AudioContext().createMediaStreamDestination().stream;
+}
+
+export function flushPromises(): Promise<void> {
+  return new Promise((resolve: () => void) => setTimeout(resolve));
+}

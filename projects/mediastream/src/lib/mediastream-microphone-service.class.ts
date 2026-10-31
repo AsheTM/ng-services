@@ -1,4 +1,4 @@
-import { combineLatest, from, Observable } from "rxjs";
+import { combineLatest, Observable } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
 import { IMediastreamMicrophoneService } from "./mediastream-microphone-service.interface";
@@ -13,10 +13,10 @@ export abstract class AMediastreamMicrophoneService
     = combineLatest([
       this._currentMediaDeviceSubject$
     ]).pipe(switchMap(([device]: [MediaDeviceInfo]) =>
-      from(this.MEDIA_DEVICES.getUserMedia({
+      this._getUserMedia({
         audio: this._buildMediaConstraints(device),
         video: false
-      }))));
+      })));
 
   disableMicrophone(): void {
     this._toggleMediaStreamSubject.next(false);

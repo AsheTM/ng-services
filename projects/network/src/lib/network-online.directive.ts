@@ -4,8 +4,7 @@ import { Subscription } from "rxjs";
 import { fromNetworkEvents } from "./network.rxjs";
 
 @Directive({
-  selector: '[ashetmNetworkOnline]',
-  standalone: true
+  selector: '[ashetmNetworkOnline]'
 })
 export class NetworkOnlineDirective {
   private readonly _templateRef: TemplateRef<never> = inject(TemplateRef) as TemplateRef<never>;

@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NetworkOfflineDirective } from './network-offline.directive';
 
 @Component({
-    imports: [NetworkOfflineDirective],
-    template: `
+  imports: [NetworkOfflineDirective],
+  template: `
     <div *ashetmNetworkOffline>
       <span id="template">Offline</span>
     </div>

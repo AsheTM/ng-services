@@ -28,7 +28,7 @@
         "dist/utility"
       ],
       "@ashetm/ng-network": [
-        "dist/network/@ashetm/",
+        "dist/network/network",
         "dist/network"
       ]
     },

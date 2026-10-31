@@ -1,7 +1,7 @@
 
 # @ashetm/ng-network
 
-``@ashetm/ng-network`` is a library that provides a directive, RxJS observables and an RxJS operator to follow the network state of the device (online/offline, connection quality).
+``@ashetm/ng-network`` is a library that provides directives, a signal, RxJS observables and an RxJS operator to follow the network state of the device (online/offline, connection quality).
 
 <!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
 <!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
@@ -15,7 +15,10 @@
 
 | Angular Version     | @ashetm/ng-network Version | RxJS Version | Support |
 |---------------------|----------------------------|--------------|---------|
+| Angular 20.x and +  | @ashetm/ng-network 2.x     | 7.4.x and +  | ✅      |
 | Angular 16.x – 19.x | @ashetm/ng-network 1.x     | 6.6.x and +  | ✅      |
+
+Upgrading from 1.x? See [Migrating from 1.x](#migrating-from-1x).
 
 ## Install
 
@@ -35,40 +38,46 @@ npm install @ashetm/ng-network
 
 * _Selector_: `[ashetmNetwork]`
 
-This Angular **standalone** **structural** directive listens for changes in the network connection status and provides observable data about the network's current state and the time elapsed since the connection was lost. It uses `fromNetworkEvents` to detect online/offline status and `fromNetworkLastTimeConnected` to track the time elapsed since the device was last connected.
+This Angular **standalone** **structural** directive listens for changes in the network connection status and provides signals with the network's current state and the time elapsed since the connection was lost. It uses [`injectNetwork()`](#injectnetwork) to follow the online/offline status and `fromNetworkLastTimeConnected` to track the time elapsed since the device was last connected.
 
 **Usage Example:**
 
-Import the standalone ``NetworkDirective`` in your component (or NgModule) `imports`:
+Import ``NetworkDirective`` in your component `imports`:
 
 ```ts
 @Component({
-  standalone: true,
-  imports: [AsyncPipe, NgIf, NetworkDirective],
+  imports: [NetworkDirective],
   // ...
 })
 ```
 
 ```html
-<ng-template ashetmNetwork let-network let-lastTimeConnected$="lastTimeConnected$">
-  <div *ngIf="network | async">You are online</div>
-  <div *ngIf="!(network | async)">You are offline</div>
-  <div *ngIf="lastTimeConnected$ | async as lastConnected">Last connected: {{ lastConnected }} ms ago</div>
+<ng-template ashetmNetwork let-network let-lastTimeConnected="lastTimeConnected">
+  @if (network()) {
+    <div>You are online</div>
+  } @else {
+    <div>You are offline</div>
+  }
+  @if (lastTimeConnected(); as lastConnected) {
+    <div>Last connected: {{ lastConnected }} ms ago</div>
+  }
 </ng-template>
 ```
 
 Or with the structural shorthand:
 
 ```html
-<div *ashetmNetwork="let network; lastTimeConnected$ as lastTimeConnected$">
-  {{ (network | async) ? 'You are online' : 'You are offline' }}
+<div *ashetmNetwork="let network; lastTimeConnected as lastTimeConnected">
+  {{ network() ? 'You are online' : 'You are offline' }}
 </div>
 ```
 
 **Explanation:**
 
-* _network_: This observable emits the current state first, then `true` when the device goes online and `false` when it goes offline.
-* _lastTimeConnected$_: This observable emits, every 100 ms while the device is offline, the time elapsed in milliseconds since the connection was lost. It emits `undefined` while the device is online.
+* _network_: A `Signal<boolean>`: `true` while the device is online, `false` while it is offline.
+* _lastTimeConnected_: A `Signal<number | undefined>`: while the device is offline, the time elapsed in milliseconds since the connection was lost (updated every 100 ms); `undefined` while the device is online.
+
+The template context is typed (`NetworkDirectiveContext`), so `network` and `lastTimeConnected` are type-checked in your templates.
 
 #### NetworkOnlineDirective
 
@@ -84,11 +93,10 @@ This Angular **standalone** **structural** directive renders its content only wh
 
 **Usage Example:**
 
-Import the standalone ``NetworkOnlineDirective`` and/or ``NetworkOfflineDirective`` in your component (or NgModule) `imports`:
+Import ``NetworkOnlineDirective`` and/or ``NetworkOfflineDirective`` in your component `imports`:
 
 ```ts
 @Component({
-  standalone: true,
   imports: [NetworkOfflineDirective, NetworkOnlineDirective],
   // ...
 })
@@ -100,6 +108,33 @@ Import the standalone ``NetworkOnlineDirective`` and/or ``NetworkOfflineDirectiv
 ```
 
 Both directives follow the current state from the start (see [`fromNetworkEvents()`](#fromnetworkevents)), and stop listening to network events when they are destroyed.
+
+### Signals
+
+#### `injectNetwork()`
+
+```ts
+function injectNetwork(options?: { injector?: Injector }): Signal<boolean> { ... }
+```
+
+Returns a signal that is `true` while the device is online and `false` while it is offline. It holds the current state right away.
+
+It must be called in an injection context (a constructor, a field initializer, or `runInInjectionContext`), unless an `injector` is given. It stops listening to network events when that context is destroyed.
+
+**Example:**
+
+```ts
+@Component({
+  template: `
+    @if (!network()) {
+      <div class="banner">You are offline</div>
+    }
+  `
+})
+export class AppComponent {
+  readonly network: Signal<boolean> = injectNetwork();
+}
+```
 
 ### Custom RXJS Observables
 
@@ -221,9 +256,8 @@ The ``retryUntilOnline`` operator is **an experimental feature** that retries an
 **Example:**
 
 ```tsx
-import { of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { catchError, tap } from 'rxjs/operators';
 
 import { retryUntilOnline } from '@ashetm/ng-network';
 
@@ -251,6 +285,13 @@ httpRequest$.subscribe({
 
 ### Types
 
+#### `NetworkDirectiveContext`
+
+The template context of `NetworkDirective`:
+
+* `$implicit`: `Signal<boolean>`, the online state.
+* `lastTimeConnected`: `Signal<number | undefined>`, the time elapsed since the connection was lost.
+
 #### `NetworkStatus`
 
 The `NetworkStatus` interface defines the structure of the network status object emitted by the `fromNetworkStatus()` observable.
@@ -267,9 +308,39 @@ The `NetworkStatus` interface defines the structure of the network status object
 The library is safe to use with server-side rendering. On the server, where there is no browser:
 
 * `fromOnlineEvent()` and `fromOfflineEvent()` emit nothing.
-* `fromNetworkEvents()` emits `true` (assumes online).
+* `fromNetworkEvents()` emits `true` (assumes online), and `injectNetwork()` is `true`.
 * `fromNetworkLastTimeConnected()` and `fromNetworkStatus()` emit `undefined`.
 * `retryUntilOnline` passes errors through.
+
+## Zoneless
+
+The directives and `injectNetwork()` are signal-based, so they work in zoneless applications (`provideZonelessChangeDetection()`) without any extra setup.
+
+## Migrating from 1.x
+
+2.0.0 requires Angular 20+ and RxJS 7.4+. The only breaking change is in the `NetworkDirective` template context, which now holds signals:
+
+| 1.x                                  | 2.x                                |
+|--------------------------------------|------------------------------------|
+| `network \| async`                   | `network()`                        |
+| `lastTimeConnected$` (Observable)    | `lastTimeConnected` (Signal)       |
+| `lastTimeConnected$ \| async`        | `lastTimeConnected()`              |
+
+```html
+<!-- 1.x -->
+<div *ashetmNetwork="let network; lastTimeConnected$ as last">
+  <span *ngIf="network | async">Online</span>
+  <span *ngIf="last | async as ms">Offline for {{ ms }} ms</span>
+</div>
+
+<!-- 2.x -->
+<div *ashetmNetwork="let network; lastTimeConnected as last">
+  @if (network()) { <span>Online</span> }
+  @if (last(); as ms) { <span>Offline for {{ ms }} ms</span> }
+</div>
+```
+
+Everything else (`*ashetmNetworkOnline`, `*ashetmNetworkOffline`, the `from…` observables, `retryUntilOnline` and `NetworkStatus`) works the same.
 
 ## Issue
 

@@ -6,14 +6,15 @@ import { AppService } from './app.service';
 
 
 @Component({
-  selector: 'sample-broadcast-channel-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AppService,
-    AppContextService
-  ]
+    selector: 'sample-broadcast-channel-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AppService,
+        AppContextService
+    ],
+    standalone: false
 })
 export class AppComponent {
 

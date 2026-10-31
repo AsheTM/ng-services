@@ -1,23 +1,29 @@
-import { Directive, TemplateRef, ViewContainerRef, inject } from "@angular/core";
-import { Observable } from "rxjs";
+import { Directive, Signal, TemplateRef, ViewContainerRef, inject } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 
-import { fromNetworkEvents, fromNetworkLastTimeConnected } from "./network.rxjs";
+import { fromNetworkLastTimeConnected } from "./network.rxjs";
+import { injectNetwork } from "./network.signal";
+
+export interface NetworkDirectiveContext {
+  $implicit: Signal<boolean>;
+  lastTimeConnected: Signal<number | undefined>;
+}
 
 @Directive({
-  selector: '[ashetmNetwork]',
-  standalone: true
+  selector: '[ashetmNetwork]'
 })
 export class NetworkDirective {
-  private readonly _templateRef: TemplateRef<{
-    $implicit: Observable<boolean>,
-    lastTimeConnected$: Observable<number | undefined>,
-  }> = inject(TemplateRef);
+  private readonly _templateRef: TemplateRef<NetworkDirectiveContext> = inject(TemplateRef);
   private readonly _viewContainerRef: ViewContainerRef = inject(ViewContainerRef);
+
+  static ngTemplateContextGuard(_directive: NetworkDirective, context: unknown): context is NetworkDirectiveContext {
+    return true;
+  }
 
   constructor() {
     this._viewContainerRef.createEmbeddedView(this._templateRef, {
-      $implicit: fromNetworkEvents(),
-      lastTimeConnected$: fromNetworkLastTimeConnected()
+      $implicit: injectNetwork(),
+      lastTimeConnected: toSignal(fromNetworkLastTimeConnected(), { initialValue: undefined })
     });
   }
 }

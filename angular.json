@@ -31,18 +31,6 @@
             "tsConfig": "projects/mediastream/tsconfig.spec.json",
             "karmaConfig": "projects/mediastream/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/mediastream/tsconfig.lib.json",
-              "projects/mediastream/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -70,18 +58,6 @@
             "main": "projects/broadcast-channel/src/test.ts",
             "tsConfig": "projects/broadcast-channel/tsconfig.spec.json",
             "karmaConfig": "projects/broadcast-channel/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/broadcast-channel/tsconfig.lib.json",
-              "projects/broadcast-channel/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -148,18 +124,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sample-broadcast-channel:build"
+            "buildTarget": "sample-broadcast-channel:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sample-broadcast-channel:build:production"
+              "buildTarget": "sample-broadcast-channel:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sample-broadcast-channel:build"
+            "buildTarget": "sample-broadcast-channel:build"
           }
         },
         "test": {
@@ -177,31 +153,6 @@
               "projects/sample-broadcast-channel/src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/sample-broadcast-channel/tsconfig.app.json",
-              "projects/sample-broadcast-channel/tsconfig.spec.json",
-              "projects/sample-broadcast-channel/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/sample-broadcast-channel/e2e/protractor.conf.js",
-            "devServerTarget": "sample-broadcast-channel:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "sample-broadcast-channel:serve:production"
-            }
           }
         }
       }
@@ -267,8 +218,44 @@
               "zone.js/testing"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/network/**/*.ts",
+              "projects/network/**/*.html"
+            ],
+            "eslintConfig": "projects/network/eslint.config.js"
+          }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

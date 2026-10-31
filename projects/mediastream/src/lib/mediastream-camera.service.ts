@@ -1,6 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import { combineLatest, map, Observable } from 'rxjs';
 
 import { AMediastreamCameraService } from './mediastream-camera-service.class';
 import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from './mediastream.token';
@@ -14,7 +13,7 @@ export class MediastreamCameraService extends AMediastreamCameraService {
       this._toggleMediaStreamSubject.asObservable(),
       this._userMedia$
     ]).pipe(map(([toggleCamera, media]: [boolean, MediaStream]) => {
-      media.getAudioTracks()
+      media.getVideoTracks()
         .map((track: MediaStreamTrack) => {
           track.enabled = toggleCamera;
 
@@ -24,11 +23,8 @@ export class MediastreamCameraService extends AMediastreamCameraService {
       return media;
     }));
 
-  constructor(
-    @Inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS)
-      private readonly __mediastreamCameraConstraints: any
-  ) {
-    super(__mediastreamCameraConstraints);
+  constructor() {
+    super(inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS));
   }
 
 }

@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-10-31
+
+### Breaking changes
+
+- Requires Angular 20+ (`@angular/common` and `@angular/core` `>=20.0.0`) and RxJS 7.4+ (`rxjs` `>=7.4.0`). Angular 16–19 users stay on 1.x.
+- `NetworkDirective`: the template context now holds signals ([#22](https://github.com/AsheTM/ng-services/issues/22)).
+  - `$implicit` is `Signal<boolean>` instead of `Observable<boolean>`: use `network()` instead of `network | async`.
+  - `lastTimeConnected$` is renamed `lastTimeConnected` and is `Signal<number | undefined>`.
+
+See [Migrating from 1.x](README.md#migrating-from-1x).
+
+### Added
+
+- `injectNetwork()`: a `Signal<boolean>` with the current online state ([#23](https://github.com/AsheTM/ng-services/issues/23)).
+- `NetworkDirectiveContext`: typed template context of `NetworkDirective`.
+- Zoneless support: the directives and `injectNetwork()` work with `provideZonelessChangeDetection()`.
+
+### Changed
+
+- `retryUntilOnline`: uses `retry({ delay })` instead of the deprecated `retryWhen`; behavior is unchanged ([#24](https://github.com/AsheTM/ng-services/issues/24)).
+- Directives no longer set `standalone: true` explicitly (standalone is the default since Angular 19).
+
+---
+
 ## [1.1.0] - 2026-10-31
 
 ### Added

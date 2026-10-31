@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-network",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -31,6 +31,8 @@
     "operators",
     "rxjs",
     "rxjs/operators",
+    "signal",
+    "signals",
     "ts"
   ],
   "private": false,
@@ -38,9 +40,9 @@
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/network"
   },
   "peerDependencies": {
-    "@angular/common": ">=16.0.0 <20.0.0",
-    "@angular/core": ">=16.0.0 <20.0.0",
-    "rxjs": ">=6.6.0"
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0",
+    "rxjs": ">=7.4.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

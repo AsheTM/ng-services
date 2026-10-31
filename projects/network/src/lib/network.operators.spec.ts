@@ -5,7 +5,7 @@ import { retryUntilOnline } from './network.operators';
 
 function createFlakySource(failures: number): { source$: Observable<string>, calls: () => number } {
   let calls: number = 0;
-  const source$: Observable<string> = defer(() => ++calls <= failures ? throwError('error') : of('success'));
+  const source$: Observable<string> = defer(() => ++calls <= failures ? throwError(() => 'error') : of('success'));
 
   return { source$, calls: () => calls };
 }

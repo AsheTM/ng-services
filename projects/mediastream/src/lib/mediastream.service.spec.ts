@@ -1,4 +1,4 @@
-import { InjectFlags } from '@angular/core';
+
 import { TestBed } from '@angular/core/testing';
 
 import { MediastreamCameraMicrophoneService } from './mediastream-camera-microphone.service';
@@ -53,13 +53,13 @@ fdescribe('MediastreamService', () => {
       = TestBed.inject(
         MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
         null,
-        InjectFlags.Optional
+        { optional: true }
       );
     const tokenMediastreamMicrophoneContrains: boolean | MediaStreamConstraints | null
       = TestBed.inject(
         MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS,
         null,
-        InjectFlags.Optional
+        { optional: true }
       );
 
     expect(service).toBeTruthy();

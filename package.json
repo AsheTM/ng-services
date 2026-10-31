@@ -12,7 +12,7 @@
     "ng": "ng",
     "build:broadcast-channel": "npm run lint:broadcast-channel & npm run test:broadcast-channel & ng build broadcast-channel --configuration=production",
     "build:mediastream": "npm run lint:mediastream & npm run test:mediastream & ng build mediastream --configuration=production",
-    "build:network": "npm run lint:network & npm run test:network & ng build network --configuration=production",
+    "build:network": "npm run lint:network && npm run test:network && ng build network --configuration=production",
     "build:sample-broadcast-channel": "npm run build:broadcast-channel && ng build sample-broadcast-channel --configuration=production",
     "build:utility": "npm run lint:utility & npm run test:utility & ng build utility --configuration=production",
     "lint": "ng lint --format stylish",
@@ -44,40 +44,40 @@
     "test:network": "npm run test -- network",
     "test:network:watch": "npm run test:network -- --watch true",
     "test:utility": "npm run test -- utility",
-    "test:utility:watch": "npm run test:utility -- --watch true",
-    "e2e": "ng e2e"
+    "test:utility:watch": "npm run test:utility -- --watch true"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "dependencies": {
-    "@angular/cdk": "^16.0.4",
-    "@angular/common": "^16.0.6",
-    "@angular/compiler": "^16.0.6",
-    "@angular/core": "^16.0.6",
-    "@angular/forms": "^16.0.6",
-    "@angular/platform-browser": "^16.0.6",
-    "@angular/platform-browser-dynamic": "^16.0.6",
-    "rxjs": "~6.6.0",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.34",
+    "@angular/compiler": "^20.3.34",
+    "@angular/core": "^20.3.34",
+    "@angular/forms": "^20.3.34",
+    "@angular/platform-browser": "^20.3.34",
+    "@angular/platform-browser-dynamic": "^20.3.34",
+    "rxjs": "~7.8.2",
     "tslib": "^2.0.0",
-    "zone.js": "^0.13.3"
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.0.6",
-    "@angular/cli": "^16.0.6",
-    "@angular/compiler-cli": "^16.0.6",
+    "@angular-devkit/build-angular": "^20.3.42",
+    "@angular/cli": "^20.3.42",
+    "@angular/compiler-cli": "^20.3.34",
     "@schematics/angular": "^16.0.6",
     "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
+    "@types/node": "^24.0.0",
+    "angular-eslint": "20.7.0",
+    "eslint": "^9.39.1",
     "jasmine-core": "~3.8.0",
-    "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "ng-packagr": "^16.2.3",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.9.5"
+    "ng-packagr": "^20.3.2",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "8.46.4"
   }
 }

@@ -33,6 +33,16 @@ describe('MediastreamMicrophoneService', () => {
     expect(service.updateMicrophoneDevice).toBeDefined();
   });
 
+  it('should provide the constraints as track constraints', () => {
+    // GIVEN
+    // WHEN
+    const constraints: boolean | MediaTrackConstraints = TestBed.inject(MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS);
+
+    // THEN
+    expect(constraints).toBeTrue();
+    expect(service.mediastreamConstraints).toBe(constraints);
+  });
+
   // it('should mediastream$ work', (done: DoneFn) => {
   //   service.mediastream$.pipe(first()).subscribe({
   //     next: (mediastream: MediaStream) => {

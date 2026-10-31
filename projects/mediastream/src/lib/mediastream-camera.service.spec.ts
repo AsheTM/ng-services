@@ -33,6 +33,16 @@ describe('MediastreamCameraService', () => {
     expect(service.toggleCamera).toBeDefined();
     expect(service.updateCameraDevice).toBeDefined();
   });
+
+  it('should provide the constraints as track constraints', () => {
+    // GIVEN
+    // WHEN
+    const constraints: boolean | MediaTrackConstraints = TestBed.inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS);
+
+    // THEN
+    expect(constraints).toBeTrue();
+    expect(service.mediastreamConstraints).toBe(constraints);
+  });
 });
 
 describe('MediastreamCameraService toggle', () => {

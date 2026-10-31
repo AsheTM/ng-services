@@ -1,3 +1,13 @@
+# 3.0.0
+
+- [x] **Breaking**: requires Angular 20+ (``@angular/common`` and ``@angular/core`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 2.x
+- [x] **Breaking**: ``currentMediaDevice$``, ``currentCameraMediaDevice$`` and ``currentMicrophoneMediaDevice$`` are ``Observable<MediaDeviceInfo | null>``, they emit ``null`` until a device is chosen
+- [x] Include the 2.0.1 fixes
+- [x] Use ``inject()`` instead of constructor injection
+- [x] Set up ESLint
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 2.0.1
 
 - [x] Fix ``disableCamera()``, ``enableCamera()`` and ``toggleCamera()`` doing nothing: they now switch the video tracks ([#30](https://github.com/AsheTM/ng-services/issues/30))

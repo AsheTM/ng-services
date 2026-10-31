@@ -16,6 +16,7 @@
 
 | Angular Version                | @ashetm/ng-mediastream Version | Support |
 |--------------------------------|--------------------------------|---------|
+| Angular 20.x and +             | @ashetm/ng-mediastream 3.x     | ✅      |
 | Angular 16.x – 19.x            | @ashetm/ng-mediastream 2.x     | ✅      |
 | Angular >= 11.0.0 and < 16.0.0 | @ashetm/ng-mediastream 1.0.1   | ❌      |
 | Angular ~ 11.2.14              | @ashetm/ng-mediastream 1.0.0   | ❌      |
@@ -92,7 +93,7 @@ The ``request…()`` methods ask the user for permission, then stop the stream u
 
 ``MediastreamCameraService`` is a service concern all about ``MediaStream`` API of camera.
 
-* ``currentMediaDevice$`` is ``Observable<MediaDeviceInfo>``, it emits ``MediaDeviceInfo`` value of current media camera device information.
+* ``currentMediaDevice$`` is ``Observable<MediaDeviceInfo | null>``, it emits the ``MediaDeviceInfo`` of the current camera device, or ``null`` until a device is chosen.
 
 * ``mediastream$`` is ``Observable<MediaStream>``, it emits ``MediaStream`` value of media stream information.
 
@@ -112,9 +113,9 @@ For methods, there is the following:
 
 ``MediastreamCameraMicrophoneService`` is a service concern all about ``MediaStream`` API of both camera and microphone at the same time.
 
-* ``currentCameraMediaDevice$`` is ``Observable<MediaDeviceInfo>``, it emits ``MediaDeviceInfo`` value of current media camera device information.
+* ``currentCameraMediaDevice$`` is ``Observable<MediaDeviceInfo | null>``, it emits the ``MediaDeviceInfo`` of the current camera device, or ``null`` until a device is chosen.
 
-* ``currentMicrophoneMediaDevice$`` is ``Observable<MediaDeviceInfo>``, it emits ``MediaDeviceInfo`` value of current media microphone device information.
+* ``currentMicrophoneMediaDevice$`` is ``Observable<MediaDeviceInfo | null>``, it emits the ``MediaDeviceInfo`` of the current microphone device, or ``null`` until a device is chosen.
 
 * ``mediastream$`` is ``Observable<MediaStream>``, it emits ``MediaStream`` value of media stream information.
 
@@ -144,7 +145,7 @@ For methods, there is the following:
 
 ``MediastreamMicrophoneService`` is a service concern all about ``MediaStream`` API of microphone.
 
-* ``currentMediaDevice$`` is ``Observable<MediaDeviceInfo>``, it emits ``MediaDeviceInfo`` value of current media microphone device information.
+* ``currentMediaDevice$`` is ``Observable<MediaDeviceInfo | null>``, it emits the ``MediaDeviceInfo`` of the current microphone device, or ``null`` until a device is chosen.
 
 * ``mediastream$`` is ``Observable<MediaStream>``, it emits ``MediaStream`` value of media stream information.
 
@@ -159,6 +160,11 @@ For methods, there is the following:
 * ``toggleMicrophone()`` returns ``void``, it disables/enables the current microphone device.
 
 * ``updateMicrophoneDevice(device: MediaDeviceInfo & Record<'kind', 'audioinput'>)`` returns ``void``, it updates the current microphone device with the first argument ``device: MediaDeviceInfo & Record<'kind', 'audioinput'>``.
+
+## Migrating from 2.x
+
+* Requires Angular 20+ and RxJS 7.4+. Angular 16–19 users stay on 2.x.
+* ``currentMediaDevice$``, ``currentCameraMediaDevice$`` and ``currentMicrophoneMediaDevice$`` are now ``Observable<MediaDeviceInfo | null>``: handle ``null`` (no device chosen yet), e.g. ``device?.label``.
 
 ## Media stream lifecycle
 

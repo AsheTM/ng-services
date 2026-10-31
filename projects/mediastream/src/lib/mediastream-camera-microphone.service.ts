@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, map, Observable } from 'rxjs';
 
 import { IMediastreamCameraService } from './mediastream-camera-service.interface';
 import { MediastreamCameraService } from './mediastream-camera.service';

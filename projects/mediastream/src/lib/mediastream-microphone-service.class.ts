@@ -1,5 +1,4 @@
-import { combineLatest, Observable } from "rxjs";
-import { shareReplay, switchMap } from "rxjs/operators";
+import { combineLatest, Observable, shareReplay, switchMap } from "rxjs";
 
 import { IMediastreamMicrophoneService } from "./mediastream-microphone-service.interface";
 import { AMediastreamService } from "./mediastream-service.class";

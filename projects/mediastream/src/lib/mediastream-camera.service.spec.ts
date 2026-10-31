@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { firstValueFrom, Subscription } from 'rxjs';
 
 import { MediastreamCameraService } from './mediastream-camera.service';
 import { createCameraStreamMock, flushPromises } from './mediastream.mock';
@@ -68,7 +67,7 @@ describe('MediastreamCameraService toggle', () => {
     service.disableCamera();
 
     // WHEN
-    const mediastream: MediaStream = await service.mediastream$.pipe(take(1)).toPromise() as MediaStream;
+    const mediastream: MediaStream = await firstValueFrom(service.mediastream$);
 
     // THEN
     expect(mediastream.getVideoTracks().length).toBe(1);
@@ -81,7 +80,7 @@ describe('MediastreamCameraService toggle', () => {
     service.enableCamera();
 
     // WHEN
-    const mediastream: MediaStream = await service.mediastream$.pipe(take(1)).toPromise() as MediaStream;
+    const mediastream: MediaStream = await firstValueFrom(service.mediastream$);
 
     // THEN
     expect(mediastream.getVideoTracks()[0].enabled).toBeTrue();
@@ -92,7 +91,7 @@ describe('MediastreamCameraService toggle', () => {
     service.toggleCamera();
 
     // WHEN
-    const mediastream: MediaStream = await service.mediastream$.pipe(take(1)).toPromise() as MediaStream;
+    const mediastream: MediaStream = await firstValueFrom(service.mediastream$);
 
     // THEN
     expect(mediastream.getVideoTracks()[0].enabled).toBeFalse();

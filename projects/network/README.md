@@ -1,7 +1,7 @@
 
 # @ashetm/ng-network
 
-``@ashetm/ng-network`` is a library that provide some utilities classes, like pipes.
+``@ashetm/ng-network`` is a library that provides a directive, RxJS observables and an RxJS operator to follow the network state of the device (online/offline, connection quality).
 
 <!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
 <!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
@@ -13,9 +13,9 @@
 
 ## Compatibility Table
 
-| Angular Version    | @ashetm/ng-network Version     | RxJS Version   | Support |
-|--------------------|--------------------------------|----------------|---------|
-| Angular 16.x and + | @ashetm/ng-network 16.x and +  | 6.x.x and +    | ✅      |
+| Angular Version     | @ashetm/ng-network Version | RxJS Version | Support |
+|---------------------|----------------------------|--------------|---------|
+| Angular 16.x – 19.x | @ashetm/ng-network 1.x     | 6.6.x and +  | ✅      |
 
 ## Install
 
@@ -33,13 +33,21 @@ npm install @ashetm/ng-network
 
 #### NetworkDirective
 
-* _Selector_: `ashetmNetwork`
+* _Selector_: `[ashetmNetwork]`
 
-This Angular **standalone** **structural** directive listens for changes in the network connection status and provides observable data about the network's current state and the last time it was connected. It uses fromNetworkEvents to detect online/offline status and fromNetworkLastTimeConnected to track the last time the device was connected.
+This Angular **standalone** **structural** directive listens for changes in the network connection status and provides observable data about the network's current state and the time elapsed since the connection was lost. It uses `fromNetworkEvents` to detect online/offline status and `fromNetworkLastTimeConnected` to track the time elapsed since the device was last connected.
 
 **Usage Example:**
 
-Importing the specific standalone ``NetworkDirective`` step is required.
+Import the standalone ``NetworkDirective`` in your component (or NgModule) `imports`:
+
+```ts
+@Component({
+  standalone: true,
+  imports: [AsyncPipe, NgIf, NetworkDirective],
+  // ...
+})
+```
 
 ```html
 <ng-template ashetmNetwork let-network let-lastTimeConnected$="lastTimeConnected$">
@@ -49,10 +57,18 @@ Importing the specific standalone ``NetworkDirective`` step is required.
 </ng-template>
 ```
 
+Or with the structural shorthand:
+
+```html
+<div *ashetmNetwork="let network; lastTimeConnected$ as lastTimeConnected$">
+  {{ (network | async) ? 'You are online' : 'You are offline' }}
+</div>
+```
+
 **Explanation:**
 
-* _network_: This observable emits a boolean value, `true` if the device is online and `false` if the device is offline.
-* _lastTimeConnected$_: This observable emits the last time the device was connected in milliseconds. It emits undefined when the device is online.
+* _network_: This observable emits the current state first, then `true` when the device goes online and `false` when it goes offline.
+* _lastTimeConnected$_: This observable emits, every 100 ms while the device is offline, the time elapsed in milliseconds since the connection was lost. It emits `undefined` while the device is online.
 
 ### Custom RXJS Observables
 
@@ -98,7 +114,7 @@ fromOnlineEvent().subscribe(() => {
 function fromNetworkEvents(): Observable<boolean> { ... }
 ```
 
-Emits true when the device is online and false when the device is offline.
+Emits the current state on subscribe (`navigator.onLine`), then `true` when the device goes online and `false` when it goes offline. Repeated values are skipped.
 
 **Example:**
 
@@ -114,7 +130,7 @@ fromNetworkEvents().subscribe((isOnline: boolean) => {
 function fromNetworkLastTimeConnected(): Observable<number | undefined> { ... }
 ```
 
-Emits the last time the device was connected (in milliseconds) or undefined if the device is currently online.
+While the device is offline, emits every 100 ms the time elapsed (in milliseconds) since the connection was lost. Emits `undefined` while the device is online.
 
 **Example:**
 
@@ -133,22 +149,20 @@ fromNetworkLastTimeConnected().subscribe((lastConnected: number | undefined) => 
 function fromNetworkStatus(): Observable<NetworkStatus | undefined> { ... }
 ```
 
-This observable provides detailed network status information, including the connection type, downlink speed, round-trip time, and whether data saver mode is enabled. The observable emits updates whenever the network conditions change.
+This observable provides detailed network status information (see [`NetworkStatus`](#networkstatus)), based on the [Network Information API](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API). It emits the current status on subscribe, then whenever the network conditions change.
 
-**Parameters:**
-
-* _online_: Indicates whether the device is online (true or false).
-* _type_: The type of network connection (e.g., wifi, cellular).
-* _downlink_: The estimated downlink speed in Mbps.
-* _rtt_: The estimated round-trip time in milliseconds.
-* _saveData_: Indicates whether the user has enabled data saver mode.
+It emits `undefined` when the browser doesn't support the Network Information API.
 
 **Example:**
 
 ```tsx
-fromNetworkStatus().subscribe((status: NetworkStatus) => {
-  console.log(`Online: ${status.online}`);
-  console.log(`Connection Type: ${status.type}`);
+fromNetworkStatus().subscribe((status: NetworkStatus | undefined) => {
+  if (!status) {
+    console.log('Network Information API not supported');
+    return;
+  }
+
+  console.log(`Effective type: ${status.effectiveType}`);
   console.log(`Downlink: ${status.downlink} Mbps`);
   console.log(`RTT: ${status.rtt} ms`);
   console.log(`Data Saver Enabled: ${status.saveData}`);
@@ -163,20 +177,24 @@ fromNetworkStatus().subscribe((status: NetworkStatus) => {
 function retryUntilOnline<T>(durationStep: number = 1000, timeIncreasing: boolean = false): MonoTypeOperatorFunction<T>  { ... }
 ```
 
-The ``retryUntilOnline`` operator is **an experimental feature** that automatically retries an observable operation whenever it fails. If the network is offline, it retries the operation with an increasing delay until the network becomes online again. Once the network is online, the operation retries immediately.
+The ``retryUntilOnline`` operator is **an experimental feature** that retries an observable operation when it fails because the device is offline:
+
+* If the source fails while the device is **offline**, it waits until the device is back online, then retries after `durationStep`.
+* If the source fails while the device is **online**, the error is passed through (it isn't a network problem).
 
 **Parameters:**
 
-* `durationStep`: The base delay time in milliseconds (default is `1000 ms`).
-* `timeIncreasing`: A boolean that determines whether the retry delay should increase with each attempt (default is `false`).
+* `durationStep`: The delay in milliseconds before retrying, once the device is back online (default is `1000 ms`).
+* `timeIncreasing`: When `true`, the delay is multiplied by the attempt number (1×, 2×, 3×…) (default is `false`).
 
 **Example:**
 
 ```tsx
+import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { catchError, tap, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
-import { retryUntilOnline } from '@ashetm//ng-network';
+import { retryUntilOnline } from '@ashetm/ng-network';
 
 // Mock API endpoint
 const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts/1';
@@ -184,11 +202,11 @@ const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts/1';
 // Simulated HTTP request
 const httpRequest$ = ajax.getJSON(apiEndpoint).pipe(
   tap((response) => console.log('Request successful:', response)),
+  retryUntilOnline(1000), // If offline, wait for the network, then retry 1 second later
   catchError((error) => {
     console.error('Request failed:', error);
     return of(null); // Handle the error and emit a fallback value
-  }),
-  retryUntilOnline(1000) // Retry every 1 second until the network is online
+  })
 );
 
 // Subscribe to the observable
@@ -212,6 +230,15 @@ The `NetworkStatus` interface defines the structure of the network status object
 * `downlink`: The approximate bandwidth of the connection in megabits per second.
 * `rtt`: The estimated round-trip time for requests in milliseconds.
 * `saveData`: A boolean indicating whether the user has enabled the browser's data-saver mode.
+
+## Server-side rendering
+
+The library is safe to use with server-side rendering. On the server, where there is no browser:
+
+* `fromOnlineEvent()` and `fromOfflineEvent()` emit nothing.
+* `fromNetworkEvents()` emits `true` (assumes online).
+* `fromNetworkLastTimeConnected()` and `fromNetworkStatus()` emit `undefined`.
+* `retryUntilOnline` passes errors through.
 
 ## Issue
 

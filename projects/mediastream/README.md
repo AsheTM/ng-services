@@ -17,7 +17,7 @@
 | Angular Version                | @ashetm/ng-mediastream Version | Support |
 |--------------------------------|--------------------------------|---------|
 | Angular 20.x and +             | @ashetm/ng-mediastream 3.x     | ✅      |
-| Angular 16.x – 19.x            | @ashetm/ng-mediastream 2.x     | ✅      |
+| Angular 16.x – 19.x            | @ashetm/ng-mediastream 2.x     | ❌      |
 | Angular >= 11.0.0 and < 16.0.0 | @ashetm/ng-mediastream 1.0.1   | ❌      |
 | Angular ~ 11.2.14              | @ashetm/ng-mediastream 1.0.0   | ❌      |
 

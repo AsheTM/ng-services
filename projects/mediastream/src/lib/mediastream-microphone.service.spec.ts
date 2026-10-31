@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+import { Subscription } from 'rxjs';
 
 import { MediastreamMicrophoneService } from './mediastream-microphone.service';
+import { createMicrophoneStreamMock, flushPromises } from './mediastream.mock';
 import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from './mediastream.token';
 
 describe('MediastreamMicrophoneService', () => {
@@ -39,4 +41,33 @@ describe('MediastreamMicrophoneService', () => {
   //     }
   //   });
   // });
+});
+
+describe('MediastreamMicrophoneService release', () => {
+  let service: MediastreamMicrophoneService;
+
+  beforeEach(() => {
+    spyOn(navigator.mediaDevices, 'getUserMedia').and.callFake(() => Promise.resolve(createMicrophoneStreamMock()));
+    TestBed.configureTestingModule({
+      providers: [
+        MediastreamMicrophoneService,
+        { provide: MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS, useValue: true }
+      ]
+    });
+    service = TestBed.inject(MediastreamMicrophoneService);
+  });
+
+  it('should stop the tracks when unsubscribed', async () => {
+    // GIVEN
+    const mediastreams: MediaStream[] = [];
+    const subscription: Subscription = service.mediastream$.subscribe((mediastream: MediaStream) => mediastreams.push(mediastream));
+    await flushPromises();
+
+    // WHEN
+    subscription.unsubscribe();
+
+    // THEN
+    expect(mediastreams.length).toBe(1);
+    expect(mediastreams[0].getAudioTracks()[0].readyState).toBe('ended');
+  });
 });

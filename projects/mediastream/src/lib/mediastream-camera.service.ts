@@ -14,7 +14,7 @@ export class MediastreamCameraService extends AMediastreamCameraService {
       this._toggleMediaStreamSubject.asObservable(),
       this._userMedia$
     ]).pipe(map(([toggleCamera, media]: [boolean, MediaStream]) => {
-      media.getAudioTracks()
+      media.getVideoTracks()
         .map((track: MediaStreamTrack) => {
           track.enabled = toggleCamera;
 

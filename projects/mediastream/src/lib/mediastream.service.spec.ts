@@ -11,7 +11,7 @@ import {
 } from './mediastream.token';
 import { provideMediaStream } from './mediastream.provider';
 
-fdescribe('MediastreamService', () => {
+describe('MediastreamService', () => {
   const deviceMocks: MediaDeviceInfo[] = [
     {
       deviceId: 'deviceId1',

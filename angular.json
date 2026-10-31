@@ -124,18 +124,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sample-broadcast-channel:build"
+            "buildTarget": "sample-broadcast-channel:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sample-broadcast-channel:build:production"
+              "buildTarget": "sample-broadcast-channel:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sample-broadcast-channel:build"
+            "buildTarget": "sample-broadcast-channel:build"
           }
         },
         "test": {

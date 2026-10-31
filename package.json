@@ -12,7 +12,7 @@
     "ng": "ng",
     "build:broadcast-channel": "npm run lint:broadcast-channel & npm run test:broadcast-channel & ng build broadcast-channel --configuration=production",
     "build:mediastream": "npm run lint:mediastream & npm run test:mediastream & ng build mediastream --configuration=production",
-    "build:network": "npm run lint:network & npm run test:network & ng build network --configuration=production",
+    "build:network": "npm run lint:network && npm run test:network && ng build network --configuration=production",
     "build:sample-broadcast-channel": "npm run build:broadcast-channel && ng build sample-broadcast-channel --configuration=production",
     "build:utility": "npm run lint:utility & npm run test:utility & ng build utility --configuration=production",
     "lint": "ng lint --format stylish",
@@ -68,6 +68,8 @@
     "@schematics/angular": "^16.0.6",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^24.0.0",
+    "angular-eslint": "20.7.0",
+    "eslint": "^9.39.1",
     "jasmine-core": "~3.8.0",
     "karma": "~6.4.1",
     "karma-chrome-launcher": "~3.1.0",
@@ -75,6 +77,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.7.0",
     "ng-packagr": "^20.3.2",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "typescript-eslint": "8.46.4"
   }
 }

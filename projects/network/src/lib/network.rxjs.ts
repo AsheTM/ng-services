@@ -4,6 +4,16 @@ import { distinctUntilChanged, map, startWith, switchMap } from "rxjs/operators"
 import { isBrowser, isOnline } from "./network.platform";
 import { NetworkStatus } from "./network.type";
 
+interface NetworkInformation extends EventTarget {
+  effectiveType?: string;
+  downlink?: number;
+  rtt?: number;
+  saveData?: boolean;
+}
+
+type NavigatorWithConnection = Navigator
+  & Partial<Record<'connection' | 'mozConnection' | 'webkitConnection', NetworkInformation>>;
+
 export const fromOfflineEvent: () => Observable<void> = () => isBrowser() ? fromEvent(window, 'offline').pipe(map(() => void 0)) : EMPTY;
 export const fromOnlineEvent: () => Observable<void> = () => isBrowser() ? fromEvent(window, 'online').pipe(map(() => void 0)) : EMPTY;
 export const fromNetworkEvents: () => Observable<boolean> = () => defer(() => merge(
@@ -26,7 +36,10 @@ export const fromNetworkStatus: () => Observable<NetworkStatus | undefined> = ()
     return of(undefined);
   }
 
-  const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+  const browserNavigator: NavigatorWithConnection = navigator;
+  const connection: NetworkInformation | undefined = browserNavigator.connection
+    || browserNavigator.mozConnection
+    || browserNavigator.webkitConnection;
 
   if (!connection) {
     return of(undefined); // Fallback when Network Information API is not supported

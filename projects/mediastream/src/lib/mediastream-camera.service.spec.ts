@@ -203,3 +203,30 @@ describe('MediastreamCameraService sharing', () => {
     subscription.unsubscribe();
   });
 });
+
+describe('MediastreamCameraService without media devices', () => {
+  let service: MediastreamCameraService;
+
+  beforeEach(() => {
+    spyOnProperty(navigator, 'mediaDevices').and.returnValue(undefined as unknown as MediaDevices);
+    TestBed.configureTestingModule({
+      providers: [
+        MediastreamCameraService,
+        { provide: MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS, useValue: true }
+      ]
+    });
+    service = TestBed.inject(MediastreamCameraService);
+  });
+
+  it('should error with NotSupportedError', () => {
+    // GIVEN
+    let error: DOMException | undefined;
+
+    // WHEN
+    service.mediastream$.subscribe({ error: (value: DOMException) => error = value });
+
+    // THEN
+    expect(error?.name).toBe('NotSupportedError');
+  });
+});
+

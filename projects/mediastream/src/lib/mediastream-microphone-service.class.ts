@@ -11,7 +11,7 @@ export abstract class AMediastreamMicrophoneService
   protected readonly _userMedia$: Observable<MediaStream>
     = combineLatest([
       this._currentMediaDeviceSubject$
-    ]).pipe(switchMap(([device]: [MediaDeviceInfo]) =>
+    ]).pipe(switchMap(([device]: [MediaDeviceInfo | null]) =>
       this._getUserMedia({
         audio: this._buildMediaConstraints(device),
         video: false

@@ -11,10 +11,10 @@ import { MediastreamMicrophoneService } from './mediastream-microphone.service';
 export class MediastreamCameraMicrophoneService
   implements IMediastreamCameraService, IMediastreamMicrophoneService {
 
-  readonly currentCameraMediaDevice$: Observable<MediaDeviceInfo>
+  readonly currentCameraMediaDevice$: Observable<MediaDeviceInfo | null>
     = this._mediastreamCameraService.currentMediaDevice$;
 
-  readonly currentMicrophoneMediaDevice$: Observable<MediaDeviceInfo>
+  readonly currentMicrophoneMediaDevice$: Observable<MediaDeviceInfo | null>
     = this._mediastreamMicrophoneService.currentMediaDevice$;
 
   readonly mediastream$: Observable<MediaStream>

@@ -33,6 +33,19 @@ describe('MediastreamCameraService', () => {
     expect(service.updateCameraDevice).toBeDefined();
   });
 
+  it('should emit null as current device, then the updated device', () => {
+    // GIVEN
+    const devices: (MediaDeviceInfo | null)[] = [];
+    const device = { deviceId: 'deviceId', kind: 'videoinput' } as MediaDeviceInfo & Record<'kind', 'videoinput'>;
+    service.currentMediaDevice$.subscribe((value: MediaDeviceInfo | null) => devices.push(value));
+
+    // WHEN
+    service.updateCameraDevice(device);
+
+    // THEN
+    expect(devices).toEqual([null, device]);
+  });
+
   it('should provide the constraints as track constraints', () => {
     // GIVEN
     // WHEN

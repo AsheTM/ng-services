@@ -31,18 +31,6 @@
             "tsConfig": "projects/mediastream/tsconfig.spec.json",
             "karmaConfig": "projects/mediastream/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/mediastream/tsconfig.lib.json",
-              "projects/mediastream/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -70,18 +58,6 @@
             "main": "projects/broadcast-channel/src/test.ts",
             "tsConfig": "projects/broadcast-channel/tsconfig.spec.json",
             "karmaConfig": "projects/broadcast-channel/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/broadcast-channel/tsconfig.lib.json",
-              "projects/broadcast-channel/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -177,31 +153,6 @@
               "projects/sample-broadcast-channel/src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/sample-broadcast-channel/tsconfig.app.json",
-              "projects/sample-broadcast-channel/tsconfig.spec.json",
-              "projects/sample-broadcast-channel/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "projects/sample-broadcast-channel/e2e/protractor.conf.js",
-            "devServerTarget": "sample-broadcast-channel:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "sample-broadcast-channel:serve:production"
-            }
           }
         }
       }

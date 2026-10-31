@@ -241,3 +241,45 @@ describe('MediastreamService', () => {
     expect(mediastream.getTracks().every((track: MediaStreamTrack) => track.readyState === 'ended')).toBeTrue();
   });
 });
+
+describe('MediastreamService without media devices', () => {
+  let service: MediastreamService;
+
+  beforeEach(() => {
+    spyOnProperty(navigator, 'mediaDevices').and.returnValue(undefined as unknown as MediaDevices);
+    TestBed.configureTestingModule({
+      providers: [provideMediaStream()]
+    });
+    service = TestBed.inject(MediastreamService);
+  });
+
+  it('should get no devices', async () => {
+    // GIVEN
+    // WHEN
+    const devices: MediaDeviceInfo[] = await service.getDevices();
+    const hasCameraDevices: boolean = await service.hasCameraDevices();
+
+    // THEN
+    expect(devices).toEqual([]);
+    expect(hasCameraDevices).toBeFalse();
+  });
+
+  it('should reject requestCamera with NotSupportedError', async () => {
+    // GIVEN
+    // WHEN
+    const request: Promise<MediastreamCameraService> = service.requestCamera();
+
+    // THEN
+    await expectAsync(request).toBeRejectedWith(jasmine.objectContaining({ name: 'NotSupportedError' }));
+  });
+
+  it('should reject requestMicrophone with NotSupportedError', async () => {
+    // GIVEN
+    // WHEN
+    const request: Promise<MediastreamMicrophoneService> = service.requestMicrophone();
+
+    // THEN
+    await expectAsync(request).toBeRejectedWith(jasmine.objectContaining({ name: 'NotSupportedError' }));
+  });
+});
+

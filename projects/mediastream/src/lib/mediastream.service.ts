@@ -22,7 +22,7 @@ export class MediastreamService extends AMediastream {
   }
 
   async getDevices(): Promise<MediaDeviceInfo[]> {
-    return await this.MEDIA_DEVICES.enumerateDevices();
+    return this.MEDIA_DEVICES ? await this.MEDIA_DEVICES.enumerateDevices() : [];
   }
 
   async getMicrophoneDevices(): Promise<MediaDeviceInfo[]> {
@@ -54,7 +54,7 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: false,
       video: cameraConstraints
     }).then((mediastream: MediaStream) => {
@@ -93,7 +93,7 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: microphoneConstraints,
       video: cameraConstraints
     }).then((mediastream: MediaStream) => {
@@ -120,7 +120,7 @@ export class MediastreamService extends AMediastream {
       parent: this._injector
     });
 
-    return await this.MEDIA_DEVICES.getUserMedia({
+    return await this._getMediaDevices().getUserMedia({
       audio: microphoneConstraints,
       video: false
     }).then((mediastream: MediaStream) => {

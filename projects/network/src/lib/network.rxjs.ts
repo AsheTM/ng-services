@@ -1,15 +1,16 @@
-import { Observable, defer, fromEvent, merge, of, timer } from "rxjs";
+import { EMPTY, Observable, defer, fromEvent, merge, of, timer } from "rxjs";
 import { distinctUntilChanged, map, startWith, switchMap } from "rxjs/operators";
 
+import { isBrowser, isOnline } from "./network.platform";
 import { NetworkStatus } from "./network.type";
 
-export const fromOfflineEvent: () => Observable<void> = () => fromEvent(window, 'offline').pipe(map(() => void 0));
-export const fromOnlineEvent: () => Observable<void> = () => fromEvent(window, 'online').pipe(map(() => void 0));
+export const fromOfflineEvent: () => Observable<void> = () => isBrowser() ? fromEvent(window, 'offline').pipe(map(() => void 0)) : EMPTY;
+export const fromOnlineEvent: () => Observable<void> = () => isBrowser() ? fromEvent(window, 'online').pipe(map(() => void 0)) : EMPTY;
 export const fromNetworkEvents: () => Observable<boolean> = () => defer(() => merge(
   fromOfflineEvent().pipe(map(() => false)),
   fromOnlineEvent().pipe(map(() => true)),
 ).pipe(
-  startWith(navigator.onLine),
+  startWith(isOnline()),
   distinctUntilChanged(),
 ));
 export const fromNetworkLastTimeConnected: () => Observable<number | undefined> = () => {
@@ -21,6 +22,10 @@ export const fromNetworkLastTimeConnected: () => Observable<number | undefined> 
   );
 }
 export const fromNetworkStatus: () => Observable<NetworkStatus | undefined> = () => {
+  if (!isBrowser()) {
+    return of(undefined);
+  }
+
   const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
 
   if (!connection) {

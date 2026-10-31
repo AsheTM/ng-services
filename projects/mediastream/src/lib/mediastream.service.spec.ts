@@ -50,13 +50,13 @@ describe('MediastreamService', () => {
   });
 
   it('should be created', () => {
-    const tokenMediastreamCameraContrains: boolean | MediaStreamConstraints | null
+    const tokenMediastreamCameraContrains: boolean | MediaTrackConstraints | null
       = TestBed.inject(
         MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
         null,
         { optional: true }
       );
-    const tokenMediastreamMicrophoneContrains: boolean | MediaStreamConstraints | null
+    const tokenMediastreamMicrophoneContrains: boolean | MediaTrackConstraints | null
       = TestBed.inject(
         MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS,
         null,

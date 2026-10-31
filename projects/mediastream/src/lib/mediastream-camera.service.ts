@@ -26,7 +26,7 @@ export class MediastreamCameraService extends AMediastreamCameraService {
 
   constructor(
     @Inject(MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS)
-      private readonly __mediastreamCameraConstraints: any
+      private readonly __mediastreamCameraConstraints: boolean | MediaTrackConstraints
   ) {
     super(__mediastreamCameraConstraints);
   }

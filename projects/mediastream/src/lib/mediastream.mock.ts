@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken, inject } from "@angular/core";
 import { Observable, of } from "rxjs";
 
-import { AMediastreamService } from "./mediastream-service.class";
+import { AMediastreamService } from "./classes";
 
 
 export const MEDIASTREAM_TOKEN_CONSTRAINTS_MOCK: InjectionToken<boolean | MediaTrackConstraints>

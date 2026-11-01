@@ -28,6 +28,14 @@ You can install it with npm:
 npm install @ashetm/ng-network
 ```
 
+This installs the latest version, for Angular 20+. On **Angular 16–19**, install the 1.x version instead (see [Compatibility Table](#compatibility-table)):
+
+```bash
+npm install @ashetm/ng-network@1
+# or, with the npm tag
+npm install @ashetm/ng-network@angular-16-19
+```
+
 ## API
 
 ``@ashetm/ng-network`` exposes the following: 

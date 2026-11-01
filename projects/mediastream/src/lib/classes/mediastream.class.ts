@@ -1,6 +1,5 @@
+import { isBrowser } from "@ashetm/platform";
 import { EMPTY, Observable, Subscriber } from "rxjs";
-
-import { isBrowser } from "../mediastream.platform";
 
 export abstract class AMediastream {
 

@@ -1,6 +1,6 @@
 import { makeEnvironmentProviders } from '@angular/core';
 
-import { MediastreamService } from './mediastream.service';
+import { MediastreamService } from './services';
 
 
 export const provideMediaStream = () => {

@@ -8,9 +8,9 @@ import { MediastreamService } from './mediastream.service';
 import {
   MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
-} from './mediastream.token';
-import { provideMediaStream } from './mediastream.provider';
-import { createCameraStreamMock, createMicrophoneStreamMock } from './mediastream.mock';
+} from '../mediastream.token';
+import { provideMediaStream } from '../mediastream.provider';
+import { createCameraStreamMock, createMicrophoneStreamMock } from '../mediastream.mock';
 
 describe('MediastreamService', () => {
   const deviceMocks: MediaDeviceInfo[] = [

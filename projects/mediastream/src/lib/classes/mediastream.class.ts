@@ -1,6 +1,6 @@
 import { EMPTY, Observable, Subscriber } from "rxjs";
 
-import { isBrowser } from "./mediastream.platform";
+import { isBrowser } from "../mediastream.platform";
 
 export abstract class AMediastream {
 

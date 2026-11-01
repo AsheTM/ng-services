@@ -1,6 +1,7 @@
+import { isBrowser } from "@ashetm/platform";
 import { EMPTY, Observable, defer, distinctUntilChanged, fromEvent, map, merge, of, startWith, switchMap, timer } from "rxjs";
 
-import { isBrowser, isOnline } from "./network.platform";
+import { isOnline } from "./network.platform";
 import { NetworkStatus } from "./network.type";
 
 interface NetworkInformation extends EventTarget {

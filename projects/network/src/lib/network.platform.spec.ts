@@ -1,17 +1,4 @@
-import { isBrowser, isOnline } from './network.platform';
-
-describe('isBrowser', () => {
-  it('should return true in a browser', () => {
-    // GIVEN
-    // tests run in a browser, where `window` and `navigator` exist
-
-    // WHEN
-    const result: boolean = isBrowser();
-
-    // THEN
-    expect(result).toBeTrue();
-  });
-});
+import { isOnline } from './network.platform';
 
 describe('isOnline', () => {
   it('should return true when the device is online', () => {

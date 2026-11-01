@@ -29,6 +29,14 @@ You can install it with npm:
 npm install @ashetm/ng-mediastream
 ```
 
+This installs the latest version, for Angular 20+. On **Angular 16–19**, install the 2.x version instead (see [Compatibility Table](#compatibility-table)):
+
+```bash
+npm install @ashetm/ng-mediastream@2
+# or, with the npm tag
+npm install @ashetm/ng-mediastream@angular-16-19
+```
+
 ## Import
 
 You only need to import ``provideMediaStream``.

@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
-import { AMediastreamMicrophoneService } from './mediastream-microphone-service.class';
-import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from './mediastream.token';
+import { AMediastreamMicrophoneService } from '../classes';
+import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from '../mediastream.token';
 
 
 @Injectable()

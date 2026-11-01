@@ -6,7 +6,7 @@ import { MediastreamMicrophoneService } from './mediastream-microphone.service';
 import {
   MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
-} from './mediastream.token';
+} from '../mediastream.token';
 
 describe('MediastreamCameraMicrophoneService', () => {
   let service: MediastreamCameraMicrophoneService;

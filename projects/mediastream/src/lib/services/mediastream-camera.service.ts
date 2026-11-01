@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
-import { AMediastreamCameraService } from './mediastream-camera-service.class';
-import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from './mediastream.token';
+import { AMediastreamCameraService } from '../classes';
+import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from '../mediastream.token';
 
 
 @Injectable()

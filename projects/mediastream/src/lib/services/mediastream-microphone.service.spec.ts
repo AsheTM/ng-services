@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { Subscription } from 'rxjs';
 
 import { MediastreamMicrophoneService } from './mediastream-microphone.service';
-import { createMicrophoneStreamMock, flushPromises } from './mediastream.mock';
-import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from './mediastream.token';
+import { createMicrophoneStreamMock, flushPromises } from '../mediastream.mock';
+import { MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS } from '../mediastream.token';
 
 describe('MediastreamMicrophoneService', () => {
   let service: MediastreamMicrophoneService;

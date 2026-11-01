@@ -3,11 +3,11 @@ import { Injectable, Injector, inject } from '@angular/core';
 import { MediastreamCameraMicrophoneService } from './mediastream-camera-microphone.service';
 import { MediastreamCameraService } from './mediastream-camera.service';
 import { MediastreamMicrophoneService } from './mediastream-microphone.service';
-import { AMediastream } from './mediastream.class';
+import { AMediastream } from '../classes';
 import {
   MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS,
   MEDIASTREAM_TOKEN_MICROPHONE_CONSTRAINTS
-} from './mediastream.token';
+} from '../mediastream.token';
 
 
 @Injectable()

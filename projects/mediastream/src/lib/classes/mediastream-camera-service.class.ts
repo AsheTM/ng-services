@@ -1,39 +1,39 @@
 import { combineLatest, Observable, shareReplay, switchMap } from "rxjs";
 
-import { IMediastreamMicrophoneService } from "./mediastream-microphone-service.interface";
+import { IMediastreamCameraService } from "../interfaces";
 import { AMediastreamService } from "./mediastream-service.class";
 
 
-export abstract class AMediastreamMicrophoneService
+export abstract class AMediastreamCameraService
   extends AMediastreamService
-  implements IMediastreamMicrophoneService {
+  implements IMediastreamCameraService {
 
   protected readonly _userMedia$: Observable<MediaStream>
     = combineLatest([
       this._currentMediaDeviceSubject$
     ]).pipe(switchMap(([device]: [MediaDeviceInfo | null]) =>
       this._getUserMedia({
-        audio: this._buildMediaConstraints(device),
-        video: false
+        audio: false,
+        video: this._buildMediaConstraints(device)
       })),
     shareReplay({ bufferSize: 1, refCount: true }));
 
-  disableMicrophone(): void {
+  disableCamera(): void {
     this._toggleMediaStreamSubject.next(false);
   }
 
-  enableMicrophone(): void {
+  enableCamera(): void {
     this._toggleMediaStreamSubject.next(true);
   }
 
-  toggleMicrophone(): void {
+  toggleCamera(): void {
     const value: boolean = this._toggleMediaStreamSubject.getValue();
 
     this._toggleMediaStreamSubject.next(!value);
   }
 
-  updateMicrophoneDevice(
-    device: MediaDeviceInfo & Record<'kind', 'audioinput'>
+  updateCameraDevice(
+    device: MediaDeviceInfo & Record<'kind', 'videoinput'>
   ): void {
     this._currentMediaDeviceSubject$.next(device);
   }

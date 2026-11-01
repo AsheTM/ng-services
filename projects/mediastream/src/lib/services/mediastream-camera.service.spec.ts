@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, Subscription } from 'rxjs';
 
 import { MediastreamCameraService } from './mediastream-camera.service';
-import { createCameraStreamMock, flushPromises } from './mediastream.mock';
-import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from './mediastream.token';
+import { createCameraStreamMock, flushPromises } from '../mediastream.mock';
+import { MEDIASTREAM_TOKEN_CAMERA_CONSTRAINTS } from '../mediastream.token';
 
 describe('MediastreamCameraService', () => {
   let service: MediastreamCameraService;

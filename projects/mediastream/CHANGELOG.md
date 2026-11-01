@@ -1,3 +1,9 @@
+# 3.1.0
+
+- [x] Browser detection comes from [``@ashetm/platform``](https://www.npmjs.com/package/@ashetm/platform), a new dependency; no API or behavior change ([#58](https://github.com/AsheTM/ng-services/issues/58))
+- [x] Organize sources into folders, and add unit tests for the base classes ([#52](https://github.com/AsheTM/ng-services/issues/52))
+- [x] Update CHANGELOG
+
 # 3.0.0
 
 - [x] **Breaking**: requires Angular 20+ (``@angular/common`` and ``@angular/core`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 2.x

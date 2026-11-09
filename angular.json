@@ -69,6 +69,16 @@
             "tsConfig": "projects/broadcast-channel/tsconfig.spec.json",
             "karmaConfig": "projects/broadcast-channel/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/broadcast-channel/**/*.ts",
+              "projects/broadcast-channel/**/*.html"
+            ],
+            "eslintConfig": "projects/broadcast-channel/eslint.config.js"
+          }
         }
       }
     },

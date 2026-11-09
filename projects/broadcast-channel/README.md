@@ -7,12 +7,15 @@
 
 | Angular Version    | @ashetm/ng-broadcast-channel Version     | Zone     | Support |
 |--------------------|------------------------------------------|----------|---------|
-| Angular 16.x and + | @ashetm/ng-broadcast-channel 16.x and +  | Zonefull | ✅      |
+| Angular 20.x and +  | @ashetm/ng-broadcast-channel 20.x        | Zonefull | ✅      |
+| Angular 16.x – 19.x | @ashetm/ng-broadcast-channel 16.x        | Zonefull | ✅      |
 | Angular 15.x       | @ashetm/ng-broadcast-channel 15.x        | Zonefull | ❌      |
 | Angular 14.x       | @ashetm/ng-broadcast-channel 14.x        | Zonefull | ❌      |
 | Angular 13.x       | @ashetm/ng-broadcast-channel 13.x        | Zonefull | ❌      |
 | Angular 12.x       | @ashetm/ng-broadcast-channel 12.x        | Zonefull | ❌      |
 | Angular 11.x       | @ashetm/ng-broadcast-channel 11.x        | Zonefull | ❌      |
+
+The version follows the Angular version it starts from: **16.x** supports Angular 16 to 19, **20.x** supports Angular 20 and above (there are no 17.x, 18.x or 19.x versions).
 
 ### Demo
 
@@ -33,9 +36,28 @@ You can install it with npm:
 npm install @ashetm/ng-broadcast-channel
 ```
 
+This installs the latest version, for Angular 20+. On **Angular 16–19**, install the 16.x version instead:
+
+```bash
+npm install @ashetm/ng-broadcast-channel@16
+```
+
 ## Import
 
-You only need to import ``provideBroadcastChannel``.
+You only need to provide ``provideBroadcastChannel()``.
+
+With a standalone application:
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideBroadcastChannel } from '@ashetm/ng-broadcast-channel';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideBroadcastChannel()]
+});
+```
+
+Or with an ``NgModule``:
 
 ```ts
 ...
@@ -43,9 +65,9 @@ import { provideBroadcastChannel } from '@ashetm/ng-broadcast-channel';
 ...
 @NgModule({
   ...
-  provide: [
+  providers: [
     ...
-    provideBroadcastChannel(), 
+    provideBroadcastChannel(),
     ...
   ]
   ...
@@ -69,17 +91,32 @@ export class AppModule { }
 
 And for methods, there is the following: 
 
-* ``create<T>(name: string)`` returns ``BroadcastChannelRef<T>`` a reference of BroadcastChannel with that name provided in the first argument, if exists otherwise returns create a new one.
+* ``create<T>(name: string)`` returns ``BroadcastChannelRef<T>``, the open channel with that name if it exists, otherwise a new one. Use the same type ``T`` for a given channel name: TypeScript can't check it between two ``create()`` calls.
 
-* ``get<T>(name: string)`` returns ``BroadcastChannelRef<T> | null`` a reference of BroadcastChannel with that name provided in the first argument, otherwise null.
+* ``get<T>(name: string)`` returns ``BroadcastChannelRef<T> | null``, the open channel with that name, otherwise ``null`` (also once the channel is closed).
+
+All channels are closed when the service is destroyed.
 
 ``BroadcastChannelRef<T>`` is wrapper class to manipulate ``BroadcastChannel`` API, it exposes the following: 
 
-* ``data$: Observable<T>`` is an observable of stream data that listen to data sent through that broadcast channel.
+* ``name: string``, the channel name.
 
-* ``close()`` returns ``void``, closes the broadcast channel.
+* ``data$: Observable<T>`` emits the data sent on that channel by **other** tabs, windows or workers. Every subscriber receives every message. It completes when the channel is closed.
 
-* ``send(data: T)`` returns ``void``, send data through the broadcast channel.
+* ``close()`` returns ``void``, closes the channel and completes ``data$``. The service forgets it, so a later ``create()`` with the same name opens a new channel.
+
+* ``send(data: T)`` returns ``void``, sends data to the other tabs, windows or workers listening on that channel.
+
+## Good to know
+
+* A tab doesn't receive its own messages: that's how the browser's ``BroadcastChannel`` works.
+* A message that can't be read (e.g. it can't be deserialized) is skipped with a ``console.warn``; ``data$`` keeps going.
+
+## Server-side rendering
+
+The library is safe to use with server-side rendering. On the server, no channel is opened: ``data$`` emits nothing and ``send()`` does nothing.
+
+In a browser without ``BroadcastChannel`` (e.g. Safari before 15.4), ``create()`` throws a ``NotSupportedError``.
 
 ## Issue
 

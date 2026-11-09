@@ -68,4 +68,33 @@ describe('BroadcastChannelService', () => {
     // THEN
     expect(foundBroadcastChannel).toBe(broadcastChannel);
   });
+
+  it('should open a new channel after the previous one was closed', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
+    broadcastChannel.close();
+
+    // WHEN
+    const newBroadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
+
+    // THEN
+    expect(newBroadcastChannel).not.toBe(broadcastChannel);
+    expect(newBroadcastChannel.name).toBe(name);
+  });
+
+  it('should close every channel and complete their subscribers when destroyed', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
+    let completed: boolean = false;
+    broadcastChannel.data$.subscribe({ complete: () => completed = true });
+
+    // WHEN
+    service.ngOnDestroy();
+
+    // THEN
+    expect(completed).toBeTrue();
+    expect(service.create<string>(name)).not.toBe(broadcastChannel);
+  });
 });

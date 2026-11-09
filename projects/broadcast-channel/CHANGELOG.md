@@ -1,4 +1,13 @@
 
+# 20.0.0
+
+- [x] **Breaking**: requires Angular 20+ (``@angular/common`` and ``@angular/core`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 16.x
+- [x] The version follows the Angular version it starts from: 16.x for Angular 16–19, 20.x for Angular 20+ (no 17.x, 18.x or 19.x)
+- [x] Include the 16.0.2 fixes ([#79](https://github.com/AsheTM/ng-services/issues/79))
+- [x] Use ``inject()`` instead of constructor injection, set up ESLint ([#80](https://github.com/AsheTM/ng-services/issues/80))
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.0.2
 
 - [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), drop the ``zone.js`` peer, declare ``rxjs`` ([#74](https://github.com/AsheTM/ng-services/issues/74))

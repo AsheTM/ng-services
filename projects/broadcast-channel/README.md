@@ -7,12 +7,15 @@
 
 | Angular Version    | @ashetm/ng-broadcast-channel Version     | Zone     | Support |
 |--------------------|------------------------------------------|----------|---------|
+| Angular 20.x and +  | @ashetm/ng-broadcast-channel 20.x        | Zonefull | ✅      |
 | Angular 16.x – 19.x | @ashetm/ng-broadcast-channel 16.x        | Zonefull | ✅      |
 | Angular 15.x       | @ashetm/ng-broadcast-channel 15.x        | Zonefull | ❌      |
 | Angular 14.x       | @ashetm/ng-broadcast-channel 14.x        | Zonefull | ❌      |
 | Angular 13.x       | @ashetm/ng-broadcast-channel 13.x        | Zonefull | ❌      |
 | Angular 12.x       | @ashetm/ng-broadcast-channel 12.x        | Zonefull | ❌      |
 | Angular 11.x       | @ashetm/ng-broadcast-channel 11.x        | Zonefull | ❌      |
+
+The version follows the Angular version it starts from: **16.x** supports Angular 16 to 19, **20.x** supports Angular 20 and above (there are no 17.x, 18.x or 19.x versions).
 
 ### Demo
 
@@ -33,7 +36,7 @@ You can install it with npm:
 npm install @ashetm/ng-broadcast-channel
 ```
 
-On **Angular 16–19**, install the 16.x version:
+This installs the latest version, for Angular 20+. On **Angular 16–19**, install the 16.x version instead:
 
 ```bash
 npm install @ashetm/ng-broadcast-channel@16

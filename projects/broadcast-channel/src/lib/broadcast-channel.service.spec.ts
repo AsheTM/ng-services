@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BroadcastChannelModule } from './broadcast-channel.module';
+import { createChannelNameMock } from './broadcast-channel.mock';
+import { provideBroadcastChannel } from './broadcast-channel.provider';
 import { BroadcastChannelRef } from './broadcast-channel.ref';
 import { BroadcastChannelService } from './broadcast-channel.service';
 
@@ -9,39 +10,62 @@ describe('BroadcastChannelService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [BroadcastChannelModule]
+      providers: [provideBroadcastChannel()]
     });
     service = TestBed.inject(BroadcastChannelService);
   });
 
   it('should be created', () => {
+    // GIVEN
+    // WHEN
+    // THEN
     expect(service).toBeTruthy();
-    expect(service.create).toBeDefined();
-    expect(service.get).toBeDefined();
-    expect(service.ngOnDestroy).toBeDefined();
   });
 
-  it('should created BroadcastChannelRef', () => {
-    const name: string = 'TEST';
-    const broadcastChannel: BroadcastChannelRef<any> = service.create<any>(name);
+  it('should create a channel with the given name', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
 
-    expect(broadcastChannel).toBeTruthy();
-    expect(broadcastChannel.name).toEqual(name);
+    // WHEN
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
+
+    // THEN
+    expect(broadcastChannel).toBeInstanceOf(BroadcastChannelRef);
+    expect(broadcastChannel.name).toBe(name);
   });
 
-  // it('should BroadcastChannelRef works', (done: DoneFn) => {
-  //   const name: string = 'TEST';
-  //   const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
-  //   const dataToSend: string = 'TEST SENDING DATA';
+  it('should return the same channel for the same name', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
 
-  //   broadcastChannel.data$.subscribe({
-  //     next: (data: string) => {
-  //       console.log(data)
-  //       expect(data).toEqual(dataToSend);
-  //       done();
-  //     }
-  //   });
+    // WHEN
+    const sameBroadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
 
-  //   setTimeout(() => broadcastChannel.send(dataToSend), 2000);
-  // });
+    // THEN
+    expect(sameBroadcastChannel).toBe(broadcastChannel);
+  });
+
+  it('should return different channels for different names', () => {
+    // GIVEN
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(createChannelNameMock());
+
+    // WHEN
+    const otherBroadcastChannel: BroadcastChannelRef<string> = service.create<string>(createChannelNameMock());
+
+    // THEN
+    expect(otherBroadcastChannel).not.toBe(broadcastChannel);
+  });
+
+  it('should get a created channel', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+    const broadcastChannel: BroadcastChannelRef<string> = service.create<string>(name);
+
+    // WHEN
+    const foundBroadcastChannel: BroadcastChannelRef<string> | null = service.get<string>(name);
+
+    // THEN
+    expect(foundBroadcastChannel).toBe(broadcastChannel);
+  });
 });

@@ -96,6 +96,43 @@ describe('BroadcastChannelRef', () => {
     expect(removeEventListener).toHaveBeenCalledWith('messageerror', jasmine.any(Function));
   });
 
+  it('should warn about a message that cannot be read', () => {
+    // GIVEN
+    const warn: jasmine.Spy = spyOn(console, 'warn');
+    const subscription: Subscription = broadcastChannel.data$.subscribe();
+
+    // WHEN
+    broadcastChannel['_broadcastChannel'].dispatchEvent(new MessageEvent('messageerror'));
+
+    // THEN
+    expect(warn).toHaveBeenCalledOnceWith(jasmine.stringMatching(name), jasmine.any(MessageEvent));
+
+    subscription.unsubscribe();
+  });
+
+  it('should keep receiving after a message that cannot be read', async () => {
+    // GIVEN
+    spyOn(console, 'warn');
+    const messages: string[] = [];
+    let error: unknown;
+    const subscription: Subscription = broadcastChannel.data$.subscribe({
+      next: (message: string) => messages.push(message),
+      error: (value: unknown) => error = value
+    });
+
+    // WHEN
+    broadcastChannel['_broadcastChannel'].dispatchEvent(new MessageEvent('messageerror'));
+    otherChannel.postMessage('hello');
+    await flushMessages();
+
+    // THEN
+    expect(error).toBeUndefined();
+    expect(subscription.closed).toBeFalse();
+    expect(messages).toEqual(['hello']);
+
+    subscription.unsubscribe();
+  });
+
   it('should send a message to another tab', async () => {
     // GIVEN
     const messages: string[] = [];

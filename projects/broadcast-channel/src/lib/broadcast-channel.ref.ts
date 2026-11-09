@@ -5,14 +5,15 @@ import { Observable, Subscriber } from "rxjs";
 export class BroadcastChannelRef<T> {
 
   /**
-   * Each subscriber gets its own listeners, removed when it unsubscribes
+   * Each subscriber gets its own listeners, removed when it unsubscribes.
+   * A message that can't be read is skipped with a warning, the stream keeps going.
    */
   readonly data$: Observable<T> = new Observable<T>((subscriber: Subscriber<T>) => {
     const onMessage = (event: MessageEvent<T>) => {
       this._ngZone.run(() => subscriber.next(event.data));
     };
     const onMessageError = (event: MessageEvent<T>) => {
-      this._ngZone.run(() => subscriber.error(event.data));
+      console.warn(`[@ashetm/ng-broadcast-channel] A message on channel "${this.name}" could not be read and was skipped.`, event);
     };
 
     this._broadcastChannel.addEventListener('message', onMessage);

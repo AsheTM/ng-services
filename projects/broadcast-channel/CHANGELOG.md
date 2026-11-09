@@ -1,4 +1,17 @@
 
+# 16.0.2
+
+- [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), drop the ``zone.js`` peer, declare ``rxjs`` ([#74](https://github.com/AsheTM/ng-services/issues/74))
+- [x] Every ``data$`` subscriber receives messages, and unsubscribing removes its listener ([#63](https://github.com/AsheTM/ng-services/issues/63))
+- [x] A message that can't be read is skipped with a warning instead of erroring ``data$`` ([#64](https://github.com/AsheTM/ng-services/issues/64))
+- [x] ``close()`` completes ``data$``, and the service forgets closed channels ([#65](https://github.com/AsheTM/ng-services/issues/65))
+- [x] ``get()`` returns ``null`` for unknown channels ([#66](https://github.com/AsheTM/ng-services/issues/66))
+- [x] Server-side rendering: no channel opened on the server; ``NotSupportedError`` in browsers without ``BroadcastChannel`` ([#67](https://github.com/AsheTM/ng-services/issues/67))
+- [x] Repair the unit tests ([#62](https://github.com/AsheTM/ng-services/issues/62))
+- [x] Build in partial compilation mode
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.0.0
 
 - [x] Make it compatible from 16 and above

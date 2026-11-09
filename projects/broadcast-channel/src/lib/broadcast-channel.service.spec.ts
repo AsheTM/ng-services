@@ -69,6 +69,29 @@ describe('BroadcastChannelService', () => {
     expect(foundBroadcastChannel).toBe(broadcastChannel);
   });
 
+  it('should get null for an unknown channel', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+
+    // WHEN
+    const foundBroadcastChannel: BroadcastChannelRef<string> | null = service.get<string>(name);
+
+    // THEN
+    expect(foundBroadcastChannel).toBeNull();
+  });
+
+  it('should get null for a closed channel', () => {
+    // GIVEN
+    const name: string = createChannelNameMock();
+    service.create<string>(name).close();
+
+    // WHEN
+    const foundBroadcastChannel: BroadcastChannelRef<string> | null = service.get<string>(name);
+
+    // THEN
+    expect(foundBroadcastChannel).toBeNull();
+  });
+
   it('should open a new channel after the previous one was closed', () => {
     // GIVEN
     const name: string = createChannelNameMock();

@@ -32,7 +32,7 @@ export class BroadcastChannelService implements OnDestroy {
   }
 
   get<T>(name: string): BroadcastChannelRef<T> | null {
-    return this._broadcastChannels[name];
+    return this._broadcastChannels[name] ?? null;
   }
 
 }

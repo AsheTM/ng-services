@@ -46,6 +46,56 @@ describe('BroadcastChannelRef', () => {
     subscription.unsubscribe();
   });
 
+  it('should deliver messages to every subscriber', async () => {
+    // GIVEN
+    const first: string[] = [];
+    const second: string[] = [];
+    const subscription: Subscription = broadcastChannel.data$.subscribe((message: string) => first.push(message));
+    subscription.add(broadcastChannel.data$.subscribe((message: string) => second.push(message)));
+
+    // WHEN
+    otherChannel.postMessage('hello');
+    await flushMessages();
+
+    // THEN
+    expect(first).toEqual(['hello']);
+    expect(second).toEqual(['hello']);
+
+    subscription.unsubscribe();
+  });
+
+  it('should keep delivering to the other subscribers when one unsubscribes', async () => {
+    // GIVEN
+    const first: string[] = [];
+    const second: string[] = [];
+    const firstSubscription: Subscription = broadcastChannel.data$.subscribe((message: string) => first.push(message));
+    const secondSubscription: Subscription = broadcastChannel.data$.subscribe((message: string) => second.push(message));
+
+    // WHEN
+    firstSubscription.unsubscribe();
+    otherChannel.postMessage('hello');
+    await flushMessages();
+
+    // THEN
+    expect(first).toEqual([]);
+    expect(second).toEqual(['hello']);
+
+    secondSubscription.unsubscribe();
+  });
+
+  it('should remove its listeners when unsubscribed', () => {
+    // GIVEN
+    const subscription: Subscription = broadcastChannel.data$.subscribe();
+    const removeEventListener: jasmine.Spy = spyOn(BroadcastChannel.prototype, 'removeEventListener').and.callThrough();
+
+    // WHEN
+    subscription.unsubscribe();
+
+    // THEN
+    expect(removeEventListener).toHaveBeenCalledWith('message', jasmine.any(Function));
+    expect(removeEventListener).toHaveBeenCalledWith('messageerror', jasmine.any(Function));
+  });
+
   it('should send a message to another tab', async () => {
     // GIVEN
     const messages: string[] = [];

@@ -102,7 +102,7 @@ describe('BroadcastChannelRef', () => {
     const subscription: Subscription = broadcastChannel.data$.subscribe();
 
     // WHEN
-    broadcastChannel['_broadcastChannel'].dispatchEvent(new MessageEvent('messageerror'));
+    broadcastChannel['_broadcastChannel']!.dispatchEvent(new MessageEvent('messageerror'));
 
     // THEN
     expect(warn).toHaveBeenCalledOnceWith(jasmine.stringMatching(name), jasmine.any(MessageEvent));
@@ -121,7 +121,7 @@ describe('BroadcastChannelRef', () => {
     });
 
     // WHEN
-    broadcastChannel['_broadcastChannel'].dispatchEvent(new MessageEvent('messageerror'));
+    broadcastChannel['_broadcastChannel']!.dispatchEvent(new MessageEvent('messageerror'));
     otherChannel.postMessage('hello');
     await flushMessages();
 
@@ -168,6 +168,22 @@ describe('BroadcastChannelRef', () => {
 
     // THEN
     expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('should throw NotSupportedError when the browser has no BroadcastChannel', () => {
+    // GIVEN
+    const nativeBroadcastChannel: typeof BroadcastChannel = window.BroadcastChannel;
+    (window as { BroadcastChannel?: typeof BroadcastChannel }).BroadcastChannel = undefined;
+
+    try {
+      // WHEN
+      const create: () => BroadcastChannelRef<string> = () => new BroadcastChannelRef<string>(TestBed.inject(NgZone), createChannelNameMock());
+
+      // THEN
+      expect(create).toThrowMatching((error: DOMException) => error.name === 'NotSupportedError');
+    } finally {
+      window.BroadcastChannel = nativeBroadcastChannel;
+    }
   });
 
   it('should send a message to another tab', async () => {

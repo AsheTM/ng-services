@@ -133,6 +133,43 @@ describe('BroadcastChannelRef', () => {
     subscription.unsubscribe();
   });
 
+  it('should complete the subscribers when closed', () => {
+    // GIVEN
+    let completed: boolean = false;
+    broadcastChannel.data$.subscribe({ complete: () => completed = true });
+
+    // WHEN
+    broadcastChannel.close();
+
+    // THEN
+    expect(completed).toBeTrue();
+  });
+
+  it('should complete a subscriber that subscribes after close', () => {
+    // GIVEN
+    broadcastChannel.close();
+    let completed: boolean = false;
+
+    // WHEN
+    broadcastChannel.data$.subscribe({ complete: () => completed = true });
+
+    // THEN
+    expect(completed).toBeTrue();
+  });
+
+  it('should call its close callback once, even when closed twice', () => {
+    // GIVEN
+    const onClose: jasmine.Spy = jasmine.createSpy('onClose');
+    const closableChannel: BroadcastChannelRef<string> = new BroadcastChannelRef<string>(TestBed.inject(NgZone), createChannelNameMock(), onClose);
+
+    // WHEN
+    closableChannel.close();
+    closableChannel.close();
+
+    // THEN
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('should send a message to another tab', async () => {
     // GIVEN
     const messages: string[] = [];

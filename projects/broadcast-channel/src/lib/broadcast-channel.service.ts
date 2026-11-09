@@ -1,4 +1,4 @@
-import { Injectable, NgZone, OnDestroy } from '@angular/core';
+import { Injectable, NgZone, OnDestroy, inject } from '@angular/core';
 
 import { BroadcastChannelRef } from './broadcast-channel.ref';
 
@@ -6,19 +6,19 @@ import { BroadcastChannelRef } from './broadcast-channel.ref';
 @Injectable()
 export class BroadcastChannelService implements OnDestroy {
 
-  private readonly _broadcastChannels: Record<string, BroadcastChannelRef<any>>
+  private readonly _broadcastChannels: Record<string, BroadcastChannelRef<unknown>>
     = { };
-
-  constructor(private readonly _ngZone: NgZone) { }
+  private readonly _ngZone: NgZone = inject(NgZone);
 
   ngOnDestroy(): void {
     Object.values(this._broadcastChannels)
-      .forEach((broadcastChannel: BroadcastChannelRef<any>) => broadcastChannel.close());
+      .forEach((broadcastChannel: BroadcastChannelRef<unknown>) => broadcastChannel.close());
   }
 
   create<T>(name: string): BroadcastChannelRef<T> {
+    // The same type `T` is expected for a given channel name (see README)
     if (this._broadcastChannels[name]) {
-      return this._broadcastChannels[name];
+      return this._broadcastChannels[name] as BroadcastChannelRef<T>;
     }
 
     // A closed channel is forgotten, so the next `create(name)` opens a new one
@@ -32,7 +32,7 @@ export class BroadcastChannelService implements OnDestroy {
   }
 
   get<T>(name: string): BroadcastChannelRef<T> | null {
-    return this._broadcastChannels[name] ?? null;
+    return (this._broadcastChannels[name] as BroadcastChannelRef<T> | undefined) ?? null;
   }
 
 }

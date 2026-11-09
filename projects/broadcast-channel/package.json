@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-broadcast-channel",
-  "version": "16.0.1",
+  "version": "16.0.2",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -34,9 +34,9 @@
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/broadcast-channel"
   },
   "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0",
-    "zone.js": "~0.13.0"
+    "@angular/common": ">=16.0.0 <20.0.0",
+    "@angular/core": ">=16.0.0 <20.0.0",
+    "rxjs": ">=6.6.0"
   },
   "dependencies": {
     "@ashetm/platform": "^1.0.0",

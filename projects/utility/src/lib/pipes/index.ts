@@ -47,4 +47,5 @@ export * from './object-pick.pipe';
 export * from './object-size.pipe';
 export * from './object-values.pipe';
 export * from './slugify.pipe';
+export * from './time-ago.pipe';
 export * from './truncate.pipe';

@@ -49,6 +49,7 @@ import {
   ObjectSize,
   ObjectValues,
   Slugify,
+  TimeAgo,
   Truncate,
 } from './pipes';
 
@@ -103,6 +104,7 @@ import {
     ObjectSize,
     ObjectValues,
     Slugify,
+    TimeAgo,
     Truncate,
   ],
   imports: [
@@ -154,6 +156,7 @@ import {
     ObjectSize,
     ObjectValues,
     Slugify,
+    TimeAgo,
     Truncate,
   ],
 })

@@ -21,4 +21,15 @@ describe('ArrayPop', () => {
 
     expect(item).toBeUndefined();
   });
+
+  it('should not remove the last item from the list', () => {
+    // GIVEN
+    const list: number[] = [1, 5, 10];
+
+    // WHEN
+    pipe.transform(list);
+
+    // THEN
+    expect(list).toEqual([1, 5, 10]);
+  });
 });

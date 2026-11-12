@@ -81,5 +81,6 @@ export {
 export {
   AutofocusDirective,
   ClickOutsideDirective,
-  CopyToClipboardDirective
+  CopyToClipboardDirective,
+  ImageFallbackDirective
 } from './lib/directives';

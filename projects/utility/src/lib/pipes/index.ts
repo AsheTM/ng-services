@@ -42,6 +42,7 @@ export * from './object-is-empty.pipe';
 export * from './object-keys.pipe';
 export * from './object-omit.pipe';
 export * from './object-pick.pipe';
+export * from './object-size.pipe';
 export * from './object-values.pipe';
 export * from './slugify.pipe';
 export * from './truncate.pipe';

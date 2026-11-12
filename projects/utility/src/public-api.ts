@@ -13,6 +13,7 @@ export {
   mapFromArray,
   nthFromArray,
   pluckFromArray,
+  sortFromArray,
   uniqueFromArray
 } from './lib/operators';
 export {

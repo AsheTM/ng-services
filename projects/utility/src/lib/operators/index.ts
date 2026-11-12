@@ -6,4 +6,5 @@ export { lastFromArray } from './last-from-array.operator';
 export { mapFromArray } from './map-from-array.operator';
 export { nthFromArray } from './nth-from-array.operator';
 export { pluckFromArray } from './pluck-from-array.operator';
+export { sortFromArray } from './sort-from-array.operator';
 export { uniqueFromArray } from './unique-from-array.operator';

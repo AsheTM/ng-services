@@ -27,6 +27,7 @@ export {
   ArraySort,
   ArraySortAsc,
   ArraySortDesc,
+  ArrayUnique,
   CapitalCase,
   CoerciveBoolean,
   ControlErrors,

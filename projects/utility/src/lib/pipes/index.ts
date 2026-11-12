@@ -1,4 +1,5 @@
 
+export * from './array-chunk.pipe';
 export * from './array-fill.pipe';
 export * from './array-filter.pipe';
 export * from './array-first.pipe';

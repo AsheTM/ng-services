@@ -2,6 +2,7 @@
 export { containsItem } from './contains-item.operator';
 export { countFromArray } from './count-from-array.operator';
 export { filterFromArray } from './filter-from-array.operator';
+export { filterNullish } from './filter-nullish.operator';
 export { firstFromArray } from './first-from-array.operator';
 export { groupByFromArray } from './group-by-from-array.operator';
 export { isEmptyArray } from './is-empty-array.operator';

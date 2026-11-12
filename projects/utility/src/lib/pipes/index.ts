@@ -4,6 +4,7 @@ export * from './array-filter.pipe';
 export * from './array-first.pipe';
 export * from './array-from.pipe';
 export * from './array-includes.pipe';
+export * from './array-last.pipe';
 export * from './array-pluck.pipe';
 export * from './array-pop.pipe';
 export * from './array-shuffle.pipe';

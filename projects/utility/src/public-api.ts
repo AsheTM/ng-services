@@ -20,6 +20,7 @@ export {
   ArrayFirst,
   ArrayFrom,
   ArrayIncludes,
+  ArrayLast,
   ArrayPluck,
   ArrayPop,
   ArrayShuffle,

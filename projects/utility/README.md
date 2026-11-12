@@ -1,21 +1,16 @@
 
 # @ashetm/ng-utility
 
+[![npm version](https://img.shields.io/npm/v/@ashetm/ng-utility.svg)](https://www.npmjs.com/package/@ashetm/ng-utility)
+[![npm downloads](https://img.shields.io/npm/dm/@ashetm/ng-utility.svg)](https://www.npmjs.com/package/@ashetm/ng-utility)
+
 ``@ashetm/ng-utility`` is a library that provide some utilities classes, like pipes.
-
-<!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
-<!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
-<!-- [![github tag](https://img.shields.io/github/tag/likeastore/ngDialog.svg)](https://github.com/likeastore/ngDialog/tags) -->
-<!-- [![Download Count](https://img.shields.io/npm/dm/ng-dialog.svg)](http://www.npmjs.com/package/ng-dialog) -->
-<!-- [![Code Climate](https://codeclimate.com/github/likeastore/ngDialog/badges/gpa.svg)](https://codeclimate.com/github/likeastore/ngDialog) -->
-
-<!-- ### [Demo](http://likeastore.github.io/ngDialog) -->
 
 ## Compatibility Table
 
 | Angular Version    | @ashetm/ng-utility Version     | RxJS Version   | Support |
 |--------------------|--------------------------------|----------------|---------|
-| Angular 16.x and + | @ashetm/ng-utility 16.x and +  | 6.x.x and +    | ✅     |
+| Angular 16.x – 19.x | @ashetm/ng-utility 16.x       | 6.x.x and +    | ✅     |
 | Angular 15.x       | @ashetm/ng-utility 15.x        | No requirement | ❌     |
 | Angular 14.x       | @ashetm/ng-utility 14.x        | No requirement | ❌     |
 | Angular 13.x       | @ashetm/ng-utility 13.x        | No requirement | ❌     |
@@ -27,6 +22,12 @@ You can install it with npm:
 
 ```bash
 npm install @ashetm/ng-utility
+```
+
+On **Angular 16–19**, install the 16.x version:
+
+```bash
+npm install @ashetm/ng-utility@16
 ```
 
 ## Import
@@ -327,7 +328,7 @@ All pipes are standalone pipes. (Importing the module or the specific standalone
 transform<T>(list: unknown[], value: T): T[] { ... }
 ```
 
-Use on any array and fill it with the provided value of type T. The pipe replaces all elements in the array with the given value.
+Use on any array and fill it with the provided value of type T. The pipe returns a new array where all elements are the given value; the original array is not modified.
 
 Example: 
 
@@ -398,7 +399,7 @@ transform(
   ): Array<any> { ... }
 ```
 
-Use on array of object items, and needs an argument of type number or string.
+Use on array of object items, and needs an argument of type number or string. Items without that key (``null`` / ``undefined``) are skipped; falsy values like ``0``, ``''`` and ``false`` are kept.
 
 Example: 
 
@@ -413,7 +414,7 @@ Example:
 transform<T>(list: T[]): T | undefined { ... }
 ```
 
-Removes and returns the last element of the provided array. If the array is empty, it returns undefined.
+Returns the last element of the provided array, without removing it. If the array is empty, it returns undefined.
 
 Example: 
 
@@ -423,15 +424,13 @@ Example:
 {{ [] | arrayPop }} // undefined
 ```
 
-**Note**: This pipe mutates the original array by removing its last element. Use with caution in cases where immutability is critical.
-
 #### ArrayShuffle 
 
 ```ts
 transform<T>(array: T[]): T[] { ... }
 ```
 
-Randomly shuffles the elements of the given array and returns the modified array. The original array is mutated during the shuffle process.
+Randomly shuffles the elements of the given array and returns a new array; the original array is not modified.
 
 Example: 
 
@@ -440,7 +439,7 @@ Example:
 {{ ['apple', 'banana', 'cherry'] | arrayShuffle }} // ['banana', 'cherry', 'apple'] (order will vary)
 ```
 
-**Note**: Since the original array is shuffled in place, use this pipe cautiously if immutability is required. The shuffled order is random and will vary each time the pipe is executed.
+**Note**: The shuffled order is random. As a pure pipe, it shuffles again only when the input array changes.
 
 #### ArraySortAsc 
 
@@ -512,7 +511,7 @@ transform<T>(list: T[], direction: 'asc' | 'desc'): T[];
 transform<T>(list: T[], direction: 'asc' | 'desc', key?: keyof T): T[];
 ```
 
-Sorts an array in either ascending or descending order. If a key is provided, it sorts the array based on the values of that key in each object. The sorting direction defaults to ascending ('asc') if not specified.
+Sorts an array in either ascending or descending order. If a key is provided, it sorts the array based on the values of that key in each object. The sorting direction defaults to ascending ('asc') if not specified. It returns a new array (the original array is not modified), and equal items keep their order.
 
 Example: 
 
@@ -582,7 +581,7 @@ Example:
 transform(controls: AbstractControl): (string | any)[] { ... }
 ```
 
-Use on any ``AbstractControl`` type.
+Use on any ``AbstractControl`` type. The pipe is impure, so the messages follow the control's errors (they're cached until the errors change).
 
 Example: 
 
@@ -600,7 +599,7 @@ formControl = new FormControl(null, {
 transform(value: AbstractControl): any { ... }
 ```
 
-Use on any ``AbstractControl`` type.
+Use on any ``AbstractControl`` type. It returns the raw value (disabled controls included). The pipe is impure, so the value follows the control (it's cached until the value changes).
 
 Example: 
 
@@ -613,6 +612,36 @@ formGroup = new FormGroup({
 {{ formGroup | controlValue }} // { test1: 'test', test2: null }
 ```
 
+#### DateMax
+
+```ts
+transform<T extends number | string | Date>(value: T[]): Date | null { ... }
+```
+
+Returns the latest date of a list of dates (or values that can be converted to a date), or ``null`` for an empty list.
+
+Example: 
+
+```tsx
+{{ ['2024-12-19', '2024-12-21', '2024-12-20'] | dateMax }} // Date of 2024-12-21
+{{ [] | dateMax }} // null
+```
+
+#### DateMin
+
+```ts
+transform<T extends number | string | Date>(value: T[]): Date | null { ... }
+```
+
+Returns the earliest date of a list of dates (or values that can be converted to a date), or ``null`` for an empty list.
+
+Example: 
+
+```tsx
+{{ ['2024-12-19', '2024-12-21', '2024-12-20'] | dateMin }} // Date of 2024-12-19
+{{ [] | dateMin }} // null
+```
+
 #### Initial
 
 ```ts
@@ -620,13 +649,13 @@ transform(value: string, max: number = Infinity): string { ... }
 ```
 
 Use on a string, and needs an optional argument of type number.
-If no argument provided, it will return string with initial of all words.
+If no argument provided, it will return string with initial of all words, in upper case. Repeated spaces are ignored.
 
 Example: 
 
 ```tsx
-{{ 'abc Def Ghi Jkl' | initial }} // 'aDGJ'
-{{ 'abc Def Ghi Jkl' | initial:2 }} // 'aD'
+{{ 'abc Def Ghi Jkl' | initial }} // 'ADGJ'
+{{ 'abc Def Ghi Jkl' | initial:2 }} // 'AD'
 ```
 
 #### IsArray

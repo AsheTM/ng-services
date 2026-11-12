@@ -37,6 +37,7 @@ export * from './is-date.pipe';
 export * from './log.pipe';
 export * from './object-entries.pipe';
 export * from './object-keys.pipe';
+export * from './object-pick.pipe';
 export * from './object-values.pipe';
 export * from './slugify.pipe';
 export * from './truncate.pipe';

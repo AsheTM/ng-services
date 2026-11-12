@@ -20,6 +20,7 @@ export * from './array-sum.pipe';
 export * from './array-unique.pipe';
 export * from './capital-case.pipe';
 export * from './coercive-boolean.pipe';
+export * from './control-errors.messages';
 export * from './control-errors.pipe';
 export * from './control-value.pipe';
 export * from './date-diff.pipe';

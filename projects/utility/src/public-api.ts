@@ -49,11 +49,13 @@ export {
   ArrayUnique,
   CapitalCase,
   CoerciveBoolean,
+  CONTROL_ERRORS_MESSAGES,
   ControlErrors,
   ControlValue,
   DateDiff,
   DateMax,
   DateMin,
+  DEFAULT_CONTROL_ERRORS_MESSAGES,
   DefaultValue,
   FileSize,
   Format,
@@ -77,11 +79,12 @@ export {
   ObjectPick,
   ObjectSize,
   ObjectValues,
+  provideControlErrorsMessages,
   Slugify,
   TimeAgo,
   Truncate
 } from './lib/pipes';
-export type { DateDiffUnit } from './lib/pipes';
+export type { ControlErrorMessage, ControlErrorsMessages, DateDiffUnit } from './lib/pipes';
 export {
   AutofocusDirective,
   ClickOutsideDirective,

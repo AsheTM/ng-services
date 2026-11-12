@@ -10,7 +10,8 @@ export class ArrayPop implements PipeTransform {
   transform<T>(list: T[]): T;
   transform(list: []): undefined;
   transform<T>(list: T[]): T | undefined {
-    return list.length === 0 ? list.pop() : undefined;
+    // The last item, without removing it from the list
+    return list[list.length - 1];
   }
 
 }

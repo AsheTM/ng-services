@@ -9,6 +9,7 @@ export {
   catchAndReturn,
   containsItem,
   countFromArray,
+  debug,
   filterFromArray,
   filterNullish,
   firstFromArray,
@@ -23,7 +24,7 @@ export {
   uniqueFromArray,
   withLoading
 } from './lib/operators';
-export type { LoadingState } from './lib/operators';
+export type { DebugEvent, DebugOptions, LoadingState } from './lib/operators';
 export {
   ArrayAverage,
   ArrayChunk,

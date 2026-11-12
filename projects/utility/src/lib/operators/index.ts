@@ -2,6 +2,8 @@
 export { catchAndReturn } from './catch-and-return.operator';
 export { containsItem } from './contains-item.operator';
 export { countFromArray } from './count-from-array.operator';
+export { debug } from './debug.operator';
+export type { DebugEvent, DebugOptions } from './debug.operator';
 export { filterFromArray } from './filter-from-array.operator';
 export { filterNullish } from './filter-nullish.operator';
 export { firstFromArray } from './first-from-array.operator';

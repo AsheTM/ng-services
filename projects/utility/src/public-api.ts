@@ -26,6 +26,7 @@ export {
   ArrayLast,
   ArrayPluck,
   ArrayPop,
+  ArrayReverse,
   ArrayShuffle,
   ArraySort,
   ArraySortAsc,

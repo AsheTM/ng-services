@@ -1013,6 +1013,122 @@ Example:
 
 Same as ``Object.values``.
 
+#### ObjectFilter
+
+```ts
+transform<T extends object>(value: T | null | undefined, predicate?: (entryValue: T[keyof T], key: keyof T) => boolean): Partial<T> { ... }
+```
+
+Returns a new object with the entries matching ``predicate``. Without a predicate, it drops ``null``, ``undefined`` and ``''`` values (``0`` and ``false`` are kept). Templates can't contain arrow functions, so pass a component method.
+
+Example: 
+
+```tsx
+{{ { a: 1, b: null, c: '' } | objectFilter }} // { a: 1 }
+{{ prices | objectFilter:isExpensive }} // with isExpensive = (price: number) => price > 100
+```
+
+#### ObjectGet
+
+```ts
+transform<T = unknown>(value: unknown, path: string | (string | number)[], fallback?: T): T | undefined { ... }
+```
+
+Reads a nested value by path (``'address.city'``, ``'items.0.name'`` or ``['items', 0, 'name']``). Returns ``fallback`` (default ``undefined``) when a step of the path is missing, instead of throwing.
+
+Example: 
+
+```tsx
+{{ user | objectGet:'address.city' }} // 'Paris'
+{{ user | objectGet:'company.name':'—' }} // '—'
+```
+
+#### ObjectHas
+
+```ts
+transform(value: unknown, path: string | (string | number)[]): boolean { ... }
+```
+
+Returns ``true`` when every step of the path exists (even with an ``undefined`` value).
+
+Example: 
+
+```tsx
+{{ user | objectHas:'address.city' }} // true
+{{ user | objectHas:'company.name' }} // false
+```
+
+#### ObjectInvert
+
+```ts
+transform(value: Record<string, string | number | boolean> | null | undefined): Record<string, string> { ... }
+```
+
+Swaps keys and values (values become string keys). With duplicate values, the last key wins.
+
+Example: 
+
+```tsx
+{{ { fr: 'France', es: 'Spain' } | objectInvert }} // { France: 'fr', Spain: 'es' }
+```
+
+#### ObjectIsEmpty
+
+```ts
+transform(value: object | null | undefined): boolean { ... }
+```
+
+Returns ``true`` for an object without keys, ``null`` or ``undefined``.
+
+Example: 
+
+```tsx
+{{ {} | objectIsEmpty }} // true
+{{ { a: 1 } | objectIsEmpty }} // false
+```
+
+#### ObjectOmit
+
+```ts
+transform<T extends object, K extends keyof T>(value: T | null | undefined, keys: K[]): Omit<T, K> { ... }
+```
+
+Returns a new object without the given keys.
+
+Example: 
+
+```tsx
+{{ { a: 1, b: 2, c: 3 } | objectOmit:['b'] }} // { a: 1, c: 3 }
+```
+
+#### ObjectPick
+
+```ts
+transform<T extends object, K extends keyof T>(value: T | null | undefined, keys: K[]): Pick<T, K> { ... }
+```
+
+Returns a new object with only the given keys (keys missing from the object are skipped).
+
+Example: 
+
+```tsx
+{{ { a: 1, b: 2, c: 3 } | objectPick:['a', 'c'] }} // { a: 1, c: 3 }
+```
+
+#### ObjectSize
+
+```ts
+transform(value: object | null | undefined): number { ... }
+```
+
+Returns the number of keys; ``0`` for ``null`` or ``undefined``.
+
+Example: 
+
+```tsx
+{{ { a: 1, b: 2 } | objectSize }} // 2
+```
+
 #### Slugify
 
 ```ts

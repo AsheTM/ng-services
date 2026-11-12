@@ -12,8 +12,19 @@ describe('DateMax', () => {
   it('works properly', () => {
     const dateMax: number = now + 60_000;
     const value: number[] = [now, now - 60_000, dateMax];
-    const result: Date = pipe.transform(value);
+    const result: Date | null = pipe.transform(value);
 
-    expect(result.getTime()).toEqual(dateMax);
+    expect(result?.getTime()).toEqual(dateMax);
+  });
+
+  it('should return null for an empty list', () => {
+    // GIVEN
+    const value: number[] = [];
+
+    // WHEN
+    const result: Date | null = pipe.transform(value);
+
+    // THEN
+    expect(result).toBeNull();
   });
 });

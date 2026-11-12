@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 
 import {
   AutofocusDirective,
-  ClickOutsideDirective
+  ClickOutsideDirective,
+  CopyToClipboardDirective
 } from './directives';
 
 
 @NgModule({
   exports: [
     AutofocusDirective,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    CopyToClipboardDirective
   ],
   imports: [
     AutofocusDirective,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    CopyToClipboardDirective
   ],
 })
 export class UtilityDirectivesModule { }

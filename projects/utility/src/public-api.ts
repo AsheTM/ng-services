@@ -80,5 +80,6 @@ export {
 } from './lib/pipes';
 export {
   AutofocusDirective,
-  ClickOutsideDirective
+  ClickOutsideDirective,
+  CopyToClipboardDirective
 } from './lib/directives';

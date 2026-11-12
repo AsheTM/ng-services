@@ -15,6 +15,7 @@ export {
   nthFromArray,
   pluckFromArray,
   sortFromArray,
+  sumFromArray,
   uniqueFromArray
 } from './lib/operators';
 export {

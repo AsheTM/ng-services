@@ -1,5 +1,4 @@
-import { Observable, OperatorFunction, of } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { Observable, OperatorFunction, of, catchError } from "rxjs";
 
 /**
  * On error, emits `value` and completes (instead of erroring)

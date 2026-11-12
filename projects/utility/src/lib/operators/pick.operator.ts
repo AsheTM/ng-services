@@ -1,5 +1,4 @@
-import { Observable, OperatorFunction } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, OperatorFunction, map } from "rxjs";
 
 /**
  * Reads `key` of each value (`undefined` for `null` / `undefined` values). Replaces RxJS's deprecated `pluck`.

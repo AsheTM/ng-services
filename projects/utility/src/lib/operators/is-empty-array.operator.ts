@@ -1,5 +1,4 @@
-import { Observable, OperatorFunction } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, OperatorFunction, map } from "rxjs";
 
 import { ArrayIsEmpty } from "../pipes/array-is-empty.pipe";
 

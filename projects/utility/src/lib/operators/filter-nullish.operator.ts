@@ -1,5 +1,4 @@
-import { Observable, OperatorFunction } from "rxjs";
-import { filter } from "rxjs/operators";
+import { Observable, OperatorFunction, filter } from "rxjs";
 
 /**
  * Drops `null` and `undefined`; the result is typed as non-null

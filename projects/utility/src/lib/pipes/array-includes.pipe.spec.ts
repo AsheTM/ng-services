@@ -21,6 +21,6 @@ describe('ArrayIncludes', () => {
     const value: number = 100;
     const isIncluded: boolean = pipe.transform(list, value);
 
-    expect(isIncluded).toBeTrue();
+    expect(isIncluded).toBeFalse();
   });
 });

@@ -1,4 +1,11 @@
 
+# 16.6.0
+
+- [x] Create ``dateDiff``, ``fileSize`` and ``timeAgo`` pipes ([#138](https://github.com/AsheTM/ng-services/issues/138))
+- [x] Export the ``DateDiffUnit`` type
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.5.0
 
 - [x] Create ``AutofocusDirective``, ``ClickOutsideDirective``, ``CopyToClipboardDirective``, ``DebounceClickDirective``, ``ImageFallbackDirective``, ``InViewportDirective`` and ``TrimOnBlurDirective`` ([#136](https://github.com/AsheTM/ng-services/issues/136))

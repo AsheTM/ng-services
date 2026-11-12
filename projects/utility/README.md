@@ -940,6 +940,23 @@ formGroup = new FormGroup({
 {{ formGroup | controlValue }} // { test1: 'test', test2: null }
 ```
 
+#### DateDiff
+
+```ts
+transform(value: Date | number | string | null | undefined, other: Date | number | string | null | undefined, unit: DateDiffUnit = 'days'): number | null { ... }
+
+type DateDiffUnit = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks';
+```
+
+Returns ``value - other`` in whole units (rounded toward zero), or ``null`` when a date is missing or invalid.
+
+Example: 
+
+```tsx
+{{ '2026-01-15' | dateDiff:'2026-01-10' }} // 5
+{{ endDate | dateDiff:startDate:'hours' }} // e.g. 36
+```
+
 #### DateMax
 
 ```ts
@@ -983,6 +1000,22 @@ Example:
 ```tsx
 {{ user.nickname | defaultValue:'—' }} // '—' when there is no nickname
 {{ 0 | defaultValue:'—' }} // 0
+```
+
+#### FileSize
+
+```ts
+transform(bytes: number | null | undefined, decimals: number = 1, locale?: string): string { ... }
+```
+
+Makes a size in bytes readable (1 KB = 1024 bytes), in the app's language (``LOCALE_ID``) or the given locale. ``''`` for ``null``, ``undefined``, negative or invalid sizes.
+
+Example: 
+
+```tsx
+{{ 1536 | fileSize }} // '1.5 KB'
+{{ file.size | fileSize:2 }} // '1.25 GB'
+{{ file.size | fileSize:2:'fr' }} // '1,25 GB'
 ```
 
 #### Format
@@ -1334,6 +1367,23 @@ Example:
 ```tsx
 {{ '  Hello, World!  ' | slugify }} // 'hello-world'
 {{ 'Crème brûlée à Paris' | slugify }} // 'creme-brulee-a-paris'
+```
+
+#### TimeAgo
+
+```ts
+transform(value: Date | number | string | null | undefined, locale?: string, now?: Date | number): string { ... }
+```
+
+Describes a date relative to now: "3 minutes ago", "yesterday", "in 2 days"... in the app's language (``LOCALE_ID``) or the given locale (browser's ``Intl.RelativeTimeFormat``). ``''`` for ``null``, ``undefined`` or an invalid date.
+
+**Note**: as a pure pipe, it updates when the date changes, not as time passes.
+
+Example: 
+
+```tsx
+{{ comment.createdAt | timeAgo }} // '3 minutes ago'
+{{ event.date | timeAgo:'fr' }} // 'dans 2 jours'
 ```
 
 #### Truncate

@@ -16,23 +16,18 @@ export class BroadcastChannelService implements OnDestroy {
   }
 
   create<T>(name: string): BroadcastChannelRef<T> {
-    // The same type `T` is expected for a given channel name (see README)
-    if (this._broadcastChannels[name]) {
-      return this._broadcastChannels[name] as BroadcastChannelRef<T>;
-    }
-
-    // A closed channel is forgotten, so the next `create(name)` opens a new one
-    const broadcastChannel: BroadcastChannelRef<T> = new BroadcastChannelRef<T>(this._ngZone, name, () => {
-      if (this._broadcastChannels[name] === broadcastChannel) {
-        delete this._broadcastChannels[name];
-      }
-    });
-
-    return this._broadcastChannels[name] = broadcastChannel;
+    // A closed channel is replaced by a new one
+    return this.get<T>(name)
+      ?? (this._broadcastChannels[name] = new BroadcastChannelRef<T>(this._ngZone, name));
   }
 
   get<T>(name: string): BroadcastChannelRef<T> | null {
-    return (this._broadcastChannels[name] as BroadcastChannelRef<T> | undefined) ?? null;
+    const broadcastChannel: BroadcastChannelRef<unknown> | undefined = this._broadcastChannels[name];
+
+    // The same type `T` is expected for a given channel name (see README)
+    return broadcastChannel && !broadcastChannel.closed
+      ? broadcastChannel as BroadcastChannelRef<T>
+      : null;
   }
 
 }

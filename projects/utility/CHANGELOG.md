@@ -1,4 +1,10 @@
 
+# 16.3.0
+
+- [x] Create ``objectFilter``, ``objectGet``, ``objectHas``, ``objectInvert``, ``objectIsEmpty``, ``objectOmit``, ``objectPick`` and ``objectSize`` pipes ([#132](https://github.com/AsheTM/ng-services/issues/132))
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.2.0
 
 - [x] Create ``defaultValue``, ``slugify`` and ``truncate`` pipes ([#130](https://github.com/AsheTM/ng-services/issues/130))

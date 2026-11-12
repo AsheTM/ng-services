@@ -1,7 +1,9 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Pipe, PipeTransform } from '@angular/core';
 
 
+/**
+ * Same rule as `coerceBooleanProperty` of `@angular/cdk`: everything is `true` except `null`, `undefined`, `false` and `'false'`.
+ */
 @Pipe({
   name: 'coerciveBoolean',
   standalone: true
@@ -9,7 +11,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CoerciveBoolean implements PipeTransform {
 
   transform(value?: any): boolean {
-    return coerceBooleanProperty(value);
+    return value != null && `${value}` !== 'false';
   }
 
 }

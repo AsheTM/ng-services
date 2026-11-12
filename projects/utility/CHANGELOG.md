@@ -1,4 +1,11 @@
 
+# 16.1.0
+
+- [x] Create ``arrayAverage``, ``arrayChunk``, ``arrayFirst``, ``arrayGroupBy``, ``arrayIsEmpty``, ``arrayLast``, ``arrayReverse``, ``arraySum`` and ``arrayUnique`` pipes ([#128](https://github.com/AsheTM/ng-services/issues/128))
+- [x] Add ``DateMax``, ``DateMin`` and ``IsArray`` to ``UtilityPipesModule`` ([#127](https://github.com/AsheTM/ng-services/issues/127))
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.0.1
 
 - [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), build in partial compilation mode ([#108](https://github.com/AsheTM/ng-services/issues/108))

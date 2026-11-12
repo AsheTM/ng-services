@@ -545,6 +545,142 @@ Sorting an array (descending):
 
 **Note**: This is a versatile pipe that serves as the base for specialized sorting pipes, such as `ArraySortAsc` and `ArraySortDesc`. It mutates the original array during sorting.
 
+#### ArrayAverage
+
+```ts
+transform(list: number[] | null | undefined): number | null;
+transform<T>(list: T[] | null | undefined, key: keyof T): number | null;
+```
+
+Returns the average of the numbers, or of the values of ``key``. Values that aren't numbers are ignored; ``null`` when there is no number.
+
+Example: 
+
+```tsx
+{{ [1, 2, 6] | arrayAverage }} // 3
+{{ [{ score: 10 }, { score: 20 }] | arrayAverage:'score' }} // 15
+{{ [] | arrayAverage }} // null
+```
+
+#### ArrayChunk
+
+```ts
+transform<T>(list: T[] | null | undefined, size: number): T[][] { ... }
+```
+
+Splits the list into groups of ``size`` items; the last group may be smaller. A size below 1 is treated as 1.
+
+Example: 
+
+```tsx
+{{ [1, 2, 3, 4, 5] | arrayChunk:2 }} // [[1, 2], [3, 4], [5]]
+```
+
+#### ArrayFirst
+
+```ts
+transform<T>(list: T[] | null | undefined): T | undefined { ... }
+```
+
+Returns the first item, or ``undefined`` for an empty list, ``null`` or ``undefined``.
+
+Example: 
+
+```tsx
+{{ [1, 5, 10] | arrayFirst }} // 1
+{{ [] | arrayFirst }} // undefined
+```
+
+#### ArrayGroupBy
+
+```ts
+transform<T>(list: T[] | null | undefined, key: keyof T): Record<string, T[]> { ... }
+```
+
+Groups the items by the value of ``key``, keeping their order. Works well with Angular's ``keyvalue`` pipe.
+
+Example: 
+
+```tsx
+{{ [{ type: 'fruit', name: 'apple' }, { type: 'vegetable', name: 'carrot' }, { type: 'fruit', name: 'banana' }] | arrayGroupBy:'type' }}
+// { fruit: [apple, banana], vegetable: [carrot] }
+```
+
+#### ArrayIsEmpty
+
+```ts
+transform(list: unknown[] | null | undefined): boolean { ... }
+```
+
+Returns ``true`` for an empty list, ``null`` or ``undefined``.
+
+Example: 
+
+```tsx
+{{ [] | arrayIsEmpty }} // true
+{{ [0] | arrayIsEmpty }} // false
+```
+
+#### ArrayLast
+
+```ts
+transform<T>(list: T[] | null | undefined): T | undefined { ... }
+```
+
+Returns the last item, or ``undefined`` for an empty list, ``null`` or ``undefined``.
+
+Example: 
+
+```tsx
+{{ [1, 5, 10] | arrayLast }} // 10
+```
+
+#### ArrayReverse
+
+```ts
+transform<T>(list: T[] | null | undefined): T[] { ... }
+```
+
+Returns a reversed copy; the original array is not modified.
+
+Example: 
+
+```tsx
+{{ [1, 2, 3] | arrayReverse }} // [3, 2, 1]
+```
+
+#### ArraySum
+
+```ts
+transform(list: number[] | null | undefined): number;
+transform<T>(list: T[] | null | undefined, key: keyof T): number;
+```
+
+Returns the sum of the numbers, or of the values of ``key``. Values that aren't numbers are ignored; ``0`` for an empty list.
+
+Example: 
+
+```tsx
+{{ [1, 2, 3.5] | arraySum }} // 6.5
+{{ [{ price: 10 }, { price: 2 }] | arraySum:'price' }} // 12
+```
+
+#### ArrayUnique
+
+```ts
+transform<T>(list: T[] | null | undefined): T[];
+transform<T>(list: T[] | null | undefined, key: keyof T): T[];
+```
+
+Removes duplicates (optionally by ``key``), keeping the first occurrence.
+
+Example: 
+
+```tsx
+{{ [3, 1, 3, 2, 1] | arrayUnique }} // [3, 1, 2]
+{{ [{ id: 1, name: 'a' }, { id: 1, name: 'b' }] | arrayUnique:'id' }} // [{ id: 1, name: 'a' }]
+```
+
 #### CapitalCase
 
 ```ts

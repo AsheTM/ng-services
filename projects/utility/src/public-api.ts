@@ -10,6 +10,7 @@ export {
   filterFromArray,
   firstFromArray,
   groupByFromArray,
+  isEmptyArray,
   lastFromArray,
   mapFromArray,
   nthFromArray,

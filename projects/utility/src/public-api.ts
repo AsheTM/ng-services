@@ -52,6 +52,7 @@ export {
   IsDatePast,
   Log,
   ObjectEntries,
+  ObjectFilter,
   ObjectGet,
   ObjectHas,
   ObjectIsEmpty,

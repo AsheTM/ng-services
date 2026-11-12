@@ -36,6 +36,7 @@ export * from './is-date-past.pipe';
 export * from './is-date.pipe';
 export * from './log.pipe';
 export * from './object-entries.pipe';
+export * from './object-filter.pipe';
 export * from './object-get.pipe';
 export * from './object-has.pipe';
 export * from './object-is-empty.pipe';

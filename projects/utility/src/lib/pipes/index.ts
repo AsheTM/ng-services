@@ -10,6 +10,7 @@ export * from './array-includes.pipe';
 export * from './array-last.pipe';
 export * from './array-pluck.pipe';
 export * from './array-pop.pipe';
+export * from './array-reverse.pipe';
 export * from './array-shuffle.pipe';
 export * from './array-sort.pipe';
 export * from './array-sort-asc.pipe';

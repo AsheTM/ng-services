@@ -19,8 +19,10 @@ export {
   pluckFromArray,
   sortFromArray,
   sumFromArray,
-  uniqueFromArray
+  uniqueFromArray,
+  withLoading
 } from './lib/operators';
+export type { LoadingState } from './lib/operators';
 export {
   ArrayAverage,
   ArrayChunk,

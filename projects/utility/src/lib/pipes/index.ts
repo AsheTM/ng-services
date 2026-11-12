@@ -3,6 +3,7 @@ export * from './array-fill.pipe';
 export * from './array-filter.pipe';
 export * from './array-first.pipe';
 export * from './array-from.pipe';
+export * from './array-group-by.pipe';
 export * from './array-includes.pipe';
 export * from './array-last.pipe';
 export * from './array-pluck.pipe';

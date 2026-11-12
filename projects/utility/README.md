@@ -778,6 +778,36 @@ Example:
 {{ [] | dateMin }} // null
 ```
 
+#### DefaultValue
+
+```ts
+transform<T, D>(value: T | null | undefined, fallback: D): T | D { ... }
+```
+
+Returns ``fallback`` when the value is ``null``, ``undefined`` or ``''``; other values (including ``0`` and ``false``) are kept.
+
+Example: 
+
+```tsx
+{{ user.nickname | defaultValue:'—' }} // '—' when there is no nickname
+{{ 0 | defaultValue:'—' }} // 0
+```
+
+#### Format
+
+```ts
+transform<T extends string | number | boolean>(value: T, mask: string): string { ... }
+```
+
+Formats a value with a mask: each ``*`` is replaced by the next character of the value, other characters are kept.
+
+Example: 
+
+```tsx
+{{ '0612345678' | format:'** ** ** ** **' }} // '06 12 34 56 78'
+{{ 1234 | format:'**-**' }} // '12-34'
+```
+
 #### Initial
 
 ```ts
@@ -982,6 +1012,37 @@ Use on a string, and needs an optional argument of type number.
 Example: 
 
 Same as ``Object.values``.
+
+#### Slugify
+
+```ts
+transform(value: string | null | undefined): string { ... }
+```
+
+Turns a text into a URL-friendly slug: lower case, accents removed, anything that isn't a letter or a digit replaced by a single ``-``.
+
+Example: 
+
+```tsx
+{{ '  Hello, World!  ' | slugify }} // 'hello-world'
+{{ 'Crème brûlée à Paris' | slugify }} // 'creme-brulee-a-paris'
+```
+
+#### Truncate
+
+```ts
+transform(value: string | null | undefined, length: number, suffix: string = '…', wholeWords: boolean = false): string { ... }
+```
+
+Keeps the first ``length`` characters and adds ``suffix`` when the text is longer. With ``wholeWords``, the text is cut at the last space before ``length``.
+
+Example: 
+
+```tsx
+{{ 'Hello wonderful world' | truncate:9 }} // 'Hello won…'
+{{ 'Hello wonderful world' | truncate:9:'...' }} // 'Hello won...'
+{{ 'Hello wonderful world' | truncate:9:'…':true }} // 'Hello…'
+```
 
 ## Issue
 

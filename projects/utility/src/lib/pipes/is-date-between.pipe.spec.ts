@@ -32,4 +32,26 @@ describe('IsDateBetween', () => {
 
     expect(result).toBeFalse();
   });
+
+  it('should not be between when the date is outside the range', () => {
+    // GIVEN
+    const now: number = Date.now();
+
+    // WHEN
+    const isBetween: boolean = pipe.transform(now + 120_000, now - 60_000, now + 60_000);
+
+    // THEN
+    expect(isBetween).toBeFalse();
+  });
+
+  it('should not be between for an invalid date', () => {
+    // GIVEN
+    const now: number = Date.now();
+
+    // WHEN
+    const isBetween: boolean = pipe.transform('not a date', now - 60_000, now + 60_000);
+
+    // THEN
+    expect(isBetween).toBeFalse();
+  });
 });

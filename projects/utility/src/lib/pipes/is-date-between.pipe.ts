@@ -12,7 +12,7 @@ export class IsDateBetween<T extends Date | number | string> extends IsDate<T> i
   transform(value: T, minDate: T, maxDate: T): boolean;
   transform(value: T, [minDate, maxDate]: [T, T]): boolean;
   transform(value: T, interval: T | [T, T], max?: T): boolean {
-    if(super.isDate(value)) {
+    if(!super.isDate(value)) {
       return false;
     }
 

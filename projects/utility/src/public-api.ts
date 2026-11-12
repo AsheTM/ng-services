@@ -23,6 +23,7 @@ export {
   ArrayFrom,
   ArrayGroupBy,
   ArrayIncludes,
+  ArrayIsEmpty,
   ArrayLast,
   ArrayPluck,
   ArrayPop,

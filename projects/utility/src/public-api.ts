@@ -19,6 +19,7 @@ export {
   ArrayFilter,
   ArrayFirst,
   ArrayFrom,
+  ArrayGroupBy,
   ArrayIncludes,
   ArrayLast,
   ArrayPluck,

@@ -1,4 +1,11 @@
 
+# 16.4.0
+
+- [x] Create ``catchAndReturn``, ``countFromArray``, ``debug``, ``filterNullish``, ``groupByFromArray``, ``isEmptyArray``, ``pick``, ``sortFromArray``, ``sumFromArray``, ``uniqueFromArray`` and ``withLoading`` RxJS operators ([#134](https://github.com/AsheTM/ng-services/issues/134))
+- [x] Export the ``LoadingState``, ``DebugOptions`` and ``DebugEvent`` types
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.3.0
 
 - [x] Create ``objectFilter``, ``objectGet``, ``objectHas``, ``objectInvert``, ``objectIsEmpty``, ``objectOmit``, ``objectPick`` and ``objectSize`` pipes ([#132](https://github.com/AsheTM/ng-services/issues/132))

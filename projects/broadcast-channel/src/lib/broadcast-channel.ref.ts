@@ -46,13 +46,18 @@ export class BroadcastChannelRef<T> {
   }
 
   /**
-   * @param _onClose called once, when the channel is closed (used by `BroadcastChannelService` to forget it)
+   * `true` once `close()` was called
+   */
+  get closed(): boolean {
+    return this._closed;
+  }
+
+  /**
    * @throws `NotSupportedError` when the browser has no `BroadcastChannel`
    */
   constructor(
     private readonly _ngZone: NgZone,
-    private readonly _name: string,
-    private readonly _onClose?: () => void
+    private readonly _name: string
   ) {
     if (isServer()) {
       this._broadcastChannel = null;
@@ -72,7 +77,6 @@ export class BroadcastChannelRef<T> {
     this._broadcastChannel?.close();
     this._close$.next();
     this._close$.complete();
-    this._onClose?.();
   }
 
   /**

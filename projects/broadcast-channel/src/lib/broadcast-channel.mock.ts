@@ -8,8 +8,8 @@ export function createChannelNameMock(): string {
 }
 
 /**
- * Waits for messages posted on a `BroadcastChannel` to be delivered
+ * Waits for messages posted on a `BroadcastChannel` to be delivered (the first delivery in a fresh browser can take a while)
  */
 export function flushMessages(): Promise<void> {
-  return new Promise((resolve: () => void) => setTimeout(resolve, 50));
+  return new Promise((resolve: () => void) => setTimeout(resolve, 200));
 }

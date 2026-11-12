@@ -1,29 +1,30 @@
 
 # @ashetm/ng-broadcast-channel
 
+[![npm version](https://img.shields.io/npm/v/@ashetm/ng-broadcast-channel.svg)](https://www.npmjs.com/package/@ashetm/ng-broadcast-channel)
+[![npm downloads](https://img.shields.io/npm/dm/@ashetm/ng-broadcast-channel.svg)](https://www.npmjs.com/package/@ashetm/ng-broadcast-channel)
+
 ``@ashetm/ng-broadcast-channel`` is a library that simplify manipulation of ``BroadcastChannel`` API.
 
 ## Compatibility Table
 
 | Angular Version    | @ashetm/ng-broadcast-channel Version     | Zone     | Support |
 |--------------------|------------------------------------------|----------|---------|
-| Angular 16.x – 19.x | @ashetm/ng-broadcast-channel 16.x        | Zonefull | ✅      |
+| Angular 20.x and +  | @ashetm/ng-broadcast-channel 20.x        | Zonefull | ✅      |
+| Angular 16.x – 19.x | @ashetm/ng-broadcast-channel 16.x        | Zonefull | ❌      |
 | Angular 15.x       | @ashetm/ng-broadcast-channel 15.x        | Zonefull | ❌      |
 | Angular 14.x       | @ashetm/ng-broadcast-channel 14.x        | Zonefull | ❌      |
 | Angular 13.x       | @ashetm/ng-broadcast-channel 13.x        | Zonefull | ❌      |
 | Angular 12.x       | @ashetm/ng-broadcast-channel 12.x        | Zonefull | ❌      |
 | Angular 11.x       | @ashetm/ng-broadcast-channel 11.x        | Zonefull | ❌      |
 
+The version follows the Angular version it starts from: **16.x** supports Angular 16 to 19, **20.x** supports Angular 20 and above (there are no 17.x, 18.x or 19.x versions).
+
+**16.x is no longer supported**, as Angular 16 to 19 have reached their end of life: 16.0.3 is its last release. Use 20.x with Angular 20+.
+
 ### Demo
 
 Link to an [sample app](https://npm-ashetm-ng-broadcast-channel.netlify.app) to see how it works
-<!-- [![build status](http://img.shields.io/travis/likeastore/ngDialog.svg)](https://travis-ci.org/likeastore/ngDialog) -->
-<!-- [![npm version](http://badge.fury.io/js/ng-dialog.svg)](http://badge.fury.io/js/ng-dialog) -->
-<!-- [![github tag](https://img.shields.io/github/tag/likeastore/ngDialog.svg)](https://github.com/likeastore/ngDialog/tags) -->
-<!-- [![Download Count](https://img.shields.io/npm/dm/ng-dialog.svg)](http://www.npmjs.com/package/ng-dialog) -->
-<!-- [![Code Climate](https://codeclimate.com/github/likeastore/ngDialog/badges/gpa.svg)](https://codeclimate.com/github/likeastore/ngDialog) -->
-
-<!-- ### [Demo](http://likeastore.github.io/ngDialog) -->
 
 ## Install
 
@@ -97,6 +98,8 @@ All channels are closed when the service is destroyed.
 ``BroadcastChannelRef<T>`` is wrapper class to manipulate ``BroadcastChannel`` API, it exposes the following: 
 
 * ``name: string``, the channel name.
+
+* ``closed: boolean``, ``true`` once the channel is closed.
 
 * ``data$: Observable<T>`` emits the data sent on that channel by **other** tabs, windows or workers. Every subscriber receives every message. It completes when the channel is closed.
 

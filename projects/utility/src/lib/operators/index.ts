@@ -13,3 +13,5 @@ export { pluckFromArray } from './pluck-from-array.operator';
 export { sortFromArray } from './sort-from-array.operator';
 export { sumFromArray } from './sum-from-array.operator';
 export { uniqueFromArray } from './unique-from-array.operator';
+export { withLoading } from './with-loading.operator';
+export type { LoadingState } from './with-loading.operator';

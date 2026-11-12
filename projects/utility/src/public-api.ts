@@ -78,3 +78,6 @@ export {
   Slugify,
   Truncate
 } from './lib/pipes';
+export {
+  AutofocusDirective
+} from './lib/directives';

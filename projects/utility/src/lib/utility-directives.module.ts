@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import {
   AutofocusDirective,
   ClickOutsideDirective,
-  CopyToClipboardDirective
+  CopyToClipboardDirective,
+  ImageFallbackDirective
 } from './directives';
 
 
@@ -11,12 +12,14 @@ import {
   exports: [
     AutofocusDirective,
     ClickOutsideDirective,
-    CopyToClipboardDirective
+    CopyToClipboardDirective,
+    ImageFallbackDirective
   ],
   imports: [
     AutofocusDirective,
     ClickOutsideDirective,
-    CopyToClipboardDirective
+    CopyToClipboardDirective,
+    ImageFallbackDirective
   ],
 })
 export class UtilityDirectivesModule { }

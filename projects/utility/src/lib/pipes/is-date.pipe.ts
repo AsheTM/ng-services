@@ -13,7 +13,8 @@ export class IsDate<T extends Date | number | string> implements PipeTransform {
   }
 
   protected isDate(value: T): boolean {
-    return value && !isNaN(new Date(value).getTime());
+    // `new Date(null)` is a valid date (1970), so `null` / `undefined` are rejected first
+    return value !== null && value !== undefined && !isNaN(new Date(value).getTime());
   }
 
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {
   ArrayFill,
   ArrayFilter,
+  ArrayFirst,
   ArrayFrom,
   ArrayIncludes,
   ArrayPluck,
@@ -37,6 +38,7 @@ import {
   exports: [
     ArrayFill,
     ArrayFilter,
+    ArrayFirst,
     ArrayFrom,
     ArrayIncludes,
     ArrayPluck,
@@ -68,6 +70,7 @@ import {
   imports: [
     ArrayFill,
     ArrayFilter,
+    ArrayFirst,
     ArrayFrom,
     ArrayIncludes,
     ArrayPluck,

@@ -58,6 +58,7 @@ export {
   ObjectKeys,
   ObjectOmit,
   ObjectPick,
+  ObjectSize,
   ObjectValues,
   Slugify,
   Truncate

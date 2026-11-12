@@ -55,6 +55,7 @@
     "@angular/forms": "^16.0.6",
     "@angular/platform-browser": "^16.0.6",
     "@angular/platform-browser-dynamic": "^16.0.6",
+    "@ashetm/platform": "^1.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "^0.13.3"

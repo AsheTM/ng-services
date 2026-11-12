@@ -16,4 +16,15 @@ describe('ArrayFilter', () => {
     expect(expectedArray).toHaveSize(1);
     expect(expectedArray[0]).toEqual(true);
   });
+
+  it('should not crash on null items when filtering by key', () => {
+    // GIVEN
+    const list: (Record<string, string> | null)[] = [{ name: 'apple' }, null, { name: 'banana' }];
+
+    // WHEN
+    const result: (Record<string, string> | null)[] = pipe.transform(list as Record<string, string>[], 'an', 'name');
+
+    // THEN
+    expect(result).toEqual([{ name: 'banana' }]);
+  });
 });

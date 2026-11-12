@@ -84,5 +84,6 @@ export {
   CopyToClipboardDirective,
   DebounceClickDirective,
   ImageFallbackDirective,
-  InViewportDirective
+  InViewportDirective,
+  TrimOnBlurDirective
 } from './lib/directives';

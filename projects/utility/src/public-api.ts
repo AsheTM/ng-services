@@ -51,9 +51,11 @@ export {
   CoerciveBoolean,
   ControlErrors,
   ControlValue,
+  DateDiff,
   DateMax,
   DateMin,
   DefaultValue,
+  FileSize,
   Format,
   Initial,
   IsArray,
@@ -76,8 +78,10 @@ export {
   ObjectSize,
   ObjectValues,
   Slugify,
+  TimeAgo,
   Truncate
 } from './lib/pipes';
+export type { DateDiffUnit } from './lib/pipes';
 export {
   AutofocusDirective,
   ClickOutsideDirective,

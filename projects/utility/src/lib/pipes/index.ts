@@ -24,6 +24,7 @@ export * from './control-errors.pipe';
 export * from './control-value.pipe';
 export * from './date-max.pipe';
 export * from './date-min.pipe';
+export * from './default-value.pipe';
 export * from './format.pipe';
 export * from './initial.pipe';
 export * from './is-array.pipe';

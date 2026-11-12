@@ -79,5 +79,6 @@ export {
   Truncate
 } from './lib/pipes';
 export {
-  AutofocusDirective
+  AutofocusDirective,
+  ClickOutsideDirective
 } from './lib/directives';

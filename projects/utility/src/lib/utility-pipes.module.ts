@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {
+  ArrayChunk,
   ArrayFill,
   ArrayFilter,
   ArrayFirst,
@@ -39,6 +40,7 @@ import {
 
 @NgModule({
   exports: [
+    ArrayChunk,
     ArrayFill,
     ArrayFilter,
     ArrayFirst,
@@ -74,6 +76,7 @@ import {
     ObjectValues,
   ],
   imports: [
+    ArrayChunk,
     ArrayFill,
     ArrayFilter,
     ArrayFirst,

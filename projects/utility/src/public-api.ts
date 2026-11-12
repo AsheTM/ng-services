@@ -54,6 +54,7 @@ export {
   ObjectEntries,
   ObjectGet,
   ObjectHas,
+  ObjectIsEmpty,
   ObjectKeys,
   ObjectOmit,
   ObjectPick,

@@ -40,6 +40,7 @@ import {
   ObjectEntries,
   ObjectKeys,
   ObjectValues,
+  Slugify,
   Truncate,
 } from './pipes';
 
@@ -85,6 +86,7 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Slugify,
     Truncate,
   ],
   imports: [
@@ -127,6 +129,7 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Slugify,
     Truncate,
   ],
 })

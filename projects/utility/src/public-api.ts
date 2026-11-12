@@ -52,5 +52,6 @@ export {
   Log,
   ObjectEntries,
   ObjectKeys,
-  ObjectValues
+  ObjectValues,
+  Truncate
 } from './lib/pipes';

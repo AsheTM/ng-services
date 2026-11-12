@@ -53,6 +53,7 @@ export {
   Log,
   ObjectEntries,
   ObjectGet,
+  ObjectHas,
   ObjectKeys,
   ObjectOmit,
   ObjectPick,

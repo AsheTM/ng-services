@@ -32,7 +32,7 @@ npm install @ashetm/ng-utility@16
 
 ## Import
 
-You only need to import ``UtilityModule``.
+You only need to import ``UtilityModule`` (all pipes and directives). Every pipe and directive is also standalone, so you can import only the ones you use in a standalone component.
 
 ```ts
 ...
@@ -56,7 +56,9 @@ export class AppModule { }
 
 ### Modules
 
-* ``UtilityModule``, that needs to import in order to use the library.
+* ``UtilityModule``, that needs to import in order to use the library (exports both modules below).
+* ``UtilityPipesModule``, all the pipes.
+* ``UtilityDirectivesModule``, all the directives.
 
 ### Custom RXJS Operators
 
@@ -1348,6 +1350,87 @@ Example:
 {{ 'Hello wonderful world' | truncate:9 }} // 'Hello won…'
 {{ 'Hello wonderful world' | truncate:9:'...' }} // 'Hello won...'
 {{ 'Hello wonderful world' | truncate:9:'…':true }} // 'Hello…'
+```
+
+### Directives
+
+All directives are standalone, prefixed ``ashetm``, and safe with server-side rendering.
+
+#### AutofocusDirective
+
+* _Selector_: ``[ashetmAutofocus]``
+
+Focuses the element once it's rendered. ``[ashetmAutofocus]="false"`` disables it.
+
+```html
+<input ashetmAutofocus>
+<input [ashetmAutofocus]="isEditing">
+```
+
+#### ClickOutsideDirective
+
+* _Selector_: ``[ashetmClickOutside]``
+* _Output_: ``(ashetmClickOutside)``: ``MouseEvent``
+
+Emits when the user clicks outside the element, e.g. to close a menu.
+
+```html
+<div class="menu" *ngIf="open" (ashetmClickOutside)="open = false">...</div>
+```
+
+#### CopyToClipboardDirective
+
+* _Selector_: ``[ashetmCopyToClipboard]``: the text to copy
+* _Outputs_: ``(copied)``: the copied text, ``(copyFailed)``: the error
+
+Copies the text to the clipboard on click. ``copyFailed`` gets a ``NotSupportedError`` when the clipboard isn't available (server, page not served over HTTPS).
+
+```html
+<button [ashetmCopyToClipboard]="link" (copied)="showToast('Copied!')">Copy link</button>
+```
+
+#### DebounceClickDirective
+
+* _Selector_: ``[ashetmDebounceClick]``
+* _Input_: ``[ashetmDebounceClickTime]``: delay in milliseconds (default ``500``)
+* _Output_: ``(ashetmDebounceClick)``: ``MouseEvent``
+
+Emits the first click right away, then ignores clicks during the delay. Prevents double submits.
+
+```html
+<button (ashetmDebounceClick)="save()" [ashetmDebounceClickTime]="1000">Save</button>
+```
+
+#### ImageFallbackDirective
+
+* _Selector_: ``img[ashetmImageFallback]``: the fallback image
+
+Shows the fallback image when the image fails to load (only once, if the fallback fails too).
+
+```html
+<img [src]="user.avatar" ashetmImageFallback="assets/default-avatar.png">
+```
+
+#### InViewportDirective
+
+* _Selector_: ``[ashetmInViewport]``
+* _Input_: ``[ashetmInViewportThreshold]``: visible part needed, from ``0`` to ``1`` (default ``0``)
+* _Output_: ``(ashetmInViewport)``: ``true`` when the element enters the screen, ``false`` when it leaves it
+
+Uses the browser's ``IntersectionObserver``; does nothing on the server.
+
+```html
+<section (ashetmInViewport)="visible = $event" [ashetmInViewportThreshold]="0.5">...</section>
+```
+
+#### TrimOnBlurDirective
+
+* _Selector_: ``input[ashetmTrimOnBlur]``, ``textarea[ashetmTrimOnBlur]``
+
+Trims the text when leaving the field. Works with plain fields, reactive forms and ``ngModel`` (also with ``updateOn: 'blur'``).
+
+```html
+<input ashetmTrimOnBlur formControlName="email">
 ```
 
 ## Issue

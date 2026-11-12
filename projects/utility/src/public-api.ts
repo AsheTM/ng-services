@@ -18,6 +18,7 @@ export {
   lastFromArray,
   mapFromArray,
   nthFromArray,
+  pick,
   pluckFromArray,
   sortFromArray,
   sumFromArray,

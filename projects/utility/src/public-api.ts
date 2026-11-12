@@ -17,6 +17,7 @@ export {
 export {
   ArrayFill,
   ArrayFilter,
+  ArrayFirst,
   ArrayFrom,
   ArrayIncludes,
   ArrayPluck,

@@ -22,6 +22,7 @@ export * from './capital-case.pipe';
 export * from './coercive-boolean.pipe';
 export * from './control-errors.pipe';
 export * from './control-value.pipe';
+export * from './date-diff.pipe';
 export * from './date-max.pipe';
 export * from './date-min.pipe';
 export * from './default-value.pipe';

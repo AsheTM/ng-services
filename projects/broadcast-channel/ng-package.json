@@ -4,5 +4,6 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "assets": [".npmrc"]
+  "assets": [".npmrc"],
+  "allowedNonPeerDependencies": ["@ashetm/platform"]
 }

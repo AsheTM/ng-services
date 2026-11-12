@@ -1,4 +1,27 @@
 
+# 20.0.0
+
+- [x] **Breaking**: requires Angular 20+ (``@angular/common`` and ``@angular/core`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 16.x
+- [x] The version follows the Angular version it starts from: 16.x for Angular 16–19, 20.x for Angular 20+ (no 17.x, 18.x or 19.x)
+- [x] Include the 16.0.2 fixes ([#79](https://github.com/AsheTM/ng-services/issues/79))
+- [x] Use ``inject()`` instead of constructor injection, set up ESLint ([#80](https://github.com/AsheTM/ng-services/issues/80))
+- [x] New ``closed`` getter on ``BroadcastChannelRef``; the optional ``onClose`` constructor argument added in 16.0.2 is removed ([#86](https://github.com/AsheTM/ng-services/issues/86))
+- [x] Update CHANGELOG
+- [x] Update README
+
+# 16.0.2
+
+- [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), drop the ``zone.js`` peer, declare ``rxjs`` ([#74](https://github.com/AsheTM/ng-services/issues/74))
+- [x] Every ``data$`` subscriber receives messages, and unsubscribing removes its listener ([#63](https://github.com/AsheTM/ng-services/issues/63))
+- [x] A message that can't be read is skipped with a warning instead of erroring ``data$`` ([#64](https://github.com/AsheTM/ng-services/issues/64))
+- [x] ``close()`` completes ``data$``, and the service forgets closed channels ([#65](https://github.com/AsheTM/ng-services/issues/65))
+- [x] ``get()`` returns ``null`` for unknown channels ([#66](https://github.com/AsheTM/ng-services/issues/66))
+- [x] Server-side rendering: no channel opened on the server; ``NotSupportedError`` in browsers without ``BroadcastChannel`` ([#67](https://github.com/AsheTM/ng-services/issues/67))
+- [x] Repair the unit tests ([#62](https://github.com/AsheTM/ng-services/issues/62))
+- [x] Build in partial compilation mode
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.0.0
 
 - [x] Make it compatible from 16 and above

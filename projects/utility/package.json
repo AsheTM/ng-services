@@ -35,7 +35,6 @@
     "url": "https://github.com/AsheTM/ng-services/tree/release/%40ashetm/ng-utility/projects/utility"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=20.0.0",
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0",
     "@angular/forms": ">=20.0.0",

@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 
 import {
-  AutofocusDirective
+  AutofocusDirective,
+  ClickOutsideDirective
 } from './directives';
 
 
 @NgModule({
   exports: [
-    AutofocusDirective
+    AutofocusDirective,
+    ClickOutsideDirective
   ],
   imports: [
-    AutofocusDirective
+    AutofocusDirective,
+    ClickOutsideDirective
   ],
 })
 export class UtilityDirectivesModule { }

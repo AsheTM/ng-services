@@ -9,6 +9,7 @@ export {
   containsItem,
   filterFromArray,
   firstFromArray,
+  groupByFromArray,
   lastFromArray,
   mapFromArray,
   nthFromArray,

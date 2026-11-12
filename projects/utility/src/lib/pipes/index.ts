@@ -13,6 +13,7 @@ export * from './array-shuffle.pipe';
 export * from './array-sort.pipe';
 export * from './array-sort-asc.pipe';
 export * from './array-sort-desc.pipe';
+export * from './array-sum.pipe';
 export * from './array-unique.pipe';
 export * from './capital-case.pipe';
 export * from './coercive-boolean.pipe';

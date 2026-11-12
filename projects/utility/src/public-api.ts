@@ -29,6 +29,7 @@ export {
   ArraySort,
   ArraySortAsc,
   ArraySortDesc,
+  ArraySum,
   ArrayUnique,
   CapitalCase,
   CoerciveBoolean,

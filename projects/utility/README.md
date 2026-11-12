@@ -898,8 +898,10 @@ Use on any type.
 Example: 
 
 ```tsx
-{{ undefined | coerciveBoolean }} // true
+{{ undefined | coerciveBoolean }} // false
 {{ null | coerciveBoolean }} // false
+{{ 'false' | coerciveBoolean }} // false
+{{ '' | coerciveBoolean }} // true (like a boolean attribute: <input disabled>)
 {{ 'true' | coerciveBoolean }} // true
 ```
 

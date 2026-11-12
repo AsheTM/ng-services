@@ -318,6 +318,196 @@ obs.pipe(pluckFromArray('id')).subscribe((result) => {
 });
 ```
 
+#### `catchAndReturn` Operator
+
+```ts
+function catchAndReturn<T, R>(value: R): OperatorFunction<T, T | R> { ... }
+```
+
+On error, emits `value` and completes, instead of erroring. A shortcut for `catchError(() => of(value))`.
+
+Example: 
+
+```tsx
+this.http.get<User[]>('/api/users').pipe(catchAndReturn([])); // [] when the request fails
+```
+
+#### `countFromArray` Operator
+
+```ts
+function countFromArray<T>(fn: (item: T, index: number) => boolean): OperatorFunction<T[] | null | undefined, number> { ... }
+```
+
+Counts the items of each emitted array that match `fn` (`0` for `null` / `undefined`).
+
+Example: 
+
+```tsx
+of([1, 5, 10, 15]).pipe(countFromArray((item) => item > 4)); // 3
+```
+
+#### `debug` Operator
+
+```ts
+function debug<T>(label: string, options?: DebugOptions): (source$: Observable<T>) => Observable<T> { ... }
+
+interface DebugOptions {
+  level?: 'log' | 'info' | 'warn' | 'error' | 'debug'; // default 'log'
+  events?: ('subscribe' | 'next' | 'error' | 'complete' | 'unsubscribe')[]; // default all
+  enabled?: boolean; // default isDevMode()
+}
+```
+
+Logs the events of a stream with a label, without changing it. The emitted value is passed as its own argument, so the browser console shows it fully expandable. Errors always use `console.error`. `unsubscribe` is only logged when the stream is stopped before it completes or errors. By default it's silent in production (`isDevMode()`).
+
+Example: 
+
+```tsx
+users$.pipe(debug('users'));
+// [users] subscribe
+// [users] next: ▶ (2) [{…}, {…}]
+// [users] complete
+
+users$.pipe(debug('users', { level: 'info', events: ['next', 'error'] }));
+```
+
+#### `filterNullish` Operator
+
+```ts
+function filterNullish<T>(): OperatorFunction<T, NonNullable<T>> { ... }
+```
+
+Drops `null` and `undefined` values (`0`, `''` and `false` are kept). The result is typed as non-null.
+
+Example: 
+
+```tsx
+of('a', null, 0, undefined).pipe(filterNullish()); // 'a', 0
+```
+
+#### `groupByFromArray` Operator
+
+```ts
+function groupByFromArray<T>(key: keyof T): OperatorFunction<T[] | null | undefined, Record<string, T[]>> { ... }
+```
+
+Groups the items of each emitted array by the value of `key` (same as the `arrayGroupBy` pipe).
+
+Example: 
+
+```tsx
+of([{ type: 'a', name: 'x' }, { type: 'b', name: 'y' }]).pipe(groupByFromArray('type')); // { a: [x], b: [y] }
+```
+
+#### `isEmptyArray` Operator
+
+```ts
+function isEmptyArray<T>(): OperatorFunction<T[] | null | undefined, boolean> { ... }
+```
+
+Emits `true` when the emitted array is empty, `null` or `undefined`.
+
+Example: 
+
+```tsx
+this.users$.pipe(isEmptyArray()); // true while there is no user
+```
+
+#### `pick` Operator
+
+```ts
+function pick<T, K extends keyof T>(key: K): OperatorFunction<T | null | undefined, T[K] | undefined> { ... }
+```
+
+Reads `key` of each emitted value (`undefined` for `null` / `undefined`). Replaces RxJS's deprecated `pluck`.
+
+Example: 
+
+```tsx
+this.user$.pipe(pick('name')); // 'John'
+```
+
+#### `sortFromArray` Operator
+
+```ts
+function sortFromArray<T>(direction: 'asc' | 'desc' = 'asc', key?: keyof T): OperatorFunction<T[] | null | undefined, T[]> { ... }
+```
+
+Sorts a copy of each emitted array (same as the `arraySort` pipe); the emitted array itself is left untouched.
+
+Example: 
+
+```tsx
+of([3, 1, 2]).pipe(sortFromArray()); // [1, 2, 3]
+this.users$.pipe(sortFromArray('desc', 'age'));
+```
+
+#### `sumFromArray` Operator
+
+```ts
+function sumFromArray<T>(key?: keyof T): OperatorFunction<T[] | null | undefined, number> { ... }
+```
+
+Sums the numbers of each emitted array, or the values of `key` (same as the `arraySum` pipe).
+
+Example: 
+
+```tsx
+this.cart$.pipe(sumFromArray('price')); // total price
+```
+
+#### `uniqueFromArray` Operator
+
+```ts
+function uniqueFromArray<T>(key?: keyof T): OperatorFunction<T[] | null | undefined, T[]> { ... }
+```
+
+Removes duplicates from each emitted array, optionally by `key` (same as the `arrayUnique` pipe).
+
+Example: 
+
+```tsx
+of([3, 1, 3, 2]).pipe(uniqueFromArray()); // [3, 1, 2]
+```
+
+#### `withLoading` Operator
+
+```ts
+function withLoading<T>(options?: { keepData?: boolean }): OperatorFunction<T, LoadingState<T>> { ... }
+
+type LoadingState<T> =
+  | { loading: true, data?: T }                    // pending
+  | { loading: false, data: T }                    // done
+  | { loading: false, data?: T, error: unknown };  // failed
+```
+
+Turns a request into loading states: `{ loading: true }` on subscribe, `{ loading: false, data }` for each value, and `{ loading: false, error }` on error (then it completes, so the template doesn't break).
+
+With `keepData: true`, the last data stays in the following states (`{ loading: true, data }` during a reload), so a list doesn't disappear while it refreshes. The data is remembered by the operator instance: create it once and reuse it for each request.
+
+Example: 
+
+```ts
+users$ = this.http.get<User[]>('/api/users').pipe(withLoading());
+
+// With a reload, keeping the previous list visible
+private readonly loading = withLoading<User[]>({ keepData: true });
+users$ = this.reload$.pipe(
+  startWith(undefined),
+  switchMap(() => this.http.get<User[]>('/api/users').pipe(this.loading))
+);
+```
+
+```html
+<ng-container *ngIf="users$ | async as state">
+  <app-spinner *ngIf="state.loading"></app-spinner>
+  <p *ngIf="state.error">Could not load users.</p>
+  <ul *ngIf="state.data as users">
+    <li *ngFor="let user of users">{{ user.name }}</li>
+  </ul>
+</ng-container>
+```
+
 ### Custom Pipes
 
 All pipes are standalone pipes. (Importing the module or the specific standalone pipe step is required)

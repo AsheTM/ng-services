@@ -921,6 +921,28 @@ formControl = new FormControl(null, {
 {{ formControl | controlErrors }} // ['This field is required', 'Custom Error Message in any key name!']
 ```
 
+##### Configurable messages
+
+By default, only ``required`` has a message, and other errors are returned as they are (a custom validator's text, or the error details). Add ``provideControlErrorsMessages()`` to get English messages for Angular's built-in validators (``required``, ``requiredTrue``, ``email``, ``minlength``, ``maxlength``, ``min``, ``max``, ``pattern``), and to add or replace messages: a text, or a function receiving the error details.
+
+```ts
+import { provideControlErrorsMessages } from '@ashetm/ng-utility';
+
+// English defaults
+providers: [provideControlErrorsMessages()]
+
+// Your own messages (e.g. translated), merged with the defaults
+providers: [
+  provideControlErrorsMessages({
+    required: 'Ce champ est obligatoire',
+    minlength: (error) => `Au moins ${error.requiredLength} caractères`,
+    phone: 'Numéro de téléphone invalide' // a custom validator's key
+  })
+]
+```
+
+It can be provided for the whole application, or in a component's ``providers``. Error keys without a message keep the default behavior. Also exported: ``CONTROL_ERRORS_MESSAGES`` (the token), ``DEFAULT_CONTROL_ERRORS_MESSAGES``, and the ``ControlErrorMessage`` / ``ControlErrorsMessages`` types.
+
 #### ControlValue
 
 ```ts

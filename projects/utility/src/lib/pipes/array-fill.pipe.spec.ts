@@ -17,4 +17,16 @@ describe('ArrayFill', () => {
 
     expect(isFilledCorrectly).toBeTrue();
   });
+
+  it('should not modify the list', () => {
+    // GIVEN
+    const list: number[] = [1, 2, 3];
+
+    // WHEN
+    const filledList: number[] = pipe.transform(list, 0);
+
+    // THEN
+    expect(filledList).toEqual([0, 0, 0]);
+    expect(list).toEqual([1, 2, 3]);
+  });
 });

@@ -8,7 +8,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ArrayFill implements PipeTransform {
 
   transform<T>(list: unknown[], value: T): T[] {
-    return list.fill(value) as T[];
+    // Fills a copy, the list itself is left untouched
+    return [...list].fill(value) as T[];
   }
 
 }

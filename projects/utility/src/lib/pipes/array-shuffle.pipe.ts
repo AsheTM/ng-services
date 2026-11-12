@@ -7,7 +7,9 @@ import { Pipe, type PipeTransform } from '@angular/core';
 })
 export class ArrayShuffle implements PipeTransform {
 
-  transform<T>(array: T[]): T[] {
+  transform<T>(list: T[]): T[] {
+    // Shuffles a copy, the list itself is left untouched
+    const array: T[] = [...list];
     let currentIndex: number = array.length, randomIndex, tempValue;
 
     while( currentIndex !== 0) {

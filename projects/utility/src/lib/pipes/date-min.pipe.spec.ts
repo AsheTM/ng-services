@@ -12,8 +12,19 @@ describe('DateMin', () => {
   it('works properly', () => {
     const dateMin: number = now - 60_000;
     const value: number[] = [now, now + 60_000, dateMin];
-    const result: Date = pipe.transform(value);
+    const result: Date | null = pipe.transform(value);
 
-    expect(result.getTime()).toEqual(dateMin);
+    expect(result?.getTime()).toEqual(dateMin);
+  });
+
+  it('should return null for an empty list', () => {
+    // GIVEN
+    const value: number[] = [];
+
+    // WHEN
+    const result: Date | null = pipe.transform(value);
+
+    // THEN
+    expect(result).toBeNull();
   });
 });

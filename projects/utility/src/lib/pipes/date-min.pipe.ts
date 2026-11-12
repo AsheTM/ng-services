@@ -7,7 +7,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DateMin<T extends number | string | Date> implements PipeTransform {
 
-  transform(value: T[]): Date {
+  transform(value: T[]): Date | null {
+    // No date to compare
+    if (value.length === 0) {
+      return null;
+    }
+
     const dateTimestampList: number[] = value.map((item: T) => new Date(item).getTime());
     const minDate: number = Math.min(...dateTimestampList);
 

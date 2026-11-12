@@ -1,4 +1,5 @@
 
+export { catchAndReturn } from './catch-and-return.operator';
 export { containsItem } from './contains-item.operator';
 export { countFromArray } from './count-from-array.operator';
 export { filterFromArray } from './filter-from-array.operator';

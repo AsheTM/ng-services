@@ -54,5 +54,6 @@ export {
   ObjectEntries,
   ObjectKeys,
   ObjectValues,
+  Slugify,
   Truncate
 } from './lib/pipes';

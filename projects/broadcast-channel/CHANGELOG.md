@@ -1,4 +1,13 @@
 
+# 16.0.3
+
+Last release of 16.x (Angular 16–19 have reached their end of life). Use 20.x with Angular 20+.
+
+- [x] New ``closed`` getter on ``BroadcastChannelRef``; the optional ``onClose`` constructor argument added in 16.0.2 is removed, like in 20.0.0 ([#92](https://github.com/AsheTM/ng-services/issues/92))
+- [x] Tests wait longer for message delivery
+- [x] README: npm badges, 16.x marked no longer supported
+- [x] Update CHANGELOG
+
 # 16.0.2
 
 - [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), drop the ``zone.js`` peer, declare ``rxjs`` ([#74](https://github.com/AsheTM/ng-services/issues/74))

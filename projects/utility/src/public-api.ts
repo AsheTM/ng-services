@@ -15,6 +15,7 @@ export {
   pluckFromArray
 } from './lib/operators';
 export {
+  ArrayAverage,
   ArrayChunk,
   ArrayFill,
   ArrayFilter,

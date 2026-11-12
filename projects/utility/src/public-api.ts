@@ -6,6 +6,7 @@ export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
 export {
+  catchAndReturn,
   containsItem,
   countFromArray,
   filterFromArray,

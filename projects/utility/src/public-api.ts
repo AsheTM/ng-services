@@ -12,7 +12,8 @@ export {
   lastFromArray,
   mapFromArray,
   nthFromArray,
-  pluckFromArray
+  pluckFromArray,
+  uniqueFromArray
 } from './lib/operators';
 export {
   ArrayAverage,

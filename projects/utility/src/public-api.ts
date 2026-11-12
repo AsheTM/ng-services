@@ -40,6 +40,7 @@ export {
   ControlValue,
   DateMax,
   DateMin,
+  DefaultValue,
   Format,
   Initial,
   IsArray,

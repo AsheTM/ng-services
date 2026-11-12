@@ -98,6 +98,8 @@ All channels are closed when the service is destroyed.
 
 * ``name: string``, the channel name.
 
+* ``closed: boolean``, ``true`` once the channel is closed.
+
 * ``data$: Observable<T>`` emits the data sent on that channel by **other** tabs, windows or workers. Every subscriber receives every message. It completes when the channel is closed.
 
 * ``close()`` returns ``void``, closes the channel and completes ``data$``. The service forgets it, so a later ``create()`` with the same name opens a new channel.

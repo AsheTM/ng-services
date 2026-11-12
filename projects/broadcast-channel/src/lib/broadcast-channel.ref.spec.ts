@@ -157,17 +157,30 @@ describe('BroadcastChannelRef', () => {
     expect(completed).toBeTrue();
   });
 
-  it('should call its close callback once, even when closed twice', () => {
+  it('should be open until closed', () => {
     // GIVEN
-    const onClose: jasmine.Spy = jasmine.createSpy('onClose');
-    const closableChannel: BroadcastChannelRef<string> = new BroadcastChannelRef<string>(TestBed.inject(NgZone), createChannelNameMock(), onClose);
+    const closedBefore: boolean = broadcastChannel.closed;
 
     // WHEN
-    closableChannel.close();
-    closableChannel.close();
+    broadcastChannel.close();
 
     // THEN
-    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(closedBefore).toBeFalse();
+    expect(broadcastChannel.closed).toBeTrue();
+  });
+
+  it('should be safe to close twice', () => {
+    // GIVEN
+    let completions: number = 0;
+    broadcastChannel.data$.subscribe({ complete: () => completions++ });
+
+    // WHEN
+    broadcastChannel.close();
+    broadcastChannel.close();
+
+    // THEN
+    expect(completions).toBe(1);
+    expect(broadcastChannel.closed).toBeTrue();
   });
 
   it('should throw NotSupportedError when the browser has no BroadcastChannel', () => {

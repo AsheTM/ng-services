@@ -55,6 +55,7 @@ export {
   ObjectFilter,
   ObjectGet,
   ObjectHas,
+  ObjectInvert,
   ObjectIsEmpty,
   ObjectKeys,
   ObjectOmit,

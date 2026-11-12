@@ -7,6 +7,7 @@ export { UtilityPipesModule } from './lib/utility-pipes.module';
 
 export {
   containsItem,
+  countFromArray,
   filterFromArray,
   firstFromArray,
   groupByFromArray,

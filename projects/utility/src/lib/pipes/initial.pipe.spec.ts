@@ -15,4 +15,26 @@ describe('InitialPipe', () => {
 
     expect(result).toEqual(expectedResult);
   });
+
+  it('should ignore repeated and surrounding spaces', () => {
+    // GIVEN
+    const value: string = ' john   doe ';
+
+    // WHEN
+    const result: string = pipe.transform(value);
+
+    // THEN
+    expect(result).toBe('JD');
+  });
+
+  it('should return an empty string for an empty string', () => {
+    // GIVEN
+    const value: string = '';
+
+    // WHEN
+    const result: string = pipe.transform(value);
+
+    // THEN
+    expect(result).toBe('');
+  });
 });

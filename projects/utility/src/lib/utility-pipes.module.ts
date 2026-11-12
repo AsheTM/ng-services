@@ -39,6 +39,7 @@ import {
   ObjectEntries,
   ObjectKeys,
   ObjectValues,
+  Truncate,
 } from './pipes';
 
 
@@ -82,6 +83,7 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Truncate,
   ],
   imports: [
     ArrayAverage,
@@ -122,6 +124,7 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Truncate,
   ],
 })
 export class UtilityPipesModule { }

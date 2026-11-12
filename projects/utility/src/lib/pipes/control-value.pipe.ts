@@ -1,34 +1,28 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValueChangeEvent } from '@angular/forms';
+import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 
 
 /**
- * Impure, so it follows the control's value: the raw value is cached until the value changes.
+ * Pure: returns an Observable of the raw value, which follows the control's value (use it with `| async`).
  */
 @Pipe({
   name: 'controlValue',
-  standalone: true,
-  pure: false
+  standalone: true
 })
 export class ControlValue implements PipeTransform {
 
-  private _cache?: { control: AbstractControl, value: any, rawValue: any };
-
-  transform(value: AbstractControl): any {
+  transform(control: AbstractControl | null | undefined): Observable<any> {
     // No control (e.g. not created yet)
-    if (!value) {
-      return undefined;
+    if (!control) {
+      return of(undefined);
     }
 
-    if (this._cache && this._cache.control === value && this._cache.value === value.value) {
-      return this._cache.rawValue;
-    }
-
-    const rawValue: any = value.getRawValue();
-
-    this._cache = { control: value, value: value.value, rawValue };
-
-    return rawValue;
+    return defer(() => control.events.pipe(
+      filter((event: unknown) => event instanceof ValueChangeEvent),
+      startWith(null),
+      map(() => control.getRawValue())
+    ));
   }
 
 }

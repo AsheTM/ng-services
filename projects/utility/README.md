@@ -906,10 +906,10 @@ Example:
 #### ControlErrors
 
 ```ts
-transform(controls: AbstractControl): (string | any)[] { ... }
+transform(control: AbstractControl | null | undefined): Observable<(string | any)[]> { ... }
 ```
 
-Use on any ``AbstractControl`` type. The pipe is impure, so the messages follow the control's errors (they're cached until the errors change).
+Use on any ``AbstractControl`` type, with ``| async``. It returns an Observable of the messages, which follows the control's errors (the pipe is pure).
 
 Example: 
 
@@ -918,7 +918,7 @@ formControl = new FormControl(null, {
   validators: [Validators.required, () => ({ customValidator: 'Custom Error Message in any key name!' })]
 });
 ...
-{{ formControl | controlErrors }} // ['This field is required', 'Custom Error Message in any key name!']
+{{ formControl | controlErrors | async }} // ['This field is required', 'Custom Error Message in any key name!']
 ```
 
 ##### Configurable messages
@@ -946,10 +946,10 @@ It can be provided for the whole application, or in a component's ``providers``.
 #### ControlValue
 
 ```ts
-transform(value: AbstractControl): any { ... }
+transform(control: AbstractControl | null | undefined): Observable<any> { ... }
 ```
 
-Use on any ``AbstractControl`` type. It returns the raw value (disabled controls included). The pipe is impure, so the value follows the control (it's cached until the value changes).
+Use on any ``AbstractControl`` type, with ``| async``. It returns an Observable of the raw value (disabled controls included), which follows the control's value (the pipe is pure).
 
 Example: 
 
@@ -959,7 +959,7 @@ formGroup = new FormGroup({
   test2: new FormControl(null), 
 });
 ...
-{{ formGroup | controlValue }} // { test1: 'test', test2: null }
+{{ formGroup | controlValue | async }} // { test1: 'test', test2: null }
 ```
 
 #### DateDiff

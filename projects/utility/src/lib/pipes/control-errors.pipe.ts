@@ -1,31 +1,38 @@
 import { Inject, Optional, Pipe, PipeTransform } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, StatusChangeEvent, ValidationErrors } from '@angular/forms';
+import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 
 import { CONTROL_ERRORS_MESSAGES, ControlErrorMessage, ControlErrorsMessages } from './control-errors.messages';
 
 
 /**
- * Impure, so it follows the control's errors: the messages are cached until the errors change.
+ * Pure: returns an Observable of the messages, which follows the control's errors (use it with `| async`).
  * Messages come from `provideControlErrorsMessages()` when it's provided.
  */
 @Pipe({
   name: 'controlErrors',
-  standalone: true,
-  pure: false
+  standalone: true
 })
 export class ControlErrors implements PipeTransform {
-
-  private _cache?: { errors: ValidationErrors | null, messages: (string | any)[] };
 
   constructor(
     @Optional() @Inject(CONTROL_ERRORS_MESSAGES) private readonly _messages: ControlErrorsMessages | null = null
   ) { }
 
-  transform({ errors }: AbstractControl): (string | any)[] {
-    if (this._cache && this._cache.errors === errors) {
-      return this._cache.messages;
+  transform(control: AbstractControl | null | undefined): Observable<(string | any)[]> {
+    // No control (e.g. not created yet)
+    if (!control) {
+      return of([]);
     }
 
+    return defer(() => control.events.pipe(
+      filter((event: unknown) => event instanceof StatusChangeEvent),
+      startWith(null),
+      map(() => this._toMessages(control.errors))
+    ));
+  }
+
+  private _toMessages(errors: ValidationErrors | null): (string | any)[] {
     const errorsControl:  ValidationErrors  = errors || {};
     let messages:         string[]          = [];
 
@@ -46,8 +53,6 @@ export class ControlErrors implements PipeTransform {
           messages = [...messages, errorsControl[key]];
       }
     }
-
-    this._cache = { errors, messages };
 
     return messages;
   }

@@ -1,7 +1,17 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { ControlValue } from './control-value.pipe';
 
+
+function latest<T>(source$: Observable<T>): { value: T | undefined, unsubscribe: () => void } {
+  const result: { value: T | undefined, unsubscribe: () => void } = { value: undefined, unsubscribe: () => undefined };
+  const subscription = source$.subscribe((value: T) => result.value = value);
+
+  result.unsubscribe = () => subscription.unsubscribe();
+
+  return result;
+}
 
 describe('ControlValue', () => {
   const pipe = new ControlValue();
@@ -13,58 +23,81 @@ describe('ControlValue', () => {
   it('works properly', () => {
     const value: string = 'Test';
     const formControl: FormControl = new FormControl(value);
-    const result: string = pipe.transform(formControl);
+    const result = latest(pipe.transform(formControl));
 
-    expect(result).toEqual(value);
+    expect(result.value).toEqual(value);
+    result.unsubscribe();
   });
 
-  it('should be impure, to follow the control', () => {
+  it('should be pure', () => {
     // GIVEN
     // WHEN
     const pure: boolean = (ControlValue as unknown as { ɵpipe: { pure: boolean } }).ɵpipe.pure;
 
     // THEN
-    expect(pure).toBeFalse();
+    expect(pure).toBeTrue();
   });
 
-  it('should update when the value changes', () => {
+  it('should emit the new value when the value changes', () => {
     // GIVEN
-    const valuePipe: ControlValue = new ControlValue();
     const formControl: FormControl = new FormControl('Before');
-    const before: string = valuePipe.transform(formControl);
+    const result = latest(pipe.transform(formControl));
+    const before: string | undefined = result.value;
 
     // WHEN
     formControl.setValue('After');
-    const after: string = valuePipe.transform(formControl);
 
     // THEN
     expect(before).toBe('Before');
-    expect(after).toBe('After');
+    expect(result.value).toBe('After');
+    result.unsubscribe();
   });
 
-  it('should return the same raw value while the value doesn\'t change', () => {
+  it('should emit the group value when a child control changes', () => {
     // GIVEN
-    const valuePipe: ControlValue = new ControlValue();
-    const formGroup: FormGroup = new FormGroup({ name: new FormControl('Test') });
+    const formGroup: FormGroup = new FormGroup({ name: new FormControl('Before') });
+    const result = latest(pipe.transform(formGroup));
 
     // WHEN
-    const first: Record<string, string> = valuePipe.transform(formGroup);
-    const second: Record<string, string> = valuePipe.transform(formGroup);
+    formGroup.controls['name'].setValue('After');
 
     // THEN
-    expect(first).toEqual({ name: 'Test' });
-    expect(second).toBe(first);
+    expect(result.value).toEqual({ name: 'After' });
+    result.unsubscribe();
   });
 
   it('should include disabled controls', () => {
     // GIVEN
-    const valuePipe: ControlValue = new ControlValue();
     const formGroup: FormGroup = new FormGroup({ name: new FormControl({ value: 'Test', disabled: true }) });
 
     // WHEN
-    const result: Record<string, string> = valuePipe.transform(formGroup);
+    const result = latest(pipe.transform(formGroup));
 
     // THEN
-    expect(result).toEqual({ name: 'Test' });
+    expect(result.value).toEqual({ name: 'Test' });
+    result.unsubscribe();
+  });
+
+  it('should emit the raw value when a child control is disabled', () => {
+    // GIVEN
+    const formGroup: FormGroup = new FormGroup({ name: new FormControl('Test'), age: new FormControl(30) });
+    const result = latest(pipe.transform(formGroup));
+
+    // WHEN
+    formGroup.controls['age'].disable();
+
+    // THEN
+    expect(result.value).toEqual({ name: 'Test', age: 30 });
+    expect(formGroup.value).toEqual({ name: 'Test' });
+    result.unsubscribe();
+  });
+
+  it('should emit undefined without a control', () => {
+    // GIVEN
+    // WHEN
+    const result = latest(pipe.transform(undefined));
+
+    // THEN
+    expect(result.value).toBeUndefined();
   });
 });

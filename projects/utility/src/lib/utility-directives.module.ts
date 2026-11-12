@@ -4,6 +4,7 @@ import {
   AutofocusDirective,
   ClickOutsideDirective,
   CopyToClipboardDirective,
+  DebounceClickDirective,
   ImageFallbackDirective
 } from './directives';
 
@@ -13,12 +14,14 @@ import {
     AutofocusDirective,
     ClickOutsideDirective,
     CopyToClipboardDirective,
+    DebounceClickDirective,
     ImageFallbackDirective
   ],
   imports: [
     AutofocusDirective,
     ClickOutsideDirective,
     CopyToClipboardDirective,
+    DebounceClickDirective,
     ImageFallbackDirective
   ],
 })

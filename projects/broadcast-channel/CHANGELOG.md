@@ -5,6 +5,7 @@
 - [x] The version follows the Angular version it starts from: 16.x for Angular 16–19, 20.x for Angular 20+ (no 17.x, 18.x or 19.x)
 - [x] Include the 16.0.2 fixes ([#79](https://github.com/AsheTM/ng-services/issues/79))
 - [x] Use ``inject()`` instead of constructor injection, set up ESLint ([#80](https://github.com/AsheTM/ng-services/issues/80))
+- [x] New ``closed`` getter on ``BroadcastChannelRef``; the optional ``onClose`` constructor argument added in 16.0.2 is removed ([#86](https://github.com/AsheTM/ng-services/issues/86))
 - [x] Update CHANGELOG
 - [x] Update README
 

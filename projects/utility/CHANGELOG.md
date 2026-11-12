@@ -1,4 +1,11 @@
 
+# 16.7.0
+
+- [x] Configurable ``ControlErrors`` messages: ``provideControlErrorsMessages()`` with English defaults for the built-in validators, custom / translated messages (text or function); unchanged behavior without it ([#140](https://github.com/AsheTM/ng-services/issues/140))
+- [x] Export ``CONTROL_ERRORS_MESSAGES``, ``DEFAULT_CONTROL_ERRORS_MESSAGES`` and the ``ControlErrorMessage`` / ``ControlErrorsMessages`` types
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.6.0
 
 - [x] Create ``dateDiff``, ``fileSize`` and ``timeAgo`` pipes ([#138](https://github.com/AsheTM/ng-services/issues/138))

@@ -1,0 +1,39 @@
+import { Directive, ElementRef, HostListener, Optional, Self } from '@angular/core';
+import { NgControl } from '@angular/forms';
+
+
+/**
+ * Trims the text of an input or textarea when leaving the field.
+ * Works with plain fields, reactive forms and `ngModel` (also with `updateOn: 'blur'`).
+ */
+@Directive({
+  selector: 'input[ashetmTrimOnBlur], textarea[ashetmTrimOnBlur]',
+  standalone: true
+})
+export class TrimOnBlurDirective {
+
+  constructor(
+    private readonly _elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
+    @Optional() @Self() private readonly _ngControl: NgControl | null
+  ) { }
+
+  @HostListener('blur')
+  onBlur(): void {
+    const element: HTMLInputElement | HTMLTextAreaElement = this._elementRef.nativeElement;
+    const trimmed: string = element.value.trim();
+
+    if (trimmed === element.value) {
+      return;
+    }
+
+    element.value = trimmed;
+    // Lets Angular forms (reactive and ngModel) see the new value
+    element.dispatchEvent(new Event('input'));
+
+    // With `updateOn: 'blur'`, the pending value may already have been committed
+    if (this._ngControl?.control?.updateOn === 'blur') {
+      this._ngControl.control.setValue(trimmed);
+    }
+  }
+
+}

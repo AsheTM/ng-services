@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-utility",
-  "version": "16.4.0",
+  "version": "16.5.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -42,6 +42,7 @@
     "rxjs": ">=6.6.0"
   },
   "dependencies": {
+    "@ashetm/platform": "^1.0.0",
     "tslib": "^2.3.0"
   }
 }

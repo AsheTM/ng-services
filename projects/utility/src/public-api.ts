@@ -2,6 +2,7 @@
  * Public API Surface of ng-utility
  */
 
+export { UtilityDirectivesModule } from './lib/utility-directives.module';
 export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
@@ -77,3 +78,12 @@ export {
   Slugify,
   Truncate
 } from './lib/pipes';
+export {
+  AutofocusDirective,
+  ClickOutsideDirective,
+  CopyToClipboardDirective,
+  DebounceClickDirective,
+  ImageFallbackDirective,
+  InViewportDirective,
+  TrimOnBlurDirective
+} from './lib/directives';

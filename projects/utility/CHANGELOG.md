@@ -1,4 +1,12 @@
 
+# 16.5.0
+
+- [x] Create ``AutofocusDirective``, ``ClickOutsideDirective``, ``CopyToClipboardDirective``, ``DebounceClickDirective``, ``ImageFallbackDirective``, ``InViewportDirective`` and ``TrimOnBlurDirective`` ([#136](https://github.com/AsheTM/ng-services/issues/136))
+- [x] Create ``UtilityDirectivesModule``, exported by ``UtilityModule``
+- [x] Depend on ``@ashetm/platform``
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.4.0
 
 - [x] Create ``catchAndReturn``, ``countFromArray``, ``debug``, ``filterNullish``, ``groupByFromArray``, ``isEmptyArray``, ``pick``, ``sortFromArray``, ``sumFromArray``, ``uniqueFromArray`` and ``withLoading`` RxJS operators ([#134](https://github.com/AsheTM/ng-services/issues/134))

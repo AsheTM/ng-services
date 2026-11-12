@@ -6,14 +6,26 @@ export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
 export {
+  catchAndReturn,
   containsItem,
+  countFromArray,
+  debug,
   filterFromArray,
+  filterNullish,
   firstFromArray,
+  groupByFromArray,
+  isEmptyArray,
   lastFromArray,
   mapFromArray,
   nthFromArray,
-  pluckFromArray
+  pick,
+  pluckFromArray,
+  sortFromArray,
+  sumFromArray,
+  uniqueFromArray,
+  withLoading
 } from './lib/operators';
+export type { DebugEvent, DebugOptions, LoadingState } from './lib/operators';
 export {
   ArrayAverage,
   ArrayChunk,

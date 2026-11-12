@@ -53,6 +53,7 @@ export {
   Log,
   ObjectEntries,
   ObjectKeys,
+  ObjectOmit,
   ObjectPick,
   ObjectValues,
   Slugify,

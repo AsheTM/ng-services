@@ -26,6 +26,7 @@ import {
   ControlValue,
   DateMax,
   DateMin,
+  DefaultValue,
   Format,
   Initial,
   IsArray,
@@ -39,6 +40,8 @@ import {
   ObjectEntries,
   ObjectKeys,
   ObjectValues,
+  Slugify,
+  Truncate,
 } from './pipes';
 
 
@@ -69,6 +72,7 @@ import {
     ControlValue,
     DateMax,
     DateMin,
+    DefaultValue,
     Format,
     Initial,
     IsArray,
@@ -82,6 +86,8 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Slugify,
+    Truncate,
   ],
   imports: [
     ArrayAverage,
@@ -109,6 +115,7 @@ import {
     ControlValue,
     DateMax,
     DateMin,
+    DefaultValue,
     Format,
     Initial,
     IsArray,
@@ -122,6 +129,8 @@ import {
     ObjectEntries,
     ObjectKeys,
     ObjectValues,
+    Slugify,
+    Truncate,
   ],
 })
 export class UtilityPipesModule { }

@@ -1,4 +1,11 @@
 
+# 16.2.0
+
+- [x] Create ``defaultValue``, ``slugify`` and ``truncate`` pipes ([#130](https://github.com/AsheTM/ng-services/issues/130))
+- [x] Document the existing ``format`` pipe
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.1.0
 
 - [x] Create ``arrayAverage``, ``arrayChunk``, ``arrayFirst``, ``arrayGroupBy``, ``arrayIsEmpty``, ``arrayLast``, ``arrayReverse``, ``arraySum`` and ``arrayUnique`` pipes ([#128](https://github.com/AsheTM/ng-services/issues/128))

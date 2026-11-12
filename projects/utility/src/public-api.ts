@@ -40,6 +40,7 @@ export {
   ControlValue,
   DateMax,
   DateMin,
+  DefaultValue,
   Format,
   Initial,
   IsArray,
@@ -52,5 +53,7 @@ export {
   Log,
   ObjectEntries,
   ObjectKeys,
-  ObjectValues
+  ObjectValues,
+  Slugify,
+  Truncate
 } from './lib/pipes';

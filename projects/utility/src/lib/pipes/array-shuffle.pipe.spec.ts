@@ -18,4 +18,17 @@ describe('ArrayShuffle', () => {
     expect(shuffledList.length).toBe(list.length);
     expect(isRandomItemIncluded).toBeTrue();
   });
+
+  it('should not modify the list', () => {
+    // GIVEN
+    const list: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    // WHEN
+    const shuffledList: number[] = pipe.transform(list);
+
+    // THEN
+    expect(shuffledList).not.toBe(list);
+    expect([...shuffledList].sort((a: number, b: number) => a - b)).toEqual(list);
+    expect(list).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  });
 });

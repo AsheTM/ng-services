@@ -76,4 +76,16 @@ describe('ArraySort', () => {
     expect(ascList).toEqual(['a', 'b', 'c']);
     expect(descList).toEqual(['c', 'b', 'a']);
   });
+
+  it('should not modify the list', () => {
+    // GIVEN
+    const list: number[] = [3, 1, 2];
+
+    // WHEN
+    const sortedList: number[] = pipe.transform(list);
+
+    // THEN
+    expect(sortedList).toEqual([1, 2, 3]);
+    expect(list).toEqual([3, 1, 2]);
+  });
 });

@@ -15,4 +15,15 @@ describe('CapitalCase', () => {
 
     expect(result).toEqual(expectedResult);
   });
+
+  it('should return an empty string for an empty string', () => {
+    // GIVEN
+    const value: string = '';
+
+    // WHEN
+    const result: string = pipe.transform(value);
+
+    // THEN
+    expect(result).toBe('');
+  });
 });

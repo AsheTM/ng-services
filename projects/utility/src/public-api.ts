@@ -55,6 +55,7 @@ export {
   DateMax,
   DateMin,
   DefaultValue,
+  FileSize,
   Format,
   Initial,
   IsArray,

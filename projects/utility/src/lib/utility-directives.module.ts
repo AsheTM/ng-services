@@ -5,7 +5,8 @@ import {
   ClickOutsideDirective,
   CopyToClipboardDirective,
   DebounceClickDirective,
-  ImageFallbackDirective
+  ImageFallbackDirective,
+  InViewportDirective
 } from './directives';
 
 
@@ -15,14 +16,16 @@ import {
     ClickOutsideDirective,
     CopyToClipboardDirective,
     DebounceClickDirective,
-    ImageFallbackDirective
+    ImageFallbackDirective,
+    InViewportDirective
   ],
   imports: [
     AutofocusDirective,
     ClickOutsideDirective,
     CopyToClipboardDirective,
     DebounceClickDirective,
-    ImageFallbackDirective
+    ImageFallbackDirective,
+    InViewportDirective
   ],
 })
 export class UtilityDirectivesModule { }

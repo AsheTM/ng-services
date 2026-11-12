@@ -1,4 +1,23 @@
 
+# 16.0.1
+
+- [x] Support Angular 16 to 19 (peer dependencies ``>=16.0.0 <20.0.0``), build in partial compilation mode ([#108](https://github.com/AsheTM/ng-services/issues/108))
+- [x] ``ArrayPop`` returns the last item, without removing it ([#95](https://github.com/AsheTM/ng-services/issues/95))
+- [x] ``ArraySort`` / ``ArraySortAsc`` / ``ArraySortDesc`` sort in the right direction, equal items keep their order ([#96](https://github.com/AsheTM/ng-services/issues/96))
+- [x] ``DateMin`` returns the earliest date ([#97](https://github.com/AsheTM/ng-services/issues/97))
+- [x] ``IsDateBetween`` accepts valid dates ([#98](https://github.com/AsheTM/ng-services/issues/98))
+- [x] ``ArraySort``, ``ArrayShuffle`` and ``ArrayFill`` return a new array, the input is not modified ([#99](https://github.com/AsheTM/ng-services/issues/99))
+- [x] ``CapitalCase`` returns ``''`` for an empty string ([#100](https://github.com/AsheTM/ng-services/issues/100))
+- [x] ``Initial`` ignores repeated spaces ([#101](https://github.com/AsheTM/ng-services/issues/101))
+- [x] ``DateMin`` / ``DateMax`` return ``null`` for an empty list (return type ``Date | null``) ([#102](https://github.com/AsheTM/ng-services/issues/102))
+- [x] ``IsDate`` accepts ``0`` and always returns a boolean (also ``IsDateAfter``, ``IsDateBefore``, ``IsDateBetween``, ``IsDateFuture``, ``IsDatePast``) ([#103](https://github.com/AsheTM/ng-services/issues/103))
+- [x] ``ArrayPluck`` keeps ``0``, ``''`` and ``false`` ([#104](https://github.com/AsheTM/ng-services/issues/104))
+- [x] ``ArrayFilter`` handles ``null`` items ([#105](https://github.com/AsheTM/ng-services/issues/105))
+- [x] ``ControlErrors`` / ``ControlValue`` are impure, so they follow the control (results cached until it changes) ([#106](https://github.com/AsheTM/ng-services/issues/106))
+- [x] Unit tests run again, wrong ``ArrayIncludes`` test fixed ([#110](https://github.com/AsheTM/ng-services/issues/110), [#107](https://github.com/AsheTM/ng-services/issues/107))
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 16.0.0
 
 - [x] Create array-fill pipe

@@ -11,7 +11,9 @@ export class ArrayPluck implements PipeTransform {
     value: Array<Record<string | number, any>>,
     key: string | number
   ): Array<any> {
-    return value.map((o: Record<string | number, any>) => o[key]).filter(Boolean);
+    // Missing values are removed, falsy ones (`0`, `''`, `false`) are kept
+    return value.map((o: Record<string | number, any>) => o[key])
+      .filter((item: any) => item !== undefined && item !== null);
   }
 
 }

@@ -20,4 +20,15 @@ describe('SharedArrayPluckPipe', () => {
     expect(expectedArray).toHaveSize(1);
     expect(expectedArray[0]).toEqual(true);
   });
+
+  it('should keep falsy values', () => {
+    // GIVEN
+    const list: Array<Record<string, unknown>> = [{ a: 0 }, { a: '' }, { a: false }, { a: null }, { b: 1 }];
+
+    // WHEN
+    const result: any[] = pipe.transform(list, 'a');
+
+    // THEN
+    expect(result).toEqual([0, '', false]);
+  });
 });

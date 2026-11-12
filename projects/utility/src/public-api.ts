@@ -76,6 +76,7 @@ export {
   ObjectSize,
   ObjectValues,
   Slugify,
+  TimeAgo,
   Truncate
 } from './lib/pipes';
 export {

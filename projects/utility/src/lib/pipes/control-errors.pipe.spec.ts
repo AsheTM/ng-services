@@ -1,11 +1,21 @@
-import { NgForOf } from '@angular/common';
+import { AsyncPipe, NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { ControlErrors } from './control-errors.pipe';
 import { DEFAULT_CONTROL_ERRORS_MESSAGES, provideControlErrorsMessages } from './control-errors.messages';
 
+
+function latest<T>(source$: Observable<T>): { value: T | undefined, unsubscribe: () => void } {
+  const result: { value: T | undefined, unsubscribe: () => void } = { value: undefined, unsubscribe: () => undefined };
+  const subscription = source$.subscribe((value: T) => result.value = value);
+
+  result.unsubscribe = () => subscription.unsubscribe();
+
+  return result;
+}
 
 describe('ControlErrors', () => {
   const pipe = new ControlErrors();
@@ -19,46 +29,58 @@ describe('ControlErrors', () => {
     const formControl: FormControl = new FormControl(value, {
       validators: [Validators.required]
     });
-    const result: (string | any)[] = pipe.transform(formControl);
+    const result = latest(pipe.transform(formControl));
 
-    expect(result).toHaveSize(1);
+    expect(result.value).toHaveSize(1);
+    result.unsubscribe();
   });
 
-  it('should be impure, to follow the control', () => {
+  it('should be pure', () => {
     // GIVEN
     // WHEN
     const pure: boolean = (ControlErrors as unknown as { ɵpipe: { pure: boolean } }).ɵpipe.pure;
 
     // THEN
-    expect(pure).toBeFalse();
+    expect(pure).toBeTrue();
   });
 
-  it('should update when the errors change', () => {
+  it('should emit new messages when the errors change', () => {
     // GIVEN
     const errorsPipe: ControlErrors = new ControlErrors();
     const formControl: FormControl = new FormControl('', { validators: [Validators.required] });
-    const before: (string | any)[] = errorsPipe.transform(formControl);
+    const result = latest(errorsPipe.transform(formControl));
+    const before: (string | any)[] | undefined = result.value;
 
     // WHEN
     formControl.setValue('Test');
-    const after: (string | any)[] = errorsPipe.transform(formControl);
 
     // THEN
     expect(before).toEqual(['This field is required']);
-    expect(after).toEqual([]);
+    expect(result.value).toEqual([]);
+    result.unsubscribe();
   });
 
-  it('should return the same messages while the errors don\'t change', () => {
+  it('should emit new messages when the errors are set by hand', () => {
     // GIVEN
     const errorsPipe: ControlErrors = new ControlErrors();
-    const formControl: FormControl = new FormControl('', { validators: [Validators.required] });
+    const formControl: FormControl = new FormControl('Test');
+    const result = latest(errorsPipe.transform(formControl));
 
     // WHEN
-    const first: (string | any)[] = errorsPipe.transform(formControl);
-    const second: (string | any)[] = errorsPipe.transform(formControl);
+    formControl.setErrors({ server: 'Already taken' });
 
     // THEN
-    expect(second).toBe(first);
+    expect(result.value).toEqual(['Already taken']);
+    result.unsubscribe();
+  });
+
+  it('should emit no messages without a control', () => {
+    // GIVEN
+    // WHEN
+    const result = latest(pipe.transform(null));
+
+    // THEN
+    expect(result.value).toEqual([]);
   });
 
   it('should keep its original messages without provided messages', () => {
@@ -67,10 +89,11 @@ describe('ControlErrors', () => {
     const formControl: FormControl = new FormControl('ab', { validators: [Validators.minLength(3)] });
 
     // WHEN
-    const result: (string | any)[] = errorsPipe.transform(formControl);
+    const result = latest(errorsPipe.transform(formControl));
 
     // THEN
-    expect(result).toEqual([{ requiredLength: 3, actualLength: 2 }]);
+    expect(result.value).toEqual([{ requiredLength: 3, actualLength: 2 }]);
+    result.unsubscribe();
   });
 
   it('should use the default messages for the built-in validators', () => {
@@ -79,10 +102,11 @@ describe('ControlErrors', () => {
     const formControl: FormControl = new FormControl('ab', { validators: [Validators.minLength(3), Validators.email] });
 
     // WHEN
-    const result: (string | any)[] = errorsPipe.transform(formControl);
+    const result = latest(errorsPipe.transform(formControl));
 
     // THEN
-    expect(result).toEqual(['Please enter at least 3 characters', 'Please enter a valid email address']);
+    expect(result.value).toEqual(['Please enter at least 3 characters', 'Please enter a valid email address']);
+    result.unsubscribe();
   });
 
   it('should keep the original behavior for keys without a message', () => {
@@ -91,23 +115,24 @@ describe('ControlErrors', () => {
     const formControl: FormControl = new FormControl(null, { validators: [() => ({ custom: 'Custom message' })] });
 
     // WHEN
-    const result: (string | any)[] = errorsPipe.transform(formControl);
+    const result = latest(errorsPipe.transform(formControl));
 
     // THEN
-    expect(result).toEqual(['Custom message']);
+    expect(result.value).toEqual(['Custom message']);
+    result.unsubscribe();
   });
 });
 
 @Component({
   standalone: true,
-  imports: [ControlErrors, NgForOf, ReactiveFormsModule],
+  imports: [AsyncPipe, ControlErrors, NgForOf, ReactiveFormsModule],
   providers: [
     provideControlErrorsMessages({
       required: 'Ce champ est obligatoire',
       minlength: (error: { requiredLength: number }) => `Au moins ${error.requiredLength} caractères`
     })
   ],
-  template: `<span *ngFor="let message of name | controlErrors" class="error">{{ message }}</span>`
+  template: `<span *ngFor="let message of name | controlErrors | async" class="error">{{ message }}</span>`
 })
 class TranslatedFormComponent {
   name: FormControl<string | null> = new FormControl('', { validators: [Validators.required, Validators.minLength(3), Validators.email] });

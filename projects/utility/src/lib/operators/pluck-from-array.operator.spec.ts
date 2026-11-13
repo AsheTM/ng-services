@@ -5,7 +5,7 @@ import { pluckFromArray } from './pluck-from-array.operator';
 
 describe('pluckFromArray', () => {
   it('should works properly', () => {
-    type Type = { a: boolean; b: number };
+    interface Type { a: boolean; b: number }
     const list: Type[] = [
       {
         a: true,

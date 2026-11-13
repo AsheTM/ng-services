@@ -1,4 +1,4 @@
-import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+import { LOCALE_ID, Pipe, PipeTransform, inject } from '@angular/core';
 
 
 const UNITS: string[] = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
@@ -13,7 +13,7 @@ const UNITS: string[] = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 })
 export class FileSize implements PipeTransform {
 
-  constructor(@Inject(LOCALE_ID) private readonly _locale: string) { }
+  private readonly _locale: string = inject(LOCALE_ID);
 
   transform(bytes: number | null | undefined, decimals: number = 1, locale?: string): string {
     if (bytes === null || bytes === undefined || !Number.isFinite(bytes) || bytes < 0) {

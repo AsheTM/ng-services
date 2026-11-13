@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Output, inject } from '@angular/core';
 
 
 /**
@@ -12,7 +12,7 @@ export class ClickOutsideDirective {
 
   @Output() readonly ashetmClickOutside: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
-  constructor(private readonly _elementRef: ElementRef<HTMLElement>) { }
+  private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {

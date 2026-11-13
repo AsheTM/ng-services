@@ -1,4 +1,4 @@
-import { Inject, Optional, Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
 import { AbstractControl, StatusChangeEvent, ValidationErrors } from '@angular/forms';
 import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 
@@ -15,9 +15,7 @@ import { CONTROL_ERRORS_MESSAGES, ControlErrorMessage, ControlErrorsMessages } f
 })
 export class ControlErrors implements PipeTransform {
 
-  constructor(
-    @Optional() @Inject(CONTROL_ERRORS_MESSAGES) private readonly _messages: ControlErrorsMessages | null = null
-  ) { }
+  private readonly _messages: ControlErrorsMessages | null = inject(CONTROL_ERRORS_MESSAGES, { optional: true });
 
   transform(control: AbstractControl | null | undefined): Observable<(string | any)[]> {
     // No control (e.g. not created yet)

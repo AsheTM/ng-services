@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Optional, Self } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 
@@ -12,10 +12,8 @@ import { NgControl } from '@angular/forms';
 })
 export class TrimOnBlurDirective {
 
-  constructor(
-    private readonly _elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
-    @Optional() @Self() private readonly _ngControl: NgControl | null
-  ) { }
+  private readonly _elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement> = inject(ElementRef);
+  private readonly _ngControl: NgControl | null = inject(NgControl, { optional: true, self: true });
 
   @HostListener('blur')
   onBlur(): void {

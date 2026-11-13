@@ -1,8 +1,16 @@
+import { LOCALE_ID } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+
 import { FileSize } from './file-size.pipe';
 
 
 describe('FileSize', () => {
-  const pipe = new FileSize('en-US');
+  let pipe: FileSize;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [{ provide: LOCALE_ID, useValue: 'en-US' }] });
+    pipe = TestBed.runInInjectionContext(() => new FileSize());
+  });
 
   it('should make a size in bytes readable', () => {
     // GIVEN

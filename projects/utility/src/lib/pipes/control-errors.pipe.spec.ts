@@ -5,7 +5,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ControlErrors } from './control-errors.pipe';
-import { DEFAULT_CONTROL_ERRORS_MESSAGES, provideControlErrorsMessages } from './control-errors.messages';
+import { provideControlErrorsMessages } from './control-errors.messages';
 
 
 function latest<T>(source$: Observable<T>): { value: T | undefined, unsubscribe: () => void } {
@@ -17,8 +17,17 @@ function latest<T>(source$: Observable<T>): { value: T | undefined, unsubscribe:
   return result;
 }
 
+function createPipe(withDefaultMessages: boolean = false): ControlErrors {
+  TestBed.resetTestingModule();
+  TestBed.configureTestingModule({ providers: withDefaultMessages ? [provideControlErrorsMessages()] : [] });
+
+  return TestBed.runInInjectionContext(() => new ControlErrors());
+}
+
 describe('ControlErrors', () => {
-  const pipe = new ControlErrors();
+  let pipe: ControlErrors;
+
+  beforeEach(() => pipe = createPipe());
 
   it('create an instance', () => {
     expect(pipe).toBeTruthy();
@@ -46,7 +55,7 @@ describe('ControlErrors', () => {
 
   it('should emit new messages when the errors change', () => {
     // GIVEN
-    const errorsPipe: ControlErrors = new ControlErrors();
+    const errorsPipe: ControlErrors = createPipe();
     const formControl: FormControl = new FormControl('', { validators: [Validators.required] });
     const result = latest(errorsPipe.transform(formControl));
     const before: (string | any)[] | undefined = result.value;
@@ -62,7 +71,7 @@ describe('ControlErrors', () => {
 
   it('should emit new messages when the errors are set by hand', () => {
     // GIVEN
-    const errorsPipe: ControlErrors = new ControlErrors();
+    const errorsPipe: ControlErrors = createPipe();
     const formControl: FormControl = new FormControl('Test');
     const result = latest(errorsPipe.transform(formControl));
 
@@ -85,7 +94,7 @@ describe('ControlErrors', () => {
 
   it('should keep its original messages without provided messages', () => {
     // GIVEN
-    const errorsPipe: ControlErrors = new ControlErrors();
+    const errorsPipe: ControlErrors = createPipe();
     const formControl: FormControl = new FormControl('ab', { validators: [Validators.minLength(3)] });
 
     // WHEN
@@ -98,7 +107,7 @@ describe('ControlErrors', () => {
 
   it('should use the default messages for the built-in validators', () => {
     // GIVEN
-    const errorsPipe: ControlErrors = new ControlErrors(DEFAULT_CONTROL_ERRORS_MESSAGES);
+    const errorsPipe: ControlErrors = createPipe(true);
     const formControl: FormControl = new FormControl('ab', { validators: [Validators.minLength(3), Validators.email] });
 
     // WHEN
@@ -111,7 +120,7 @@ describe('ControlErrors', () => {
 
   it('should keep the original behavior for keys without a message', () => {
     // GIVEN
-    const errorsPipe: ControlErrors = new ControlErrors(DEFAULT_CONTROL_ERRORS_MESSAGES);
+    const errorsPipe: ControlErrors = createPipe(true);
     const formControl: FormControl = new FormControl(null, { validators: [() => ({ custom: 'Custom message' })] });
 
     // WHEN
@@ -135,7 +144,7 @@ describe('ControlErrors', () => {
   template: `<span *ngFor="let message of name | controlErrors | async" class="error">{{ message }}</span>`
 })
 class TranslatedFormComponent {
-  name: FormControl<string | null> = new FormControl('', { validators: [Validators.required, Validators.minLength(3), Validators.email] });
+  name = new FormControl<string | null>('', { validators: [Validators.required, Validators.minLength(3), Validators.email] });
 }
 
 describe('ControlErrors with provideControlErrorsMessages', () => {

@@ -89,6 +89,7 @@ export {
   controlErrorsSignal,
   controlValueSignal,
   debouncedSignal,
+  loadingSignal,
   nowSignal,
   previousSignal,
   toggleSignal

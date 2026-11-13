@@ -4,3 +4,5 @@ export { debouncedSignal } from './debounced.signal';
 export { nowSignal } from './now.signal';
 export { previousSignal } from './previous.signal';
 export type { SignalOptions } from './signal-options';
+export { toggleSignal } from './toggle.signal';
+export type { ToggleSignal } from './toggle.signal';

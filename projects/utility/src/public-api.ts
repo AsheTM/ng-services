@@ -90,9 +90,10 @@ export {
   controlValueSignal,
   debouncedSignal,
   nowSignal,
-  previousSignal
+  previousSignal,
+  toggleSignal
 } from './lib/signals';
-export type { SignalOptions } from './lib/signals';
+export type { SignalOptions, ToggleSignal } from './lib/signals';
 export {
   AutofocusDirective,
   ClickOutsideDirective,

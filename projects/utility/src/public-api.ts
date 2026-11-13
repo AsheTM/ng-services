@@ -86,6 +86,18 @@ export {
 } from './lib/pipes';
 export type { ControlErrorMessage, ControlErrorsMessages, DateDiffUnit } from './lib/pipes';
 export {
+  controlErrorsSignal,
+  controlValueSignal,
+  debouncedSignal,
+  loadingSignal,
+  mediaQuerySignal,
+  nowSignal,
+  previousSignal,
+  storageSignal,
+  toggleSignal
+} from './lib/signals';
+export type { SignalOptions, ToggleSignal } from './lib/signals';
+export {
   AutofocusDirective,
   ClickOutsideDirective,
   CopyToClipboardDirective,

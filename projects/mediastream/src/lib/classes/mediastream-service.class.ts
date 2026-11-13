@@ -1,3 +1,4 @@
+import { Nullable } from "@ashetm/types";
 import { BehaviorSubject, Observable } from "rxjs";
 
 import { AMediastreamDevice } from "./mediastream-device.class";
@@ -21,7 +22,7 @@ export abstract class AMediastreamService extends AMediastreamDevice {
   }
 
   protected _buildMediaConstraints(
-    device: MediaDeviceInfo | null
+    device: Nullable<MediaDeviceInfo>
   ): boolean | MediaTrackConstraints {
     switch (true) {
       case device && typeof this._mediaConstraints === 'object':

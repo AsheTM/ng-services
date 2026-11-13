@@ -1,5 +1,6 @@
 import { NgZone } from "@angular/core";
 import { isServer } from "@ashetm/platform";
+import { Nullable } from "@ashetm/types";
 import { Observable, Subject, Subscriber, Subscription } from "rxjs";
 
 
@@ -37,7 +38,7 @@ export class BroadcastChannelRef<T> {
   /**
    * `null` on the server, where no real channel is opened
    */
-  private readonly _broadcastChannel: BroadcastChannel | null;
+  private readonly _broadcastChannel: Nullable<BroadcastChannel>;
   private readonly _close$: Subject<void> = new Subject<void>();
   private _closed: boolean = false;
 

@@ -1,4 +1,5 @@
 import { Injectable, NgZone, OnDestroy, inject } from '@angular/core';
+import { Nullable } from '@ashetm/types';
 
 import { BroadcastChannelRef } from './broadcast-channel.ref';
 
@@ -21,7 +22,7 @@ export class BroadcastChannelService implements OnDestroy {
       ?? (this._broadcastChannels[name] = new BroadcastChannelRef<T>(this._ngZone, name));
   }
 
-  get<T>(name: string): BroadcastChannelRef<T> | null {
+  get<T>(name: string): Nullable<BroadcastChannelRef<T>> {
     const broadcastChannel: BroadcastChannelRef<unknown> | undefined = this._broadcastChannels[name];
 
     // The same type `T` is expected for a given channel name (see README)

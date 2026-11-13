@@ -92,6 +92,7 @@ export {
   loadingSignal,
   nowSignal,
   previousSignal,
+  storageSignal,
   toggleSignal
 } from './lib/signals';
 export type { SignalOptions, ToggleSignal } from './lib/signals';

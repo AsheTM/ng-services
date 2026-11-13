@@ -1,3 +1,8 @@
+# 20.1.0
+
+- [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``get()`` returns ``Nullable<BroadcastChannelRef<T>>``, same type as before ([#174](https://github.com/AsheTM/ng-services/issues/174))
+- [x] Update CHANGELOG
+
 
 # 20.0.0
 

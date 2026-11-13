@@ -1,3 +1,8 @@
+# 3.2.0
+
+- [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``Nullable<MediaDeviceInfo>``, same type as before ([#171](https://github.com/AsheTM/ng-services/issues/171))
+- [x] Update CHANGELOG
+
 # 3.1.0
 
 - [x] Browser detection comes from [``@ashetm/platform``](https://www.npmjs.com/package/@ashetm/platform), a new dependency; no API or behavior change ([#58](https://github.com/AsheTM/ng-services/issues/58))

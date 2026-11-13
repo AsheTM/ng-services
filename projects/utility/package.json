@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-utility",
-  "version": "20.0.0",
+  "version": "20.1.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -33,7 +33,10 @@
     "directives",
     "forms",
     "signal",
-    "signals"
+    "signals",
+    "guard",
+    "guards",
+    "router"
   ],
   "private": false,
   "repository": {
@@ -43,10 +46,14 @@
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0",
     "@angular/forms": ">=20.0.0",
+    "@angular/router": ">=20.0.0",
     "rxjs": ">=7.4.0"
   },
   "peerDependenciesMeta": {
     "@angular/forms": {
+      "optional": true
+    },
+    "@angular/router": {
       "optional": true
     }
   },

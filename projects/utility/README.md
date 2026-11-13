@@ -53,9 +53,10 @@ The library is split into entry points. Import from the one you need:
 | ``@ashetm/ng-utility/directives`` | the directives (except ``TrimOnBlurDirective``)                         |
 | ``@ashetm/ng-utility/signals``    | the signal helpers (except the form ones)                               |
 | ``@ashetm/ng-utility/forms``      | ``ControlErrors``, ``ControlValue``, ``provideControlErrorsMessages``, ``TrimOnBlurDirective``, ``controlErrorsSignal``, ``controlValueSignal`` |
-| ``@ashetm/ng-utility``            | everything above, and the modules                                       |
+| ``@ashetm/ng-utility/router``     | the guards (only from here)                                             |
+| ``@ashetm/ng-utility``            | everything above except the guards, and the modules                     |
 
-Only ``@ashetm/ng-utility/forms`` (and ``@ashetm/ng-utility``) needs ``@angular/forms``: it's an optional peer dependency.
+Only ``@ashetm/ng-utility/forms`` (and ``@ashetm/ng-utility``) needs ``@angular/forms``, and only ``@ashetm/ng-utility/router`` needs ``@angular/router``: both are optional peer dependencies.
 
 ```ts
 import { Truncate } from '@ashetm/ng-utility/pipes';
@@ -1677,6 +1678,95 @@ function mediaQuerySignal(query: string, options?: SignalOptions): Signal<boolea
 
 ```ts
 isMobile = mediaQuerySignal('(max-width: 600px)');
+```
+
+### Guards
+
+Functional router guards (Angular 20+ only), from ``@ashetm/ng-utility/router`` only: ``@ashetm/ng-utility`` doesn't re-export them, so it doesn't need ``@angular/router``. ``@angular/router`` is an optional peer dependency.
+
+``redirectTo`` is a URL (``'/login'``) or a ``UrlTree``. Without it, a refused route is just cancelled.
+
+#### unsavedChangesGuard
+
+```ts
+const unsavedChangesGuard: CanDeactivateFn<HasUnsavedChanges>;
+
+interface HasUnsavedChanges { hasUnsavedChanges(): boolean | Observable<boolean> | Promise<boolean>; }
+```
+
+Asks before leaving a component that has unsaved changes (with ``window.confirm`` by default). Always allowed on the server.
+
+```ts
+export class EditComponent implements HasUnsavedChanges {
+  form = new FormGroup({ ... });
+
+  hasUnsavedChanges(): boolean {
+    return this.form.dirty;
+  }
+}
+...
+{ path: 'edit/:id', component: EditComponent, canDeactivate: [unsavedChangesGuard] }
+```
+
+Replace the message, and / or the confirmation (e.g. your own dialog, returning ``true`` to leave):
+
+```ts
+providers: [
+  provideUnsavedChanges({
+    message: 'Des modifications ne sont pas enregistrées. Quitter ?',
+    confirm: (message) => inject(MyDialog).ask(message) // boolean, Observable or Promise
+  })
+]
+```
+
+Also exported: ``UNSAVED_CHANGES_MESSAGE``, ``UNSAVED_CHANGES_CONFIRM`` (the tokens) and the ``UnsavedChangesConfirm`` type.
+
+#### allowIf / redirectIf
+
+```ts
+function allowIf(condition: GuardCondition, redirectTo?: string | UrlTree): RouteGuard { ... }
+function redirectIf(condition: GuardCondition, redirectTo: string | UrlTree): RouteGuard { ... }
+
+type GuardCondition = () => boolean | Observable<boolean> | Promise<boolean>;
+type RouteGuard = CanActivateFn & CanActivateChildFn & CanMatchFn;
+```
+
+Turn any condition into a guard, for ``canActivate``, ``canActivateChild`` or ``canMatch``. ``allowIf`` allows the route when the condition is ``true``; ``redirectIf`` redirects when it's ``true``. The condition runs in an injection context, so it can use ``inject()``.
+
+```ts
+{ path: 'admin', canMatch: [allowIf(() => inject(Auth).isAdmin(), '/forbidden')], loadChildren: ... }
+{ path: 'login', component: LoginComponent, canActivate: [redirectIf(() => inject(Auth).loggedIn$, '/home')] }
+```
+
+#### allGuards / anyGuard
+
+```ts
+function allGuards(...guards: Guard[]): Guard { ... }
+function anyGuard(...guards: Guard[]): Guard { ... }
+```
+
+Combine guards of the same kind (``canActivate``, ``canMatch``…). Angular runs the guards of a route in parallel: these run them one after the other, with their injection context.
+
+* ``allGuards`` stops at the first guard that doesn't allow the route, and returns its result (e.g. its redirection).
+* ``anyGuard`` allows the route as soon as one guard allows it. When none does, it returns the result of the first one.
+
+```ts
+canActivate: [allGuards(isLoggedIn, isAdmin)]
+canActivate: [anyGuard(isAdmin, isOwner)]
+```
+
+#### paramGuard / queryParamGuard
+
+```ts
+function paramGuard(name: string, isValid: (value: string) => boolean = (value) => value !== '', redirectTo?: string | UrlTree): CanActivateFn { ... }
+function queryParamGuard(name: string, isValid: (value: string) => boolean = (value) => value !== '', redirectTo?: string | UrlTree): CanActivateFn { ... }
+```
+
+Allows the route when its parameter (or query parameter) is valid: by default, present and not empty.
+
+```ts
+{ path: 'user/:id', component: UserComponent, canActivate: [paramGuard('id', (id) => /^\d+$/.test(id), '/not-found')] }
+{ path: 'reset-password', component: ResetComponent, canActivate: [queryParamGuard('token', undefined, '/login')] }
 ```
 
 ## Issue

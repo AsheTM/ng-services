@@ -1,3 +1,10 @@
+# 20.1.0
+
+- [x] New entry point ``@ashetm/ng-utility/router`` with functional guards: ``unsavedChangesGuard`` (``provideUnsavedChanges()``), ``allowIf`` / ``redirectIf``, ``allGuards`` / ``anyGuard``, ``paramGuard`` / ``queryParamGuard`` ([#161](https://github.com/AsheTM/ng-services/issues/161))
+- [x] ``@angular/router`` is an optional peer dependency; ``@ashetm/ng-utility`` doesn't re-export the guards, so it doesn't need it
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 20.0.0
 
 - [x] **Breaking**: requires Angular 20+ (``@angular/common``, ``@angular/core`` and ``@angular/forms`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 16.x

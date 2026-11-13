@@ -90,6 +90,7 @@ export {
   controlValueSignal,
   debouncedSignal,
   loadingSignal,
+  mediaQuerySignal,
   nowSignal,
   previousSignal,
   storageSignal,

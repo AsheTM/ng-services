@@ -5,7 +5,12 @@
     "outDir": "../../out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@ashetm/ng-utility/*": [
+        "projects/utility/*/src/index.ts"
+      ]
+    }
   },
   "files": [
     "src/test.ts"

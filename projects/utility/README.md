@@ -32,7 +32,27 @@ npm install @ashetm/ng-utility@16
 
 ## Import
 
-You only need to import ``UtilityModule`` (all pipes and directives). Every pipe and directive is also standalone, so you can import only the ones you use in a standalone component.
+The library is split into entry points. Import from the one you need:
+
+| Entry point                      | Content                                                                 |
+|----------------------------------|-------------------------------------------------------------------------|
+| ``@ashetm/ng-utility/pipes``      | the pipes (except the form ones)                                        |
+| ``@ashetm/ng-utility/operators``  | the RxJS operators                                                      |
+| ``@ashetm/ng-utility/directives`` | the directives (except ``TrimOnBlurDirective``)                         |
+| ``@ashetm/ng-utility/signals``    | the signal helpers (except the form ones)                               |
+| ``@ashetm/ng-utility/forms``      | ``ControlErrors``, ``ControlValue``, ``provideControlErrorsMessages``, ``TrimOnBlurDirective``, ``controlErrorsSignal``, ``controlValueSignal`` |
+| ``@ashetm/ng-utility``            | everything above, and the modules                                       |
+
+Only ``@ashetm/ng-utility/forms`` (and ``@ashetm/ng-utility``) needs ``@angular/forms``: it's an optional peer dependency.
+
+```ts
+import { Truncate } from '@ashetm/ng-utility/pipes';
+import { withLoading } from '@ashetm/ng-utility/operators';
+import { debouncedSignal } from '@ashetm/ng-utility/signals';
+import { ControlErrors } from '@ashetm/ng-utility/forms';
+```
+
+Every pipe and directive is standalone, so you can import only the ones you use in a standalone component. Or import ``UtilityModule`` (all pipes and directives):
 
 ```ts
 ...
@@ -62,7 +82,7 @@ export class AppModule { }
 
 ### Custom RXJS Operators
 
-All custom RXJS operators are available without importing the module.
+All custom RXJS operators are available without importing the module, from ``@ashetm/ng-utility/operators``.
 
 #### `containsItem` Operator
 
@@ -512,7 +532,7 @@ users$ = this.reload$.pipe(
 
 ### Custom Pipes
 
-All pipes are standalone pipes. (Importing the module or the specific standalone pipe step is required)
+All pipes are standalone pipes, from ``@ashetm/ng-utility/pipes`` (the form pipes ``ControlErrors`` and ``ControlValue`` are in ``@ashetm/ng-utility/forms``). Importing the module or the specific standalone pipe is required.
 
 #### ArrayFill
 
@@ -928,7 +948,7 @@ formControl = new FormControl(null, {
 By default, only ``required`` has a message, and other errors are returned as they are (a custom validator's text, or the error details). Add ``provideControlErrorsMessages()`` to get English messages for Angular's built-in validators (``required``, ``requiredTrue``, ``email``, ``minlength``, ``maxlength``, ``min``, ``max``, ``pattern``), and to add or replace messages: a text, or a function receiving the error details.
 
 ```ts
-import { provideControlErrorsMessages } from '@ashetm/ng-utility';
+import { provideControlErrorsMessages } from '@ashetm/ng-utility/forms';
 
 // English defaults
 providers: [provideControlErrorsMessages()]
@@ -1428,7 +1448,7 @@ Example:
 
 ### Directives
 
-All directives are standalone, prefixed ``ashetm``, and safe with server-side rendering.
+All directives are standalone, prefixed ``ashetm``, and safe with server-side rendering. They're in ``@ashetm/ng-utility/directives``, except ``TrimOnBlurDirective`` (``@ashetm/ng-utility/forms``).
 
 #### AutofocusDirective
 
@@ -1509,7 +1529,7 @@ Trims the text when leaving the field. Works with plain fields, reactive forms a
 
 ### Signal Helpers
 
-Functions that create signals, available without importing the module (Angular 20+ only). Unless written otherwise, they must be called in an injection context (a field initializer or a constructor), or with ``{ injector }``. They clean up when that injector is destroyed (e.g. the component).
+Functions that create signals, available without importing the module (Angular 20+ only), from ``@ashetm/ng-utility/signals`` (``controlValueSignal`` and ``controlErrorsSignal`` are in ``@ashetm/ng-utility/forms``). Unless written otherwise, they must be called in an injection context (a field initializer or a constructor), or with ``{ injector }``. They clean up when that injector is destroyed (e.g. the component).
 
 ```ts
 interface SignalOptions { injector?: Injector; }

@@ -2,7 +2,7 @@ import { Signal, WritableSignal, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable, Subject, of, throwError } from 'rxjs';
 
-import { LoadingState } from '../operators/with-loading.operator';
+import { LoadingState } from '@ashetm/ng-utility/operators';
 import { loadingSignal } from './loading.signal';
 
 

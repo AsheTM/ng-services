@@ -1,6 +1,6 @@
 import { Observable, OperatorFunction, map } from "rxjs";
 
-import { ArraySort } from "../pipes/array-sort.pipe";
+import { ArraySort } from '@ashetm/ng-utility/pipes';
 
 const arraySort: ArraySort = new ArraySort();
 

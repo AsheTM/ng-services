@@ -2,7 +2,7 @@ import { Signal, computed } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Observable, isObservable, switchMap } from 'rxjs';
 
-import { LoadingState, withLoading } from '../operators/with-loading.operator';
+import { LoadingState, withLoading } from '@ashetm/ng-utility/operators';
 import { SignalOptions, resolveInjector } from './signal-options';
 
 

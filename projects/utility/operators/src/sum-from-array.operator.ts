@@ -1,6 +1,6 @@
 import { Observable, OperatorFunction, map } from "rxjs";
 
-import { ArraySum } from "../pipes/array-sum.pipe";
+import { ArraySum } from '@ashetm/ng-utility/pipes';
 
 const arraySum: ArraySum = new ArraySum();
 

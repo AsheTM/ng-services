@@ -1,5 +1,6 @@
+import { Maybe } from '@ashetm/types';
 import { Observable, OperatorFunction, map } from "rxjs";
 
-export function countFromArray<T>(fn: (item: T, index: number) => boolean): OperatorFunction<T[] | null | undefined, number> {
-  return (source$: Observable<T[] | null | undefined>) => source$.pipe(map((list: T[] | null | undefined) => (list ?? []).filter((item: T, index: number) => fn(item, index)).length));
+export function countFromArray<T>(fn: (item: T, index: number) => boolean): OperatorFunction<Maybe<T[]>, number> {
+  return (source$: Observable<Maybe<T[]>>) => source$.pipe(map((list: Maybe<T[]>) => (list ?? []).filter((item: T, index: number) => fn(item, index)).length));
 }

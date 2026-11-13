@@ -1,5 +1,6 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { isBrowser } from '@ashetm/platform';
+import { Maybe } from '@ashetm/types';
 
 
 /**
@@ -12,7 +13,7 @@ import { isBrowser } from '@ashetm/platform';
 })
 export class CopyToClipboardDirective {
 
-  @Input('ashetmCopyToClipboard') text: string | null | undefined = '';
+  @Input('ashetmCopyToClipboard') text: Maybe<string> = '';
 
   @Output() readonly copied: EventEmitter<string> = new EventEmitter<string>();
   @Output() readonly copyFailed: EventEmitter<unknown> = new EventEmitter<unknown>();

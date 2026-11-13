@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe, Nullable } from '@ashetm/types';
 
 
 export type DateDiffUnit = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks';
@@ -22,10 +23,10 @@ const UNIT_SIZES: Record<DateDiffUnit, number> = {
 export class DateDiff implements PipeTransform {
 
   transform(
-    value: Date | number | string | null | undefined,
-    other: Date | number | string | null | undefined,
+    value: Maybe<Date | number | string>,
+    other: Maybe<Date | number | string>,
     unit: DateDiffUnit = 'days'
-  ): number | null {
+  ): Nullable<number> {
     if (value === null || value === undefined || other === null || other === undefined) {
       return null;
     }

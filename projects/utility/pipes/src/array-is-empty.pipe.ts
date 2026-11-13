@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArrayIsEmpty implements PipeTransform {
 
-  transform(list: unknown[] | null | undefined): boolean {
+  transform(list: Maybe<unknown[]>): boolean {
     return !list || list.length === 0;
   }
 

@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe, Nullable } from '@ashetm/types';
 
 
 @Pipe({
@@ -11,9 +12,9 @@ export class ArrayAverage implements PipeTransform {
    * Average of the numbers (or of the values of `key`); values that aren't finite numbers are ignored.
    * `null` when there is no number.
    */
-  transform(list: number[] | null | undefined): number | null;
-  transform<T>(list: T[] | null | undefined, key: keyof T): number | null;
-  transform<T>(list: T[] | null | undefined, key?: keyof T): number | null {
+  transform(list: Maybe<number[]>): Nullable<number>;
+  transform<T>(list: Maybe<T[]>, key: keyof T): Nullable<number>;
+  transform<T>(list: Maybe<T[]>, key?: keyof T): Nullable<number> {
     const values: number[] = (list ?? [])
       .map((item: T): unknown => key !== undefined ? item?.[key] : item)
       .filter((value: unknown): value is number => typeof value === 'number' && Number.isFinite(value));

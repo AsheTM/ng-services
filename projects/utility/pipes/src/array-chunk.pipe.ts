@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -10,7 +11,7 @@ export class ArrayChunk implements PipeTransform {
   /**
    * Splits the list into groups of `size` items (the last group may be smaller). A size below 1 is treated as 1.
    */
-  transform<T>(list: T[] | null | undefined, size: number): T[][] {
+  transform<T>(list: Maybe<T[]>, size: number): T[][] {
     const chunkSize: number = Math.max(1, Math.floor(size));
     const items: T[] = list ?? [];
     const chunks: T[][] = [];

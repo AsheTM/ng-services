@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { AbstractControl, ValueChangeEvent } from '@angular/forms';
+import { Maybe } from '@ashetm/types';
 import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 
 
@@ -12,7 +13,7 @@ import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 })
 export class ControlValue implements PipeTransform {
 
-  transform(control: AbstractControl | null | undefined): Observable<any> {
+  transform(control: Maybe<AbstractControl>): Observable<any> {
     // No control (e.g. not created yet)
     if (!control) {
       return of(undefined);

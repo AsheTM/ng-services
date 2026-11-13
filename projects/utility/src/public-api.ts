@@ -1,47 +1,16 @@
 /*
  * Public API Surface of ng-utility
+ *
+ * Everything is also available from the secondary entry points:
+ * @ashetm/ng-utility/pipes, /operators, /directives, /signals and /forms.
  */
 
+export { UtilityDirectivesModule } from './lib/utility-directives.module';
 export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
-export {
-  containsItem,
-  filterFromArray,
-  firstFromArray,
-  lastFromArray,
-  mapFromArray,
-  nthFromArray,
-  pluckFromArray
-} from './lib/operators';
-export {
-  ArrayFill,
-  ArrayFilter,
-  ArrayFrom,
-  ArrayIncludes,
-  ArrayPluck,
-  ArrayPop,
-  ArrayShuffle,
-  ArraySort,
-  ArraySortAsc,
-  ArraySortDesc,
-  DateMax,
-  DateMin,
-  CapitalCase,
-  CoerciveBoolean,
-  ControlErrors,
-  ControlValue,
-  Format,
-  Initial,
-  IsArray,
-  IsDate,
-  IsDateAfter,
-  IsDateBefore,
-  IsDateBetween,
-  IsDateFuture,
-  IsDatePast,
-  Log,
-  ObjectEntries,
-  ObjectKeys,
-  ObjectValues
-} from './lib/pipes';
+export * from '@ashetm/ng-utility/directives';
+export * from '@ashetm/ng-utility/forms';
+export * from '@ashetm/ng-utility/operators';
+export * from '@ashetm/ng-utility/pipes';
+export * from '@ashetm/ng-utility/signals';

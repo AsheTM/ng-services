@@ -14,7 +14,7 @@
     "build:mediastream": "npm run lint:mediastream && npm run test:mediastream && ng build mediastream --configuration=production",
     "build:network": "npm run lint:network && npm run test:network && ng build network --configuration=production",
     "build:sample-broadcast-channel": "ng build broadcast-channel --configuration=production && ng build sample-broadcast-channel --configuration=production",
-    "build:utility": "npm run lint:utility & npm run test:utility & ng build utility --configuration=production",
+    "build:utility": "npm run lint:utility && npm run test:utility && ng build utility --configuration=production",
     "lint": "ng lint --format stylish",
     "lint:fix": "npm run lint -- --fix",
     "lint:broadcast-channel": "npm run lint -- broadcast-channel",
@@ -50,7 +50,6 @@
     "node": ">=24"
   },
   "dependencies": {
-    "@angular/cdk": "^20.2.14",
     "@angular/common": "^20.3.34",
     "@angular/compiler": "^20.3.34",
     "@angular/core": "^20.3.34",

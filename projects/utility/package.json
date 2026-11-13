@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-utility",
-  "version": "16.0.0",
+  "version": "20.0.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -28,20 +28,30 @@
     "operators",
     "service",
     "rxjs",
-    "rxjs/operators"
+    "rxjs/operators",
+    "directive",
+    "directives",
+    "forms",
+    "signal",
+    "signals"
   ],
   "private": false,
   "repository": {
     "url": "https://github.com/AsheTM/ng-services/tree/release/%40ashetm/ng-utility/projects/utility"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=16.0.0",
-    "@angular/common": ">=16.0.0",
-    "@angular/core": ">=16.0.0",
-    "@angular/forms": ">=16.0.0",
-    "rxjs": ">=6.6.0"
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0",
+    "@angular/forms": ">=20.0.0",
+    "rxjs": ">=7.4.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/forms": {
+      "optional": true
+    }
   },
   "dependencies": {
+    "@ashetm/platform": "^1.0.0",
     "tslib": "^2.3.0"
   }
 }

@@ -1,4 +1,4 @@
-import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
+import { LOCALE_ID, Pipe, PipeTransform, inject } from '@angular/core';
 
 
 type RelativeTimeUnit = 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year';
@@ -27,7 +27,7 @@ const UNITS: [RelativeTimeUnit, number][] = [
 })
 export class TimeAgo implements PipeTransform {
 
-  constructor(@Inject(LOCALE_ID) private readonly _locale: string) { }
+  private readonly _locale: string = inject(LOCALE_ID);
 
   transform(value: Date | number | string | null | undefined, locale?: string, now: Date | number = Date.now()): string {
     if (value === null || value === undefined || value === '') {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, Output, inject } from '@angular/core';
 import { isBrowser } from '@ashetm/platform';
 
 
@@ -20,10 +20,8 @@ export class InViewportDirective implements AfterViewInit, OnDestroy {
   private _observer?: IntersectionObserver;
   private _visible?: boolean;
 
-  constructor(
-    private readonly _elementRef: ElementRef<HTMLElement>,
-    private readonly _ngZone: NgZone
-  ) { }
+  private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+  private readonly _ngZone: NgZone = inject(NgZone);
 
   ngAfterViewInit(): void {
     if (!isBrowser() || typeof IntersectionObserver === 'undefined') {

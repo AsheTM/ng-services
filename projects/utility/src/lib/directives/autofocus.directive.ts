@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, inject } from '@angular/core';
 import { isBrowser } from '@ashetm/platform';
 
 
@@ -13,7 +13,7 @@ export class AutofocusDirective implements AfterViewInit {
 
   @Input() ashetmAutofocus: boolean | '' | null | undefined = true;
 
-  constructor(private readonly _elementRef: ElementRef<HTMLElement>) { }
+  private readonly _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
   ngAfterViewInit(): void {
     if (this.ashetmAutofocus !== false && isBrowser()) {

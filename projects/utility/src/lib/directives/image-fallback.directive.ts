@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
 
 
 /**
@@ -12,7 +12,7 @@ export class ImageFallbackDirective {
 
   @Input('ashetmImageFallback') fallback: string | null | undefined;
 
-  constructor(private readonly _elementRef: ElementRef<HTMLImageElement>) { }
+  private readonly _elementRef: ElementRef<HTMLImageElement> = inject(ElementRef);
 
   @HostListener('error')
   onError(): void {

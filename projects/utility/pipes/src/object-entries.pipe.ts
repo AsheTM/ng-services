@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Entries } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,8 +8,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ObjectEntries implements PipeTransform {
 
-  transform(value: Record<string | number, any>): [string | number, any][] {
-    return Object.entries(value);
+  /**
+   * The `[key, value]` pairs of `value`, typed from its keys
+   */
+  transform<T extends object>(value: T): Entries<T> {
+    return Object.entries(value) as Entries<T>;
   }
 
 }

@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -11,7 +12,7 @@ export class Truncate implements PipeTransform {
    * Keeps the first `length` characters and adds `suffix` when the text is longer.
    * With `wholeWords`, the text is cut at the last space before `length` (if any).
    */
-  transform(value: string | null | undefined, length: number, suffix: string = '…', wholeWords: boolean = false): string {
+  transform(value: Maybe<string>, length: number, suffix: string = '…', wholeWords: boolean = false): string {
     const text: string = value ?? '';
 
     if (text.length <= length) {

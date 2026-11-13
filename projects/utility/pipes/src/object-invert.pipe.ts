@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -10,7 +11,7 @@ export class ObjectInvert implements PipeTransform {
   /**
    * Swaps keys and values (values become string keys); with duplicate values, the last key wins
    */
-  transform(value: Record<string, string | number | boolean> | null | undefined): Record<string, string> {
+  transform(value: Maybe<Record<string, string | number | boolean>>): Record<string, string> {
     const result: Record<string, string> = {};
 
     Object.keys(value ?? {}).forEach((key: string) => {

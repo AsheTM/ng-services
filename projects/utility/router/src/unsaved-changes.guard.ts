@@ -1,6 +1,7 @@
 import { InjectionToken, Provider, inject } from '@angular/core';
 import { CanDeactivateFn, MaybeAsync } from '@angular/router';
 import { isBrowser } from '@ashetm/platform';
+import { Nullable } from '@ashetm/types';
 import { of, switchMap } from 'rxjs';
 
 import { toObservable } from './guard-result';
@@ -39,7 +40,7 @@ export function provideUnsavedChanges(options: { message?: string, confirm?: Uns
 /**
  * Asks before leaving a component that has unsaved changes. Always allowed on the server.
  */
-export const unsavedChangesGuard: CanDeactivateFn<HasUnsavedChanges> = (component: HasUnsavedChanges | null) => {
+export const unsavedChangesGuard: CanDeactivateFn<HasUnsavedChanges> = (component: Nullable<HasUnsavedChanges>) => {
   if (!isBrowser() || typeof component?.hasUnsavedChanges !== 'function') {
     return true;
   }

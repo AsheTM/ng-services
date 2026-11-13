@@ -1,5 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, ParamMap, Router, UrlTree } from '@angular/router';
+import { Nullable } from '@ashetm/types';
 
 import { toRedirect } from './guard-result';
 
@@ -24,7 +25,7 @@ function isNotEmpty(value: string): boolean {
 }
 
 function check(params: ParamMap, name: string, isValid: (value: string) => boolean, redirectTo?: string | UrlTree): GuardResult {
-  const value: string | null = params.get(name);
+  const value: Nullable<string> = params.get(name);
 
   return value !== null && isValid(value) ? true : toRedirect(inject(Router), redirectTo);
 }

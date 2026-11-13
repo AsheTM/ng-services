@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { AbstractControl, StatusChangeEvent, ValidationErrors } from '@angular/forms';
+import { Maybe, Nullable } from '@ashetm/types';
 import { Observable, defer, filter, map, of, startWith } from 'rxjs';
 
 import { CONTROL_ERRORS_MESSAGES, ControlErrorMessage, ControlErrorsMessages } from './control-errors.messages';
@@ -15,9 +16,9 @@ import { CONTROL_ERRORS_MESSAGES, ControlErrorMessage, ControlErrorsMessages } f
 })
 export class ControlErrors implements PipeTransform {
 
-  private readonly _messages: ControlErrorsMessages | null = inject(CONTROL_ERRORS_MESSAGES, { optional: true });
+  private readonly _messages: Nullable<ControlErrorsMessages> = inject(CONTROL_ERRORS_MESSAGES, { optional: true });
 
-  transform(control: AbstractControl | null | undefined): Observable<(string | any)[]> {
+  transform(control: Maybe<AbstractControl>): Observable<(string | any)[]> {
     // No control (e.g. not created yet)
     if (!control) {
       return of([]);
@@ -30,7 +31,7 @@ export class ControlErrors implements PipeTransform {
     ));
   }
 
-  private _toMessages(errors: ValidationErrors | null): (string | any)[] {
+  private _toMessages(errors: Nullable<ValidationErrors>): (string | any)[] {
     const errorsControl:  ValidationErrors  = errors || {};
     let messages:         string[]          = [];
 

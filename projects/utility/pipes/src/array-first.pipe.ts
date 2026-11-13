@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArrayFirst implements PipeTransform {
 
-  transform<T>(list: T[] | null | undefined): T | undefined {
+  transform<T>(list: Maybe<T[]>): T | undefined {
     return list?.[0];
   }
 

@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ObjectSize implements PipeTransform {
 
-  transform(value: object | null | undefined): number {
+  transform(value: Maybe<object>): number {
     return value ? Object.keys(value).length : 0;
   }
 

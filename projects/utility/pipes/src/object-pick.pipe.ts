@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -10,7 +11,7 @@ export class ObjectPick implements PipeTransform {
   /**
    * A new object with only the given keys (keys missing from the object are skipped)
    */
-  transform<T extends object, K extends keyof T>(value: T | null | undefined, keys: K[]): Pick<T, K> {
+  transform<T extends object, K extends keyof T>(value: Maybe<T>, keys: K[]): Pick<T, K> {
     const result: Partial<Pick<T, K>> = {};
 
     keys.forEach((key: K) => {

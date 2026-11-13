@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ObjectIsEmpty implements PipeTransform {
 
-  transform(value: object | null | undefined): boolean {
+  transform(value: Maybe<object>): boolean {
     return !value || Object.keys(value).length === 0;
   }
 

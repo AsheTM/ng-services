@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-utility",
-  "version": "16.0.0",
+  "version": "20.0.0",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -28,7 +28,12 @@
     "operators",
     "service",
     "rxjs",
-    "rxjs/operators"
+    "rxjs/operators",
+    "directive",
+    "directives",
+    "forms",
+    "signal",
+    "signals"
   ],
   "private": false,
   "repository": {

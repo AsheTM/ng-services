@@ -10,11 +10,16 @@
 
 | Angular Version    | @ashetm/ng-utility Version     | RxJS Version   | Support |
 |--------------------|--------------------------------|----------------|---------|
-| Angular 16.x – 19.x | @ashetm/ng-utility 16.x       | 6.x.x and +    | ✅     |
+| Angular 20.x and +  | @ashetm/ng-utility 20.x       | 7.4.x and +    | ✅     |
+| Angular 16.x – 19.x | @ashetm/ng-utility 16.x       | 6.x.x and +    | ❌     |
 | Angular 15.x       | @ashetm/ng-utility 15.x        | No requirement | ❌     |
 | Angular 14.x       | @ashetm/ng-utility 14.x        | No requirement | ❌     |
 | Angular 13.x       | @ashetm/ng-utility 13.x        | No requirement | ❌     |
 | Angular 12.x       | @ashetm/ng-utility 12.x        | No requirement | ❌     |
+
+The version follows the Angular version it starts from: **16.x** supports Angular 16 to 19, **20.x** supports Angular 20 and above (there are no 17.x, 18.x or 19.x versions).
+
+16.x is no longer supported, as Angular 16 to 19 have reached their end of life: it stays installable, but gets no more fixes.
 
 ## Install
 
@@ -24,11 +29,18 @@ You can install it with npm:
 npm install @ashetm/ng-utility
 ```
 
-On **Angular 16–19**, install the 16.x version:
+This installs the latest version, for Angular 20+. On **Angular 16–19**, install the 16.x version instead:
 
 ```bash
 npm install @ashetm/ng-utility@16
 ```
+
+### Upgrading from 16.x
+
+* Angular 20+ and RxJS 7.4+ are required. ``@angular/cdk`` isn't needed anymore.
+* ``controlErrors`` and ``controlValue`` return an Observable: add ``| async`` (``{{ control | controlErrors | async }}``).
+* ``ControlErrors``, ``TimeAgo`` and ``FileSize`` use ``inject()``: creating them with ``new`` only works in an injection context.
+* Imports from ``@ashetm/ng-utility`` keep working; the new entry points (``/pipes``, ``/operators``, ``/directives``, ``/signals``, ``/forms``) are optional.
 
 ## Import
 

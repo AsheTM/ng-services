@@ -1,3 +1,16 @@
+# 20.0.0
+
+- [x] **Breaking**: requires Angular 20+ (``@angular/common``, ``@angular/core`` and ``@angular/forms`` ``>=20.0.0``) and RxJS 7.4+ (``rxjs`` ``>=7.4.0``); Angular 16–19 users stay on 16.x
+- [x] The version follows the Angular version it starts from: 16.x for Angular 16–19, 20.x for Angular 20+ (no 17.x, 18.x or 19.x)
+- [x] Include everything from 16.0.1 to 16.7.0 ([#145](https://github.com/AsheTM/ng-services/issues/145))
+- [x] **Breaking**: ``ControlErrors`` and ``ControlValue`` are pure again and return an Observable, used with ``| async`` ([#147](https://github.com/AsheTM/ng-services/issues/147))
+- [x] Drop the ``@angular/cdk`` peer dependency, same ``coerciveBoolean`` results ([#149](https://github.com/AsheTM/ng-services/issues/149))
+- [x] **Breaking**: use ``inject()`` instead of constructor injection (``new ControlErrors()``, ``new TimeAgo()``, ``new FileSize()`` need an injection context), set up ESLint ([#151](https://github.com/AsheTM/ng-services/issues/151))
+- [x] Create the ``controlValueSignal``, ``controlErrorsSignal``, ``debouncedSignal``, ``previousSignal``, ``nowSignal``, ``toggleSignal``, ``loadingSignal``, ``storageSignal`` and ``mediaQuerySignal`` signal helpers; export the ``SignalOptions`` and ``ToggleSignal`` types ([#153](https://github.com/AsheTM/ng-services/issues/153))
+- [x] Secondary entry points ``@ashetm/ng-utility/pipes``, ``/operators``, ``/directives``, ``/signals`` and ``/forms``; ``@ashetm/ng-utility`` still exports everything; ``@angular/forms`` is an optional peer dependency ([#155](https://github.com/AsheTM/ng-services/issues/155))
+- [x] Update CHANGELOG
+- [x] Update README
+
 
 # 16.7.0
 

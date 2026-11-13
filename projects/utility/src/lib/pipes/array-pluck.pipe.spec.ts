@@ -2,7 +2,7 @@ import { ArrayPluck } from './array-pluck.pipe';
 
 describe('SharedArrayPluckPipe', () => {
   const pipe = new ArrayPluck();
-  const inputArray: Array<Record<string | number, any>>
+  const inputArray: Record<string | number, any>[]
     = [
       { a: 1, b: true },
       { a: 2 },
@@ -23,7 +23,7 @@ describe('SharedArrayPluckPipe', () => {
 
   it('should keep falsy values', () => {
     // GIVEN
-    const list: Array<Record<string, unknown>> = [{ a: 0 }, { a: '' }, { a: false }, { a: null }, { b: 1 }];
+    const list: Record<string, unknown>[] = [{ a: 0 }, { a: '' }, { a: false }, { a: null }, { b: 1 }];
 
     // WHEN
     const result: any[] = pipe.transform(list, 'a');

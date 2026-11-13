@@ -10,7 +10,7 @@ describe('ArrayFrom', () => {
   });
 
   it('should create array properly', () => {
-    const array: Array<number> = pipe.transform(length);
+    const array: number[] = pipe.transform(length);
     const isFilled: boolean = array.every((n: number, i: number) => n === i);
 
     expect(array).toHaveSize(length);
@@ -19,7 +19,7 @@ describe('ArrayFrom', () => {
 
   it('should create array and filled properly', () => {
     const fill: number = 1;
-    const array: Array<number> = pipe.transform<number>(length, fill);
+    const array: number[] = pipe.transform<number>(length, fill);
     const isFilled: boolean = array.every((n: number) => n === fill);
 
     expect(array).toHaveSize(length);

@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ObjectKeys implements PipeTransform {
 
-  transform(value: Record<string | number, any>): Array<string> {
+  transform(value: Record<string | number, any>): string[] {
     return Object.keys(value);
   }
 

@@ -3,7 +3,7 @@ import { ArrayFilter } from './array-filter.pipe';
 
 describe('ArrayFilter', () => {
   const pipe = new ArrayFilter();
-  const inputArray: Array<string | number | boolean>
+  const inputArray: (string | number | boolean)[]
     = [5, 'Test', true];
 
   it('create an instance', () => {

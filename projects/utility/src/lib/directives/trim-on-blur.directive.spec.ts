@@ -15,8 +15,8 @@ import { TrimOnBlurDirective } from './trim-on-blur.directive';
   `
 })
 class HostComponent {
-  name: FormControl<string | null> = new FormControl('');
-  nameOnBlur: FormControl<string | null> = new FormControl('', { updateOn: 'blur' });
+  name = new FormControl<string | null>('');
+  nameOnBlur = new FormControl<string | null>('', { updateOn: 'blur' });
 }
 
 describe('TrimOnBlurDirective', () => {

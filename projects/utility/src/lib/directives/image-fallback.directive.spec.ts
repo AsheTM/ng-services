@@ -7,7 +7,7 @@ import { ImageFallbackDirective } from './image-fallback.directive';
 @Component({
   standalone: true,
   imports: [ImageFallbackDirective],
-  template: `<img src="broken.png" ashetmImageFallback="fallback.png">`
+  template: `<img src="broken.png" alt="" ashetmImageFallback="fallback.png">`
 })
 class HostComponent { }
 

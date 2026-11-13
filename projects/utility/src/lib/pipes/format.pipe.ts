@@ -14,14 +14,12 @@ export class Format implements PipeTransform {
     let valueIndex: number = 0;
     let result: string = '';
 
-    for(let i: number = 0; i < mask.length; i++) {
-      const charater: string = mask[i];
-
+    for(const charater of mask) {
       if(charater === this.PLACEHOLDER_CHARACTER) {
         result += stringifiedValue[valueIndex] || '';
         valueIndex++;
       } else {
-        result += mask[i];
+        result += charater;
       }
     }
 

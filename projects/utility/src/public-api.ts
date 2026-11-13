@@ -86,6 +86,7 @@ export {
 } from './lib/pipes';
 export type { ControlErrorMessage, ControlErrorsMessages, DateDiffUnit } from './lib/pipes';
 export {
+  controlErrorsSignal,
   controlValueSignal
 } from './lib/signals';
 export type { SignalOptions } from './lib/signals';

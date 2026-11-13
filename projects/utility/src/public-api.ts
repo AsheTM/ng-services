@@ -89,6 +89,7 @@ export {
   controlErrorsSignal,
   controlValueSignal,
   debouncedSignal,
+  nowSignal,
   previousSignal
 } from './lib/signals';
 export type { SignalOptions } from './lib/signals';

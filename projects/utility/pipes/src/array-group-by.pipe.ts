@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -10,7 +11,7 @@ export class ArrayGroupBy implements PipeTransform {
   /**
    * Groups the items by the value of `key` (used as a string), keeping their order
    */
-  transform<T>(list: T[] | null | undefined, key: keyof T): Record<string, T[]> {
+  transform<T>(list: Maybe<T[]>, key: keyof T): Record<string, T[]> {
     return (list ?? []).reduce((groups: Record<string, T[]>, item: T) => {
       const group: string = String(item[key]);
 

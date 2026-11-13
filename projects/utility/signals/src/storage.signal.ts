@@ -1,5 +1,6 @@
 import { WritableSignal, signal } from '@angular/core';
 import { isBrowser } from '@ashetm/platform';
+import { Maybe, Nullable } from '@ashetm/types';
 
 
 /**
@@ -7,7 +8,7 @@ import { isBrowser } from '@ashetm/platform';
  * On the server, or when the storage can't be used, it's a plain signal.
  */
 export function storageSignal<T>(key: string, initial: T, options: { storage?: 'local' | 'session' } = {}): WritableSignal<T> {
-  const storage: Storage | null = getStorage(options.storage ?? 'local');
+  const storage: Nullable<Storage> = getStorage(options.storage ?? 'local');
   const state: WritableSignal<T> = signal<T>(read(storage, key, initial));
   const set: (value: T) => void = state.set.bind(state);
 
@@ -20,7 +21,7 @@ export function storageSignal<T>(key: string, initial: T, options: { storage?: '
   return state;
 }
 
-function getStorage(type: 'local' | 'session'): Storage | null {
+function getStorage(type: 'local' | 'session'): Nullable<Storage> {
   try {
     return isBrowser() ? (type === 'local' ? localStorage : sessionStorage) : null;
   } catch {
@@ -29,9 +30,9 @@ function getStorage(type: 'local' | 'session'): Storage | null {
   }
 }
 
-function read<T>(storage: Storage | null, key: string, initial: T): T {
+function read<T>(storage: Nullable<Storage>, key: string, initial: T): T {
   try {
-    const saved: string | null | undefined = storage?.getItem(key);
+    const saved: Maybe<string> = storage?.getItem(key);
 
     return saved === null || saved === undefined ? initial : JSON.parse(saved);
   } catch {
@@ -39,7 +40,7 @@ function read<T>(storage: Storage | null, key: string, initial: T): T {
   }
 }
 
-function write<T>(storage: Storage | null, key: string, value: T): void {
+function write<T>(storage: Nullable<Storage>, key: string, value: T): void {
   try {
     storage?.setItem(key, JSON.stringify(value));
   } catch {

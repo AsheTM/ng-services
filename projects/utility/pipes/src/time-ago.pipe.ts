@@ -1,4 +1,5 @@
 import { LOCALE_ID, Pipe, PipeTransform, inject } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 type RelativeTimeUnit = 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year';
@@ -29,7 +30,7 @@ export class TimeAgo implements PipeTransform {
 
   private readonly _locale: string = inject(LOCALE_ID);
 
-  transform(value: Date | number | string | null | undefined, locale?: string, now: Date | number = Date.now()): string {
+  transform(value: Maybe<Date | number | string>, locale?: string, now: Date | number = Date.now()): string {
     if (value === null || value === undefined || value === '') {
       return '';
     }

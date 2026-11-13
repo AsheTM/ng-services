@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 /**
@@ -10,7 +11,7 @@ import { Directive, ElementRef, HostListener, Input, inject } from '@angular/cor
 })
 export class ImageFallbackDirective {
 
-  @Input('ashetmImageFallback') fallback: string | null | undefined;
+  @Input('ashetmImageFallback') fallback: Maybe<string>;
 
   private readonly _elementRef: ElementRef<HTMLImageElement> = inject(ElementRef);
 

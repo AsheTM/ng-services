@@ -1,3 +1,11 @@
+# 20.2.0
+
+- [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``Maybe`` / ``Nullable`` / ``ValueOf`` in the public types, same types as before ([#167](https://github.com/AsheTM/ng-services/issues/167))
+- [x] ``objectEntries`` returns typed pairs (``Entries<T>``) ([#167](https://github.com/AsheTM/ng-services/issues/167))
+- [x] ``objectGet`` infers the return type when the object type is known and the path is one of its paths ([#168](https://github.com/AsheTM/ng-services/issues/168))
+- [x] Update CHANGELOG
+- [x] Update README
+
 # 20.1.0
 
 - [x] New entry point ``@ashetm/ng-utility/router`` with functional guards: ``unsavedChangesGuard`` (``provideUnsavedChanges()``), ``allowIf`` / ``redirectIf``, ``allGuards`` / ``anyGuard``, ``paramGuard`` / ``queryParamGuard`` ([#161](https://github.com/AsheTM/ng-services/issues/161))

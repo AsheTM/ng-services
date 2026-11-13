@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe, ValueOf } from '@ashetm/types';
 
 
 @Pipe({
@@ -12,14 +13,14 @@ export class ObjectFilter implements PipeTransform {
    * Without a predicate, drops `null`, `undefined` and `''` values.
    */
   transform<T extends object>(
-    value: T | null | undefined,
-    predicate: (entryValue: T[keyof T], key: keyof T) => boolean
-      = (entryValue: T[keyof T]) => entryValue !== null && entryValue !== undefined && (entryValue as unknown) !== ''
+    value: Maybe<T>,
+    predicate: (entryValue: ValueOf<T>, key: keyof T) => boolean
+      = (entryValue: ValueOf<T>) => entryValue !== null && entryValue !== undefined && (entryValue as unknown) !== ''
   ): Partial<T> {
     const result: Partial<T> = {};
 
     (Object.keys(value ?? {}) as (keyof T)[]).forEach((key: keyof T) => {
-      const entryValue: T[keyof T] = (value as T)[key];
+      const entryValue: ValueOf<T> = (value as T)[key];
 
       if (predicate(entryValue, key)) {
         result[key] = entryValue;

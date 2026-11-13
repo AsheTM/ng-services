@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,9 +8,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ArrayUnique implements PipeTransform {
 
-  transform<T>(list: T[] | null | undefined): T[];
-  transform<T>(list: T[] | null | undefined, key: keyof T): T[];
-  transform<T>(list: T[] | null | undefined, key?: keyof T): T[] {
+  transform<T>(list: Maybe<T[]>): T[];
+  transform<T>(list: Maybe<T[]>, key: keyof T): T[];
+  transform<T>(list: Maybe<T[]>, key?: keyof T): T[] {
     const seen: Set<unknown> = new Set<unknown>();
 
     // The first occurrence is kept

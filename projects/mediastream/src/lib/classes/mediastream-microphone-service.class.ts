@@ -1,3 +1,4 @@
+import { Nullable } from "@ashetm/types";
 import { combineLatest, Observable, shareReplay, switchMap } from "rxjs";
 
 import { IMediastreamMicrophoneService } from "../interfaces";
@@ -11,7 +12,7 @@ export abstract class AMediastreamMicrophoneService
   protected readonly _userMedia$: Observable<MediaStream>
     = combineLatest([
       this._currentMediaDeviceSubject$
-    ]).pipe(switchMap(([device]: [MediaDeviceInfo | null]) =>
+    ]).pipe(switchMap(([device]: [Nullable<MediaDeviceInfo>]) =>
       this._getUserMedia({
         audio: this._buildMediaConstraints(device),
         video: false

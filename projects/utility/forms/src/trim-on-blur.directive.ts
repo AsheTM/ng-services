@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { Nullable } from '@ashetm/types';
 
 
 /**
@@ -13,7 +14,7 @@ import { NgControl } from '@angular/forms';
 export class TrimOnBlurDirective {
 
   private readonly _elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement> = inject(ElementRef);
-  private readonly _ngControl: NgControl | null = inject(NgControl, { optional: true, self: true });
+  private readonly _ngControl: Nullable<NgControl> = inject(NgControl, { optional: true, self: true });
 
   @HostListener('blur')
   onBlur(): void {

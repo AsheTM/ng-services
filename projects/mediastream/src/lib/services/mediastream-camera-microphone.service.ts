@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { Nullable } from '@ashetm/types';
 import { combineLatest, map, Observable } from 'rxjs';
 
 import { IMediastreamCameraService } from '../interfaces';
@@ -14,10 +15,10 @@ export class MediastreamCameraMicrophoneService
   private readonly _mediastreamCameraService: MediastreamCameraService = inject(MediastreamCameraService);
   private readonly _mediastreamMicrophoneService: MediastreamMicrophoneService = inject(MediastreamMicrophoneService);
 
-  readonly currentCameraMediaDevice$: Observable<MediaDeviceInfo | null>
+  readonly currentCameraMediaDevice$: Observable<Nullable<MediaDeviceInfo>>
     = this._mediastreamCameraService.currentMediaDevice$;
 
-  readonly currentMicrophoneMediaDevice$: Observable<MediaDeviceInfo | null>
+  readonly currentMicrophoneMediaDevice$: Observable<Nullable<MediaDeviceInfo>>
     = this._mediastreamMicrophoneService.currentMediaDevice$;
 
   readonly mediastream$: Observable<MediaStream>

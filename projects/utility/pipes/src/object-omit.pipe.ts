@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 @Pipe({
@@ -10,7 +11,7 @@ export class ObjectOmit implements PipeTransform {
   /**
    * A new object without the given keys
    */
-  transform<T extends object, K extends keyof T>(value: T | null | undefined, keys: K[]): Omit<T, K> {
+  transform<T extends object, K extends keyof T>(value: Maybe<T>, keys: K[]): Omit<T, K> {
     const result: Partial<T> = { ...(value ?? {}) } as Partial<T>;
 
     keys.forEach((key: K) => delete result[key]);

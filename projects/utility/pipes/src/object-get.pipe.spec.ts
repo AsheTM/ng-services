@@ -31,4 +31,18 @@ describe('ObjectGet', () => {
     // THEN
     expect(results).toEqual([undefined, 'none', 'none']);
   });
+
+  it('should infer the type when the object type is known', () => {
+    // GIVEN
+    const settings: { theme: { color: string }, owner?: { name: string }, tags: string[] } = { theme: { color: 'red' }, tags: ['a'] };
+
+    // WHEN
+    const color: string | undefined = pipe.transform(settings, 'theme.color');
+    const owner: string = pipe.transform(settings, 'owner.name', 'nobody');
+    const tag: string | undefined = pipe.transform(settings, 'tags.0');
+
+    // THEN
+    expect([color, owner, tag]).toEqual(['red', 'nobody', 'a']);
+    expect(pipe.transform(settings, 'theme.size')).toBeUndefined();
+  });
 });

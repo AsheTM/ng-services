@@ -1262,10 +1262,10 @@ Example:
 #### ObjectEntries
 
 ```ts
-transform(value: Record<string | number, any>): [string | number, any][] { ... }
+transform<T extends object>(value: T): Entries<T> { ... }
 ```
 
-Use on a object.
+Use on a object. The pairs are typed from its keys (``Entries`` from [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types)).
 
 Example: 
 
@@ -1313,10 +1313,13 @@ Example:
 #### ObjectGet
 
 ```ts
+transform<T extends object, P extends Paths<T>, F = undefined>(value: T | null | undefined, path: P, fallback?: F): PathValue<T, P> | F { ... }
 transform<T = unknown>(value: unknown, path: string | (string | number)[], fallback?: T): T | undefined { ... }
 ```
 
 Reads a nested value by path (``'address.city'``, ``'items.0.name'`` or ``['items', 0, 'name']``). Returns ``fallback`` (default ``undefined``) when a step of the path is missing, instead of throwing.
+
+When the type of ``value`` is known and ``path`` is one of its paths, the return type is inferred (``Paths`` / ``PathValue`` from [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types)): ``objectGet:'address.city'`` is a ``string``. Other paths still work and return ``unknown``.
 
 Example: 
 

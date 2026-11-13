@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Nullable } from '@ashetm/types';
 
 
 @Pipe({
@@ -7,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DateMin<T extends number | string | Date> implements PipeTransform {
 
-  transform(value: T[]): Date | null {
+  transform(value: T[]): Nullable<Date> {
     // No date to compare
     if (value.length === 0) {
       return null;

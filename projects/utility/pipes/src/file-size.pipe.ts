@@ -1,4 +1,5 @@
 import { LOCALE_ID, Pipe, PipeTransform, inject } from '@angular/core';
+import { Maybe } from '@ashetm/types';
 
 
 const UNITS: string[] = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
@@ -15,7 +16,7 @@ export class FileSize implements PipeTransform {
 
   private readonly _locale: string = inject(LOCALE_ID);
 
-  transform(bytes: number | null | undefined, decimals: number = 1, locale?: string): string {
+  transform(bytes: Maybe<number>, decimals: number = 1, locale?: string): string {
     if (bytes === null || bytes === undefined || !Number.isFinite(bytes) || bytes < 0) {
       return '';
     }

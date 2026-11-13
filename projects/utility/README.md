@@ -1507,6 +1507,146 @@ Trims the text when leaving the field. Works with plain fields, reactive forms a
 <input ashetmTrimOnBlur formControlName="email">
 ```
 
+### Signal Helpers
+
+Functions that create signals, available without importing the module (Angular 20+ only). Unless written otherwise, they must be called in an injection context (a field initializer or a constructor), or with ``{ injector }``. They clean up when that injector is destroyed (e.g. the component).
+
+```ts
+interface SignalOptions { injector?: Injector; }
+```
+
+#### controlValueSignal
+
+```ts
+function controlValueSignal<TRawValue>(control: AbstractControl<any, TRawValue>, options?: SignalOptions): Signal<TRawValue> { ... }
+```
+
+The raw value of a control (disabled controls included), following the control. The signal version of the ``controlValue`` pipe.
+
+```ts
+form = new FormGroup({ name: new FormControl(''), age: new FormControl(0) });
+value = controlValueSignal(this.form); // { name: '', age: 0 }
+```
+
+#### controlErrorsSignal
+
+```ts
+function controlErrorsSignal(control: AbstractControl, options?: SignalOptions): Signal<(string | any)[]> { ... }
+```
+
+The error messages of a control, following the control. The signal version of the ``controlErrors`` pipe: it uses ``provideControlErrorsMessages()`` too.
+
+```ts
+name = new FormControl('', Validators.required);
+nameErrors = controlErrorsSignal(this.name); // ['This field is required']
+canSave = computed(() => this.nameErrors().length === 0);
+```
+
+#### debouncedSignal
+
+```ts
+function debouncedSignal<T>(source: Signal<T>, time: number, options?: SignalOptions): Signal<T> { ... }
+```
+
+Follows ``source`` once it hasn't changed for ``time`` milliseconds. Useful for search fields.
+
+```ts
+query = signal('');
+debouncedQuery = debouncedSignal(this.query, 300);
+```
+
+#### previousSignal
+
+```ts
+function previousSignal<T>(source: Signal<T>): Signal<T | undefined> { ... }
+```
+
+The value ``source`` had before its last change (``undefined`` at first). No injection context needed. Like ``computed``, it's lazy: changes made between two reads count as one.
+
+```ts
+page = signal(1);
+previousPage = previousSignal(this.page); // after page.set(2): 1
+```
+
+#### nowSignal
+
+```ts
+function nowSignal(every: number = 60_000, options?: SignalOptions): Signal<number> { ... }
+```
+
+The current time (``Date.now()``), updated every ``every`` milliseconds. Use it with the ``now`` parameter of ``timeAgo`` to keep the text up to date. On the server, it isn't updated.
+
+```ts
+now = nowSignal();
+```
+
+```html
+{{ message.date | timeAgo : undefined : now() }}
+```
+
+#### toggleSignal
+
+```ts
+function toggleSignal(initial: boolean = false): ToggleSignal { ... }
+
+type ToggleSignal = WritableSignal<boolean> & { toggle(): void };
+```
+
+A boolean signal with ``toggle()``. No injection context needed.
+
+```ts
+menuOpen = toggleSignal();
+```
+
+```html
+<button (click)="menuOpen.toggle()">Menu</button>
+```
+
+#### loadingSignal
+
+```ts
+function loadingSignal<T>(source: Observable<T> | (() => Observable<T>), options?: SignalOptions & { keepData?: boolean }): Signal<LoadingState<T>> { ... }
+```
+
+The ``withLoading`` operator as a signal: ``{ loading: true }``, then ``{ loading: false, data }`` or ``{ loading: false, error }``.
+
+With a function, the request runs again when the signals it reads change (the previous request is cancelled). With ``keepData``, the last data stays during the new request (``{ loading: true, data }``).
+
+```ts
+users = loadingSignal(this.http.get<User[]>('/users'));
+
+userId = signal(1);
+user = loadingSignal(() => this.http.get<User>(`/users/${this.userId()}`), { keepData: true });
+```
+
+```html
+@if (users().loading) { Loading… } @else { {{ users().data?.length }} users }
+```
+
+#### storageSignal
+
+```ts
+function storageSignal<T>(key: string, initial: T, options?: { storage?: 'local' | 'session' }): WritableSignal<T> { ... }
+```
+
+A writable signal saved in ``localStorage`` (or ``sessionStorage``) as JSON, under ``key``. It starts with the saved value, or ``initial``. No injection context needed. On the server, or when the storage is blocked or full, it works as a plain signal.
+
+```ts
+theme = storageSignal<'light' | 'dark'>('theme', 'light');
+```
+
+#### mediaQuerySignal
+
+```ts
+function mediaQuerySignal(query: string, options?: SignalOptions): Signal<boolean> { ... }
+```
+
+``true`` while the media query matches. On the server, it's ``false``.
+
+```ts
+isMobile = mediaQuerySignal('(max-width: 600px)');
+```
+
 ## Issue
 
 LOOKING FOR MAINTAINER OR IF THERE IS AN ISSUE OR ANY IDEA TO ADD. PLEASE CREATE ISSUE IN GITHUB REPOSITORY.

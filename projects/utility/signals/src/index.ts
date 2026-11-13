@@ -1,5 +1,3 @@
-export { controlErrorsSignal } from './control-errors.signal';
-export { controlValueSignal } from './control-value.signal';
 export { debouncedSignal } from './debounced.signal';
 export { loadingSignal } from './loading.signal';
 export { mediaQuerySignal } from './media-query.signal';

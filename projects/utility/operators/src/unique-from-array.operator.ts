@@ -1,6 +1,6 @@
 import { Observable, OperatorFunction, map } from "rxjs";
 
-import { ArrayUnique } from "../pipes/array-unique.pipe";
+import { ArrayUnique } from '@ashetm/ng-utility/pipes';
 
 const arrayUnique: ArrayUnique = new ArrayUnique();
 

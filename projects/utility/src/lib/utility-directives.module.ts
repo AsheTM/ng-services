@@ -6,9 +6,9 @@ import {
   CopyToClipboardDirective,
   DebounceClickDirective,
   ImageFallbackDirective,
-  InViewportDirective,
-  TrimOnBlurDirective
-} from './directives';
+  InViewportDirective
+} from '@ashetm/ng-utility/directives';
+import { TrimOnBlurDirective } from '@ashetm/ng-utility/forms';
 
 
 @NgModule({

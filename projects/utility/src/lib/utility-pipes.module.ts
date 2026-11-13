@@ -22,8 +22,6 @@ import {
   ArrayUnique,
   CapitalCase,
   CoerciveBoolean,
-  ControlErrors,
-  ControlValue,
   DateDiff,
   DateMax,
   DateMin,
@@ -53,7 +51,8 @@ import {
   Slugify,
   TimeAgo,
   Truncate,
-} from './pipes';
+} from '@ashetm/ng-utility/pipes';
+import { ControlErrors, ControlValue } from '@ashetm/ng-utility/forms';
 
 
 @NgModule({

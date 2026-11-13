@@ -2,7 +2,7 @@ import { Signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 
-import { provideControlErrorsMessages } from '../pipes/control-errors.messages';
+import { provideControlErrorsMessages } from './control-errors.messages';
 import { controlErrorsSignal } from './control-errors.signal';
 
 

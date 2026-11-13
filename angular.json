@@ -203,7 +203,15 @@
           "options": {
             "main": "projects/utility/src/test.ts",
             "tsConfig": "projects/utility/tsconfig.spec.json",
-            "karmaConfig": "projects/utility/karma.conf.js"
+            "karmaConfig": "projects/utility/karma.conf.js",
+            "include": [
+              "**/*.spec.ts",
+              "../pipes",
+              "../operators",
+              "../directives",
+              "../signals",
+              "../forms"
+            ]
           }
         },
         "lint": {

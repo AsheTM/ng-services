@@ -1,6 +1,6 @@
 import { Observable, OperatorFunction, map } from "rxjs";
 
-import { ArrayIsEmpty } from "../pipes/array-is-empty.pipe";
+import { ArrayIsEmpty } from '@ashetm/ng-utility/pipes';
 
 const arrayIsEmpty: ArrayIsEmpty = new ArrayIsEmpty();
 

@@ -1,13 +1,14 @@
 import { Type } from '@angular/core';
 
-import * as pipes from './pipes';
+import * as forms from '@ashetm/ng-utility/forms';
+import * as pipes from '@ashetm/ng-utility/pipes';
 import { UtilityPipesModule } from './utility-pipes.module';
 
 
 describe('UtilityPipesModule', () => {
   it('should export every pipe of the library', () => {
     // GIVEN
-    const allPipes: Type<unknown>[] = Object.values(pipes)
+    const allPipes: Type<unknown>[] = [...Object.values(pipes), ...Object.values(forms)]
       .filter((value: unknown) => typeof value === 'function' && 'ɵpipe' in (value as object)) as Type<unknown>[];
 
     // WHEN

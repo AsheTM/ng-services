@@ -1,108 +1,16 @@
 /*
  * Public API Surface of ng-utility
+ *
+ * Everything is also available from the secondary entry points:
+ * @ashetm/ng-utility/pipes, /operators, /directives, /signals and /forms.
  */
 
 export { UtilityDirectivesModule } from './lib/utility-directives.module';
 export { UtilityModule } from './lib/utility.module';
 export { UtilityPipesModule } from './lib/utility-pipes.module';
 
-export {
-  catchAndReturn,
-  containsItem,
-  countFromArray,
-  debug,
-  filterFromArray,
-  filterNullish,
-  firstFromArray,
-  groupByFromArray,
-  isEmptyArray,
-  lastFromArray,
-  mapFromArray,
-  nthFromArray,
-  pick,
-  pluckFromArray,
-  sortFromArray,
-  sumFromArray,
-  uniqueFromArray,
-  withLoading
-} from './lib/operators';
-export type { DebugEvent, DebugOptions, LoadingState } from './lib/operators';
-export {
-  ArrayAverage,
-  ArrayChunk,
-  ArrayFill,
-  ArrayFilter,
-  ArrayFirst,
-  ArrayFrom,
-  ArrayGroupBy,
-  ArrayIncludes,
-  ArrayIsEmpty,
-  ArrayLast,
-  ArrayPluck,
-  ArrayPop,
-  ArrayReverse,
-  ArrayShuffle,
-  ArraySort,
-  ArraySortAsc,
-  ArraySortDesc,
-  ArraySum,
-  ArrayUnique,
-  CapitalCase,
-  CoerciveBoolean,
-  CONTROL_ERRORS_MESSAGES,
-  ControlErrors,
-  ControlValue,
-  DateDiff,
-  DateMax,
-  DateMin,
-  DEFAULT_CONTROL_ERRORS_MESSAGES,
-  DefaultValue,
-  FileSize,
-  Format,
-  Initial,
-  IsArray,
-  IsDate,
-  IsDateAfter,
-  IsDateBefore,
-  IsDateBetween,
-  IsDateFuture,
-  IsDatePast,
-  Log,
-  ObjectEntries,
-  ObjectFilter,
-  ObjectGet,
-  ObjectHas,
-  ObjectInvert,
-  ObjectIsEmpty,
-  ObjectKeys,
-  ObjectOmit,
-  ObjectPick,
-  ObjectSize,
-  ObjectValues,
-  provideControlErrorsMessages,
-  Slugify,
-  TimeAgo,
-  Truncate
-} from './lib/pipes';
-export type { ControlErrorMessage, ControlErrorsMessages, DateDiffUnit } from './lib/pipes';
-export {
-  controlErrorsSignal,
-  controlValueSignal,
-  debouncedSignal,
-  loadingSignal,
-  mediaQuerySignal,
-  nowSignal,
-  previousSignal,
-  storageSignal,
-  toggleSignal
-} from './lib/signals';
-export type { SignalOptions, ToggleSignal } from './lib/signals';
-export {
-  AutofocusDirective,
-  ClickOutsideDirective,
-  CopyToClipboardDirective,
-  DebounceClickDirective,
-  ImageFallbackDirective,
-  InViewportDirective,
-  TrimOnBlurDirective
-} from './lib/directives';
+export * from '@ashetm/ng-utility/directives';
+export * from '@ashetm/ng-utility/forms';
+export * from '@ashetm/ng-utility/operators';
+export * from '@ashetm/ng-utility/pipes';
+export * from '@ashetm/ng-utility/signals';

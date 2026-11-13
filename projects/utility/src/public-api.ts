@@ -88,7 +88,8 @@ export type { ControlErrorMessage, ControlErrorsMessages, DateDiffUnit } from '.
 export {
   controlErrorsSignal,
   controlValueSignal,
-  debouncedSignal
+  debouncedSignal,
+  previousSignal
 } from './lib/signals';
 export type { SignalOptions } from './lib/signals';
 export {

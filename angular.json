@@ -293,7 +293,11 @@
           "options": {
             "main": "projects/openai/src/test.ts",
             "tsConfig": "projects/openai/tsconfig.spec.json",
-            "karmaConfig": "projects/openai/karma.conf.js"
+            "karmaConfig": "projects/openai/karma.conf.js",
+            "include": [
+              "**/*.spec.ts",
+              "../signals"
+            ]
           }
         },
         "lint": {

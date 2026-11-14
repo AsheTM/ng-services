@@ -1,0 +1,25 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/spec",
+    "types": [
+      "jasmine"
+    ],
+    "paths": {
+      "@ashetm/ng-openai": [
+        "projects/openai/src/public-api.ts"
+      ],
+      "@ashetm/ng-openai/*": [
+        "projects/openai/*/src/index.ts"
+      ]
+    }
+  },
+  "files": [
+    "src/test.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ]
+}

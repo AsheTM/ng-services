@@ -27,6 +27,10 @@
         "dist/utility/utility",
         "dist/utility"
       ],
+      "@ashetm/ng-openai": [
+        "dist/openai/openai",
+        "dist/openai"
+      ],
       "@ashetm/ng-network": [
         "dist/network/network",
         "dist/network"

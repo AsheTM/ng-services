@@ -5,7 +5,15 @@
     "outDir": "../../out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@ashetm/ng-openai": [
+        "projects/openai/src/public-api.ts"
+      ],
+      "@ashetm/ng-openai/*": [
+        "projects/openai/*/src/index.ts"
+      ]
+    }
   },
   "files": [
     "src/test.ts"

@@ -296,7 +296,8 @@
             "karmaConfig": "projects/openai/karma.conf.js",
             "include": [
               "**/*.spec.ts",
-              "../signals"
+              "../signals",
+              "../server"
             ]
           }
         },

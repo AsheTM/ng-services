@@ -1,3 +1,9 @@
+# 20.0.1
+
+- [x] Add ``description`` and ``license`` (MIT) to ``package.json``: npm showed a README badge line as description ([#197](https://github.com/AsheTM/ng-services/issues/197))
+- [x] Ship the MIT ``LICENSE`` file ([#196](https://github.com/AsheTM/ng-services/issues/196))
+- [x] Update CHANGELOG
+
 # 20.0.0
 
 - [x] **Breaking**: rewrite for Angular 20+ (``@angular/common`` and ``@angular/core`` ``>=20.0.0``) and ``openai`` 7.x (peer dependency ``^7.0.0``); 14.x and 15.x are deprecated ([#183](https://github.com/AsheTM/ng-services/issues/183))

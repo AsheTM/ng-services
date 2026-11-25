@@ -24,7 +24,7 @@ The version follows the Angular version it starts from: **16.x** supports Angula
 
 ### Demo
 
-Link to an [sample app](https://npm-ashetm-ng-broadcast-channel.netlify.app) to see how it works
+Link to an [sample app](https://npm-ng-broadcast-channel.netlify.app/) to see how it works
 
 ## Install
 

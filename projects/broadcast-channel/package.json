@@ -1,6 +1,7 @@
 {
   "name": "@ashetm/ng-broadcast-channel",
-  "version": "20.1.0",
+  "version": "20.1.1",
+  "description": "Simplifies the BroadcastChannel API in Angular.",
   "contributors": [
     {
       "email": "contact@ashetm.com",
@@ -13,6 +14,7 @@
     "name": "DAWOUD Haitham",
     "url": "http://ashetm.com"
   },
+  "license": "MIT",
   "keywords": [
     "angular",
     "api",
@@ -30,6 +32,7 @@
     "service"
   ],
   "private": false,
+  "homepage": "https://npm-ng-broadcast-channel.netlify.app/",
   "repository": {
     "url": "https://github.com/AsheTM/ng-services/tree/main/projects/broadcast-channel"
   },

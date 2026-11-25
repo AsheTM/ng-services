@@ -1,3 +1,10 @@
+# 20.1.1
+
+- [x] Add ``description``, ``license`` (MIT) and ``homepage`` (demo app) to ``package.json``: npm showed a README badge line as description ([#197](https://github.com/AsheTM/ng-services/issues/197))
+- [x] Ship the MIT ``LICENSE`` file ([#196](https://github.com/AsheTM/ng-services/issues/196))
+- [x] Fix the README demo link ([#199](https://github.com/AsheTM/ng-services/issues/199))
+- [x] Update CHANGELOG
+
 # 20.1.0
 
 - [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``get()`` returns ``Nullable<BroadcastChannelRef<T>>``, same type as before ([#174](https://github.com/AsheTM/ng-services/issues/174))

@@ -1,3 +1,10 @@
+# 20.2.1
+
+- [x] Add ``description`` and ``license`` (MIT) to ``package.json``: npm showed a README badge line as description ([#197](https://github.com/AsheTM/ng-services/issues/197))
+- [x] ``repository`` points to ``main`` ([#198](https://github.com/AsheTM/ng-services/issues/198))
+- [x] Ship the MIT ``LICENSE`` file ([#196](https://github.com/AsheTM/ng-services/issues/196))
+- [x] Update CHANGELOG
+
 # 20.2.0
 
 - [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``Maybe`` / ``Nullable`` / ``ValueOf`` in the public types, same types as before ([#167](https://github.com/AsheTM/ng-services/issues/167))

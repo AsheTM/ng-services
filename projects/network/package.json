@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-network",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Directives, a signal and RxJS streams to follow the device network state in Angular.",
   "contributors": [
     {

@@ -1,6 +1,6 @@
 {
   "name": "@ashetm/ng-openai",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "description": "Angular providers, signals and a server proxy for the official openai SDK, keeping the API key on the server.",
   "contributors": [
     {

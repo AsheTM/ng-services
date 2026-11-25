@@ -1,3 +1,9 @@
+# 3.2.1
+
+- [x] Add ``description`` and ``license`` (MIT) to ``package.json``: npm showed README text as description ([#197](https://github.com/AsheTM/ng-services/issues/197))
+- [x] Ship the MIT ``LICENSE`` file ([#196](https://github.com/AsheTM/ng-services/issues/196))
+- [x] Update CHANGELOG
+
 # 3.2.0
 
 - [x] Use [``@ashetm/types``](https://www.npmjs.com/package/@ashetm/types), a new types-only dependency: ``Nullable<MediaDeviceInfo>``, same type as before ([#171](https://github.com/AsheTM/ng-services/issues/171))
